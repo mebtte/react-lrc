@@ -1,0 +1,14 @@
+# node & npm & yarn
+node_modules/
+package-lock.json
+yarn.lock
+
+# log
+*.log
+
+# macOS
+.DS_Store
+
+# dist
+/dist
+/build
