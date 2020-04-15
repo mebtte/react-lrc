@@ -94,7 +94,7 @@ It only works on `-webkit-`.
 
 ### Could not auto scroll to correct line after `Lrc` resized ?
 
-`window.resize` is supportted, but `Lrc.resize` is not, because i don't know how to inspect `Lrc` resize, if you know how please [tell me](), thanks very much.
+`window.resize` is supportted, but `Lrc.resize` is not, because i don't know how to inspect `Lrc` resize, if you know how please [tell me](https://github.com/mebtte/react-lrc/issues/1), thanks very much.
 
 ## License
 
