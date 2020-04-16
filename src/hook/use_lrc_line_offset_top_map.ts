@@ -22,7 +22,7 @@ export default ({
     const lineList = document.querySelectorAll(`.${LRC_LINE_CLASS_NAME}`);
     for (let i = 0, { length } = lineList; i < length; i += 1) {
       const line = lineList[i] as HTMLDivElement;
-      map.current.set(i, line.offsetTop);
+      map.current.set(i, line.offsetTop + line.clientHeight);
     }
     const rect = rootRef.current?.getBoundingClientRect();
     map.current.set(Infinity, rect?.height || 0);

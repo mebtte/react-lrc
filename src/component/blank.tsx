@@ -1,7 +1,5 @@
 import React from 'react';
 
-const Blank = ({ height }: { height: string | number }) => (
-  <div style={{ height }} />
-);
+const Blank = () => <div style={{ height: '50%' }} />;
 
 export default Blank;
