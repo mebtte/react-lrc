@@ -35,8 +35,8 @@ export default ({
       timer = setTimeout(calculate, RESIZE_INTERVAL);
     };
     window.addEventListener('resize', windowResizeListener);
-    return window.removeEventListener('resize', windowResizeListener);
-  }, []);
+    return () => window.removeEventListener('resize', windowResizeListener);
+  }, [calculate]);
 
   useLayoutEffect(() => {
     calculate();

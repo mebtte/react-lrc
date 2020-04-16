@@ -10,5 +10,6 @@ export interface LrcProps {
   children: (lrcLine: LrcLine, active: boolean, index: number) => ReactNode;
   currentTime?: number;
   autoScrollAfterUserScroll?: number;
+  onCurrentLineChange?: (lrcLine: LrcLine | null, index: number) => any;
   [key: string]: any;
 }

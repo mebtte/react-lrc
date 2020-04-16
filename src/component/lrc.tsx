@@ -1,7 +1,7 @@
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
 
 import { LrcProps } from '../type';
-import { AUTO_SCROLL_AFTER_USER_SCROLL, BLANK_HEIGTH } from '../constant';
+import { AUTO_SCROLL_AFTER_USER_SCROLL } from '../constant';
 import useLrc from '../hook/use_lrc';
 import useLrcLineOffsetTopMap from '../hook/use_lrc_line_offset_top_map';
 import useAutoScroll from '../hook/use_auto_scroll';
@@ -17,6 +17,7 @@ const Lrc = ({
   currentTime = 0,
   children,
   autoScrollAfterUserScroll = AUTO_SCROLL_AFTER_USER_SCROLL,
+  onCurrentLineChange,
   scrollToCurrentLineSymbol,
   ...props
 }: Props) => {
@@ -48,19 +49,24 @@ const Lrc = ({
         left: 0,
         top:
           (lrcLineOffsetTopMap.get(currentIndex) || 0) -
-          (lrcLineOffsetTopMap.get(Infinity) || 0) * BLANK_HEIGTH.TOP,
+          (lrcLineOffsetTopMap.get(Infinity) || 0) / 2,
         behavior: 'smooth',
       });
     }
-  }, [autoScroll, currentIndex]);
+  }, [currentIndex, autoScroll]);
+  useEffect(() => {
+    if (onCurrentLineChange) {
+      onCurrentLineChange(lrcLineList[currentIndex] || null, currentIndex);
+    }
+  }, [currentIndex, lrcLineList, onCurrentLineChange]);
 
   return (
     <div {...props} ref={rootRef}>
-      <Blank height={`${BLANK_HEIGTH.TOP * 100}%`} />
+      <Blank />
       {lrcLineList.map((lrcLine, index) =>
         children(lrcLine, index === currentIndex, index),
       )}
-      <Blank height={`${BLANK_HEIGTH.BOTTOM * 100}%`} />
+      <Blank />
     </div>
   );
 };

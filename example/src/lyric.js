@@ -25,6 +25,14 @@ const Wrapper = ({ music, currentTime }) => {
     () => lrcRef.current.scrollToCurrentLine(),
     [],
   );
+  const getCurrentLine = useCallback(() => {
+    // eslint-disable-next-line no-undef
+    alert(JSON.stringify(lrcRef.current.getCurrentLine()));
+  }, []);
+  const onCurrentLineChange = useCallback((lrcLine, index) => {
+    console.log('\n');
+    console.log(lrcLine, index);
+  }, []);
 
   return (
     <div style={style.wrapper}>
@@ -32,10 +40,14 @@ const Wrapper = ({ music, currentTime }) => {
         <button type="button" onClick={scrollToCurrentLine}>
           scroll to current line
         </button>
+        <button type="button" onClick={getCurrentLine}>
+          alert current line
+        </button>
       </div>
       <Lrc
         lrc={music.lrc}
         currentTime={currentTime * 1000}
+        onCurrentLineChange={onCurrentLineChange}
         style={style.lrc}
         ref={lrcRef}
       >

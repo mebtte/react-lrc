@@ -15,21 +15,22 @@ export default ({
     (rootRef.current as HTMLDivElement).style.overflow = 'auto';
   }, []);
 
-  // @ts-ignore
   useLayoutEffect(() => {
-    if (autoScrollAfterUserScroll) {
-      let timer: ReturnType<typeof setTimeout>;
-      const wheelListener = () => {
-        setAutoScroll(false);
-        clearTimeout(timer);
-        timer = setTimeout(
-          () => setAutoScroll(true),
-          autoScrollAfterUserScroll,
-        );
-      };
-      rootRef.current?.addEventListener('wheel', wheelListener);
-      return () => rootRef.current?.removeEventListener('wheel', wheelListener);
-    }
+    let timer: ReturnType<typeof setTimeout>;
+    const wheelListener = () => {
+      setAutoScroll(false);
+      clearTimeout(timer);
+      timer = setTimeout(() => setAutoScroll(true), autoScrollAfterUserScroll);
+    };
+    (rootRef.current as HTMLDivElement).addEventListener(
+      'wheel',
+      wheelListener,
+    );
+    return () =>
+      (rootRef.current as HTMLDivElement).removeEventListener(
+        'wheel',
+        wheelListener,
+      );
   }, [autoScrollAfterUserScroll]);
 
   useEffect(() => {
