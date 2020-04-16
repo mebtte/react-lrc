@@ -7,7 +7,7 @@ export interface LrcLine {
 
 export interface LrcProps {
   lrc: string;
-  children: (lrcLine: LrcLine, active: boolean) => ReactNode;
+  children: (lrcLine: LrcLine, active: boolean, index: number) => ReactNode;
   currentTime?: number;
   autoScrollAfterUserScroll?: number;
   [key: string]: any;

@@ -58,7 +58,7 @@ const Lrc = ({
     <div {...props} ref={rootRef}>
       <Blank height={`${BLANK_HEIGTH.TOP * 100}%`} />
       {lrcLineList.map((lrcLine, index) =>
-        children(lrcLine, index === currentIndex),
+        children(lrcLine, index === currentIndex, index),
       )}
       <Blank height={`${BLANK_HEIGTH.BOTTOM * 100}%`} />
     </div>

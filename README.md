@@ -46,13 +46,13 @@ export default Lyric;
 
 ### `Lrc` Props
 
-| prop                      | description                                   | type                                                             | required | default |
-| ------------------------- | --------------------------------------------- | ---------------------------------------------------------------- | -------- | ------- |
-| lrc                       | lrc string                                    | string                                                           | true     |         |
-| children                  | lrc line render method, must return `LrcLine` | (lrcLine: { millisecond: number, content: string }) => ReactNode | true     |         |
-| currentTime               | current time                                  | number is **millisecond**                                        | false    | 0       |
-| autoScrollAfterUserScroll | recover auto scroll after user scroll         | number is **millisecond**                                        | false    | 5000    |
-| [key: string]             | any props like `style`/`className`...         | any                                                              | false    |         |
+| prop                      | description                                   | type                                                                                                      | required | default |
+| ------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------- | -------- | ------- |
+| lrc                       | lrc string                                    | string                                                                                                    | true     |         |
+| children                  | lrc line render method, must return `LrcLine` | (lrcLine: { millisecond: number, content: string }, active: boolean, index: number) => ReactNode<LrcLine> | true     |         |
+| currentTime               | current time                                  | number is **millisecond**                                                                                 | false    | 0       |
+| autoScrollAfterUserScroll | recover auto scroll after user scroll         | number is **millisecond**                                                                                 | false    | 5000    |
+| [key: string]             | any props like `style`/`className`...         | any                                                                                                       | false    |         |
 
 ### `Lrc` Methods
 
