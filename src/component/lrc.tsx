@@ -62,11 +62,11 @@ const Lrc = ({
 
   return (
     <div {...props} ref={rootRef}>
-      <Blank />
+      <Blank height="45%" />
       {lrcLineList.map((lrcLine, index) =>
         children(lrcLine, index === currentIndex, index),
       )}
-      <Blank />
+      <Blank height="50%" />
     </div>
   );
 };
