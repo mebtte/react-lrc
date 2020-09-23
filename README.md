@@ -64,14 +64,14 @@ export default Lyric;
 | autoScroll                | whether auto scroll                                  | boolean                                                                                                          | true     |
 | autoScrollAfterUserScroll | auto scroll after user scroll                        | number, **millisecond**                                                                                          | 6000     |
 | spaceTop                  | space on lrc component top, percent of lrc component | number, 0~1                                                                                                      | 0.4      |
-| onCurrentLineChange       | when current line change                             | ({ index: number, lrcLine: { id: string, millisecond: number, content: string }}) => void                        | null     |
+| onCurrentLineChange       | when current line change                             | ({ index: number, lrcLine: { id: string, millisecond: number, content: string } \| null }) => void               | null     |
 
 ### `Lrc` Methods
 
 | method              | description                                | type                                                                                           |
 | ------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------- |
 | scrollToCurrentLine | scroll to current line and set auto scroll | () => void                                                                                     |
-| getCurrentLine      | get the current lrc line                   | () => { lrcLine: { id: string, millisecond: number, content: string }, index: number } \| null |
+| getCurrentLine      | get the current lrc line                   | () => { lrcLine: { id: string, millisecond: number, content: string } \| null, index: number } |
 
 ## Other API
 
@@ -95,7 +95,16 @@ const Component = () => {
 };
 ```
 
+## Example
+
+- [Dynamic lyric](https://mebtte.github.io/react-lrc)
+- [Static lyric](https://codesandbox.io/s/static-lyric-u32p1)
+
 ## Question
+
+### Why lrc component do not auto scroll ?
+
+You probably do not give a `height` to `Lrc`. The height can make `Lrc` scrollable.
 
 ### How to prevent user scroll ?
 
