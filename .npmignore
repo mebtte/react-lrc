@@ -1,10 +1,6 @@
-case/
-docs/
 example/
-.eslintignore
-.eslintrc
+screenshot/
 .gitignore
 .prettierignore
-docs.sh
 prettier.config.js
 tsconfig.json
