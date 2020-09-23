@@ -137,6 +137,26 @@ You probably do not give a `height` to `Lrc`. The height can make `Lrc` scrollab
 <Lrc className="lrc" {...otherProps} />
 ```
 
+## Typescript
+
+`@mebtte/react-lrc` export type `LrcLine`.
+
+```tsx
+import React from 'react';
+import { LrcLine } from '@mebtte/react-lrc';
+
+const Component = () => {
+  const lineRenderer = React.useCallback(
+    ({ lrcLine }: { lrcLine: LrcLine }) => {
+      // ...
+    },
+    [],
+  );
+  // ...
+  return <Lrc lineRenderer={lineRenderer} {...otherProps} />;
+};
+```
+
 ## License
 
 MIT

@@ -1,6 +1,6 @@
 {
   "name": "@mebtte/react-lrc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The react component that display lyric from lrc.",
   "author": "mebtte<hi@mebtte.com>",
   "license": "MIT",
