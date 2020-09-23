@@ -1,7 +1,9 @@
-# react-media-session example
+# react-lrc example
+
+## Development
 
 ```sh
 npm i
 npm run dev
-# npm run build
+# http://localhost:3000
 ```

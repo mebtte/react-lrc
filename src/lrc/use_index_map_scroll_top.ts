@@ -18,7 +18,6 @@ export default ({
     [key: number]: number;
   }>({});
   const caculate = useCallback(() => {
-    console.log('recaculate');
     const lrcNode = document.querySelector<HTMLDivElement>(
       `.${lrcClassName}`,
     ) as HTMLDivElement;

@@ -27,12 +27,20 @@ interface Props {
   }) => React.ReactNode;
   /** audio currentTime, millisecond */
   currentTime?: number;
-  /** space on lrc component top, percent of lrc component */
-  spaceTop?: number;
   /** whether auto scroll  */
   autoScroll?: boolean;
   /** auto scroll after user scroll */
   autoScrollAfterUserScroll?: number;
+  /** space on lrc component top, percent of lrc component */
+  spaceTop?: number;
+  /** when current line change */
+  onCurrentLineChange?: ({
+    index,
+    lrcLine,
+  }: {
+    index: number;
+    lrcLine: LrcLine | null;
+  }) => void;
 
   className?: string;
   [key: string]: any;
@@ -56,6 +64,7 @@ const Lrc = React.forwardRef<
       spaceTop = 0.4,
       autoScroll = true,
       autoScrollAfterUserScroll = AUTO_SCROLL_AFTER_USER_SCROLL,
+      onCurrentLineChange,
 
       className = '',
       ...props
@@ -94,6 +103,15 @@ const Lrc = React.forwardRef<
         });
       }
     }, [currentIndex, localAutoScroll, indexMapScrollTop]);
+
+    // on current line change
+    useEffect(() => {
+      onCurrentLineChange &&
+        onCurrentLineChange({
+          index: currentIndex,
+          lrcLine: lrcLineList[currentIndex] || null,
+        });
+    }, [lrcLineList, currentIndex, onCurrentLineChange]);
 
     useImperativeHandle(ref, () => ({
       getCurrentLine: () => ({

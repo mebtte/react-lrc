@@ -32,6 +32,7 @@ const App = () => {
       </div>
     );
   }, []);
+  const onCurrentLineChange = useCallback((line) => console.log(line), []);
 
   const currentMusic = musicList[currentIndex];
   return (
@@ -78,6 +79,7 @@ const App = () => {
         lrc={currentMusic.lrc}
         currentTime={currentTime * 1000}
         lineRenderer={lineRenderer}
+        onCurrentLineChange={onCurrentLineChange}
       />
     </StyledApp>
   );

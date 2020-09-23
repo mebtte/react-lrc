@@ -8,9 +8,9 @@ The react component that display lyric from lrc format.
 
 ## Feature
 
-- auto scroll smoothly
-- user srcollable
-- custom style
+- Auto scroll smoothly
+- User srcollable
+- Custom style
 
 ## Requirement
 
@@ -25,25 +25,29 @@ npm install --save @mebtte/react-lrc
 
 ```jsx
 import React, { useCallback } from 'react';
-import { Lrc, LrcLine } from '@mebtte/react-lrc';
+import { Lrc } from '@mebtte/react-lrc';
 
 const Lyric = ({ lrc, currentTime }) => {
-  const onCurrentLineChange = useCallback(({ millisecond, content }, index) => {
-    console.log(millisecond, content, index);
-  }, []);
+  const lineRenderer = useCallback(
+    ({ lrcLine: { millisecond, content }, index, active }) => (
+      <div style={{ textAlign: 'center', color: active ? 'green' : 'inherit' }}>
+        {content}
+      </div>
+    ),
+  );
+  const onCurrentLineChange = useCallback(
+    ({ lrcLine: { millisecond, content }, index }) =>
+      console.log(index, millisecond, content),
+    [],
+  );
 
   return (
     <Lrc
       lrc={lrc}
       currentTime={currentTime}
+      lineRenderer={lineRenderer}
       onCurrentLineChange={onCurrentLineChange}
-    >
-      {({ millisecond, content }, active, index) => (
-        <LrcLine key={index} style={{ color: active ? 'red' : 'gray' }}>
-          {content}
-        </LrcLine>
-      )}
-    </Lrc>
+    />
   );
 };
 
@@ -52,21 +56,22 @@ export default Lyric;
 
 ### `Lrc` Props
 
-| prop                      | description                                   | type                                                                                                      | required | default |
-| ------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------- | -------- | ------- |
-| lrc                       | lrc string                                    | string                                                                                                    | true     |         |
-| children                  | lrc line render method, must return `LrcLine` | (lrcLine: { millisecond: number, content: string }, active: boolean, index: number) => ReactNode<LrcLine> | true     |         |
-| currentTime               | current time                                  | number is **millisecond**                                                                                 | false    | 0       |
-| autoScrollAfterUserScroll | recover auto scroll after user scroll         | number is **millisecond**                                                                                 | false    | 5000    |
-| onCurrentLineChange       | when current line change it will emit         | (lrcLine: { millisecond: number, content: string }, index: number) => any                                 | false    | null    |
-| [key: string]             | any props like `style`/`className`...         | any                                                                                                       | false    |         |
+| prop                      | description                                          | type                                                                                                             | default  |
+| ------------------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------- |
+| lrc                       | lrc string                                           | string                                                                                                           | required |
+| lineRenderer              | lrc line render method                               | ({ lrcLine: { id: string, millisecond: number, content: string }, index: number, active: boolean }) => ReactNode | required |
+| currentTime               | current time                                         | number, **millisecond**                                                                                          | 0        |
+| autoScroll                | whether auto scroll                                  | boolean                                                                                                          | true     |
+| autoScrollAfterUserScroll | auto scroll after user scroll                        | number, **millisecond**                                                                                          | 6000     |
+| spaceTop                  | space on lrc component top, percent of lrc component | number, 0~1                                                                                                      | 0.4      |
+| onCurrentLineChange       | when current line change                             | ({ index: number, lrcLine: { id: string, millisecond: number, content: string }}) => void                        | null     |
 
 ### `Lrc` Methods
 
-| method              | description                                                | type                                                                               |
-| ------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| scrollToCurrentLine | call this it will scroll to current line after user scroll | () => void                                                                         |
-| getCurrentLine      | get the current lrc line and index                         | () => { lrcLine: { millisecond: number, content: string }, index: number } \| null |
+| method              | description                                | type                                                                                           |
+| ------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| scrollToCurrentLine | scroll to current line and set auto scroll | () => void                                                                                     |
+| getCurrentLine      | get the current lrc line                   | () => { lrcLine: { id: string, millisecond: number, content: string }, index: number } \| null |
 
 ## Other API
 
@@ -95,9 +100,32 @@ const Component = () => {
 ### How to prevent user scroll ?
 
 ```jsx
-<Lrc style={{ overflow: 'hidden !important' }} autoScrollAfterUserScroll={0}>
-  ...
-</Lrc>
+<Lrc
+  style={{ overflow: 'hidden !important' }}
+  autoScrollAfterUserScroll={0}
+  {...otherProps}
+/>
+```
+
+### How to hide scrollbar ?
+
+```scss
+.lrc {
+  /* webkit */
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+
+  /* firefox */
+  scrollbar-width: none;
+
+  /* ie */
+  -ms-overflow-style: none;
+}
+```
+
+```jsx
+<Lrc className="lrc" {...otherProps} />
 ```
 
 ## License
