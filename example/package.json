@@ -3,7 +3,6 @@
   "private": true,
   "dependencies": {
     "@mebtte/react-lrc": "file:..",
-    "@mebtte/react-media-session": "^1.0.1",
     "react": "file:../node_modules/react",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",

@@ -1,4 +1,5 @@
-import { LrcLine } from '../type';
+import { LrcLine } from '../constant';
+import getRandomString from './get_random_string';
 
 const LRC_LINE = /^(\[[0-9]+:[0-9]+(\.[0-9]+)?\])+.*/;
 const LRC_TIMESTAMP_WITH_BRACKET = /\[[0-9]+:[0-9]+(\.[0-9]+)?\]/g;
@@ -18,6 +19,7 @@ export default (lrc: string): LrcLine[] => {
         LRC_TIMESTAMP,
       ) as string[];
       lrcLineList.push({
+        id: getRandomString(),
         millisecond:
           Number.parseInt(minute, 10) * 60 * 1000 +
           Number.parseInt(second, 10) * 1000 +

@@ -1,56 +1,85 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
+import { Lrc } from '@mebtte/react-lrc';
 
 import musicList from './data';
-import style from './style';
-
+import { StyledApp, MusicList, Action } from './style';
 import Music from './music';
-import Audio from './audio';
-import Lyric from './lyric';
+
+const lrcStyle = {
+  flex: 1,
+  minHeight: 0,
+};
 
 const App = () => {
-  const [index, setIndex] = useState(0);
-  const onPrevious = useCallback(
-    () =>
-      setIndex((i) => {
-        const target = i - 1;
-        if (target < 0) {
-          return target + musicList.length;
-        }
-        return target;
-      }),
-    [],
-  );
-  const onNext = useCallback(
-    () => setIndex((i) => (i + 1) % musicList.length),
-    [],
-  );
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const onTimeUpdate = useCallback(
     (event) => setCurrentTime(event.target.currentTime),
     [],
   );
-
-  const music = musicList[index];
-  return (
-    <div style={style.container}>
-      <div style={style.part}>
-        {musicList.map((m, i) => (
-          <Music
-            key={m.id}
-            music={m}
-            playing={i === index}
-            onPlay={() => setIndex(i)}
-          />
-        ))}
-        <Audio
-          music={music}
-          onPrevious={onPrevious}
-          onNext={onNext}
-          onTimeUpdate={onTimeUpdate}
-        />
+  const lrcRef = useRef();
+  const lineRenderer = useCallback(({ lrcLine, index, active }) => {
+    const { content } = lrcLine;
+    return (
+      <div
+        style={{
+          textAlign: 'center',
+          padding: '10px 0',
+          color: active ? 'green' : 'inherit',
+        }}
+      >
+        {content}
       </div>
-      <Lyric music={music} currentTime={currentTime} />
-    </div>
+    );
+  }, []);
+
+  const currentMusic = musicList[currentIndex];
+  return (
+    <StyledApp>
+      <div className="top">
+        <MusicList>
+          {musicList.map((music, index) => (
+            <Music
+              key={music.id}
+              active={index === currentIndex}
+              music={music}
+              onPlay={() => setCurrentIndex(index)}
+            />
+          ))}
+        </MusicList>
+        <Action>
+          <audio
+            src={currentMusic.src}
+            autoPlay
+            controls
+            onTimeUpdate={onTimeUpdate}
+          />
+          <br />
+          <button
+            type="button"
+            onClick={() =>
+              alert(JSON.stringify(lrcRef.current.getCurrentLine()))
+            }
+          >
+            get current line
+          </button>
+          <button
+            type="button"
+            onClick={() => lrcRef.current.scrollToCurrentLine()}
+          >
+            scroll to current line
+          </button>
+          <a href="https://github.com/mebtte/react-lrc">github</a>
+        </Action>
+      </div>
+      <Lrc
+        ref={lrcRef}
+        style={lrcStyle}
+        lrc={currentMusic.lrc}
+        currentTime={currentTime * 1000}
+        lineRenderer={lineRenderer}
+      />
+    </StyledApp>
   );
 };
 

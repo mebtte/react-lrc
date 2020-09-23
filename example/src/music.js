@@ -2,42 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Style = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  background-color: ${({ playing }) =>
-    playing ? 'rgba(49, 194, 124, 0.2)' : 'white'};
+  background-color: ${({ active }) =>
+    active ? 'rgba(0, 255, 0, 0.1)' : 'transparent'};
   > .cover {
-    width: 60px;
-    height: 60px;
-  }
-  > .info {
-    flex: 1;
-    min-width: 0;
-    margin-left: 20px;
-    > .name {
-      font-size: 14px;
-    }
-    > .singers {
-      font-size: 12px;
-      color: gray;
-    }
+    vertical-align: middle;
+    width: 36px;
+    height: 36px;
   }
 `;
 
-const Music = ({ music, playing, onPlay }) => {
+const Music = ({ active, music, onPlay }) => {
+  const { cover, name, singers } = music;
   return (
-    <Style playing={playing}>
-      <img src={music.cover} alt="cover" className="cover" />
-      <div className="info">
-        <div className="name">{music.name}</div>
-        <div className="singers">{music.singers.join(',')}</div>
-        <div className="actions">
-          <button type="button" onClick={() => onPlay(music)}>
-            {playing ? 'playing' : 'play'}
-          </button>
-        </div>
-      </div>
+    <Style active={active}>
+      <img className="cover" src={cover} alt="cover" />
+      <span>
+        {name} - {singers.join(',')}
+      </span>
+      <button type="button" onClick={onPlay}>
+        play
+      </button>
     </Style>
   );
 };

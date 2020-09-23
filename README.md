@@ -2,25 +2,20 @@
 
 The react component that display lyric from lrc format.
 
+## Screenshot
+
+![](./screenshot/cicada.gif)
+
 ## Feature
 
 - auto scroll smoothly
 - user srcollable
 - custom style
 
-## Example
-
-[https://mebtte.github.io/react-lrc](https://mebtte.github.io/react-lrc)
-
-![](./case/demo.gif)
-
-![](./case/cicada_default.gif)
-
-[Static lyric](https://codesandbox.io/s/staticlrcdisplay-89q5m?file=/src/App.js)
-
 ## Requirement
 
 - `react >= 16.8` with `hook`
+- [ResizeObserver](https://caniuse.com/?search=ResizeObserver)
 
 ## Usage
 
@@ -68,16 +63,32 @@ export default Lyric;
 
 ### `Lrc` Methods
 
-| method              | description                                                | type                                                                       |
-| ------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------- |
-| scrollToCurrentLine | call this it will scroll to current line after user scroll | () => void                                                                 |
-| getCurrentLine      | get the current lrc line and index                         | () => { lrcLine: { millisecond: number, content: string }, index: number } |
+| method              | description                                                | type                                                                               |
+| ------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| scrollToCurrentLine | call this it will scroll to current line after user scroll | () => void                                                                         |
+| getCurrentLine      | get the current lrc line and index                         | () => { lrcLine: { millisecond: number, content: string }, index: number } \| null |
 
-### `LrcLine` Props
+## Other API
 
-| prop          | description                           | type | required | default |
-| ------------- | ------------------------------------- | ---- | -------- | ------- |
-| [key: string] | any props like `style`/`className`... | any  | false    |         |
+### parseLrc
+
+```jsx
+import { parseLrc } from '@mebtte/react-lrc';
+
+parseLrc(lrcString); // { id: string, millesecond: number: content: string }[]
+```
+
+### useLrc
+
+```jsx
+import React from 'react';
+import { useLrc } from '@mebtte/react-lrc';
+
+const Component = () => {
+  const lrcLineList = useLrc(lrcString); // { id: string, millesecond: number: content: string }[]
+  // ...
+};
+```
 
 ## Question
 
@@ -88,10 +99,6 @@ export default Lyric;
   ...
 </Lrc>
 ```
-
-### Can not auto scroll to correct line after `Lrc` resized ?
-
-`window.resize` is supportted, but `Lrc.resize` is not, because i don't know how to inspect `Lrc` resize, if you know how please [tell me](https://github.com/mebtte/react-lrc/issues/1), thanks very much.
 
 ## License
 

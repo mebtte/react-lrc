@@ -1,8 +1,8 @@
 {
   "name": "@mebtte/react-lrc",
-  "version": "0.2.2",
-  "description": "The react component that display lyric from lrc format.",
-  "author": "mebtte<mebtte@gmail.com>",
+  "version": "1.0.0",
+  "description": "The react component that display lyric from lrc.",
+  "author": "mebtte<hi@mebtte.com>",
   "license": "MIT",
   "keywords": [
     "react",
@@ -23,7 +23,8 @@
   "source": "src/index.tsx",
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
-    "dev": "microbundle-crl watch --no-compress --format modern,cjs"
+    "dev": "microbundle-crl watch --no-compress --format modern,cjs",
+    "prepublish": "npm run build"
   },
   "peerDependencies": {
     "react": "^16.8.0"
@@ -31,18 +32,6 @@
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.8.3",
     "@types/react": "^16.9.27",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-config-standard-react": "^9.2.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.17.0",
-    "eslint-plugin-react-hooks": "^3.0.0",
-    "eslint-plugin-standard": "^4.0.1",
     "microbundle-crl": "^0.13.8",
     "prettier": "^1.19.1",
     "react": "^16.13.1"

@@ -1,12 +1,12 @@
 export default [
   {
     id: 2,
-    cover: './source/d0c670fed000d3330cf26f704b4e7a86.jpeg',
+    cover: './source/2.jpeg',
     singers: ['Cailin Russo', 'Chrissy Costanza'],
     name: 'Phoenix',
-    album: 'Phoenix',
-    src: './source/Cailin Russo,Chrissy Costanza - Phoenix.m4a',
-    lrc: `[00:11.89]What are you willing to lose
+    src: './source/2.m4a',
+    lrc: `
+[00:11.89]What are you willing to lose
 [00:13.73]You cover your wounds but underneath them
 [00:17.74]A million voices in your head that whisper "Stop now"
 [00:23.38]Another twist of the knife turn of the screws
@@ -40,16 +40,17 @@ export default [
 [02:56.83]Fly Phoenix fly
 [03:00.22]It's time for a new empire
 [03:02.90]Go bury your demons then tear down the ceiling
-[03:08.52]Phoenix fly`,
+[03:08.52]Phoenix fly
+`,
   },
   {
     id: 1,
-    cover: './source/b5d358e6c54c15bf0d80ad288aba377b.jpeg',
+    cover: './source/1.jpeg',
     singers: ['陈蕾'],
     name: '当我迷失时听着的歌',
-    album: '当我迷失时听着的歌',
-    src: './source/陈蕾 - 当我迷失时听着的歌.mp3',
-    lrc: `[00:28.41]为着什么追赶到头来有变质吗
+    src: './source/1.mp3',
+    lrc: `
+[00:28.41]为着什么追赶到头来有变质吗
 [00:35.34]日夜扮演开心角色吗 却总一个面对
 [00:42.41]一个 流浪哪一街角找哪份寄托
 [00:49.02]一个 闹市中却只得我
@@ -82,6 +83,7 @@ export default [
 [03:39.34]若跌倒纵使满身伤痕沉沦在流沙
 [03:46.08]我都不怕
 [03:47.08]也得你的双手引路回家
-[03:55.80]再都不怕`,
+[03:55.80]再都不怕
+`,
   },
 ];
