@@ -80,7 +80,7 @@ export default Lyric;
 ```jsx
 import { parseLrc } from '@mebtte/react-lrc';
 
-parseLrc(lrcString); // { id: string, millesecond: number: content: string }[]
+parseLrc(lrcString); // { id: string, millesecond: number, content: string }[]
 ```
 
 ### useLrc
@@ -90,7 +90,7 @@ import React from 'react';
 import { useLrc } from '@mebtte/react-lrc';
 
 const Component = () => {
-  const lrcLineList = useLrc(lrcString); // { id: string, millesecond: number: content: string }[]
+  const lrcLineList = useLrc(lrcString); // { id: string, millesecond: number, content: string }[]
   // ...
 };
 ```
@@ -104,7 +104,7 @@ const Component = () => {
 
 ### Why lrc component do not auto scroll ?
 
-You probably do not give a `height` to `Lrc`. The height can make `Lrc` scrollable.
+You probably do not give `height` to `Lrc`. The `height` make `Lrc` scrollable.
 
 ### How to prevent user scroll ?
 
