@@ -1,4 +1,4 @@
-# react-lrc
+# react-lrc [![version](https://img.shields.io/npm/v/@mebtte/react-lrc)](https://www.npmjs.com/package/@mebtte/react-lrc) [![license](https://img.shields.io/npm/l/@mebtte/react-lrc)](https://github.com/mebtte/react-lrc/blob/master/LICENSE)
 
 The react component that display lyric from lrc format.
 
