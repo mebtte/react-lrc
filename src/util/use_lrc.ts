@@ -1,14 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 
-import { LrcLine } from '../constant';
 import parseLrc from './parse_lrc';
 
 export default (lrc: string) => {
-  const [lrcLineList, setLrcLineList] = useState<LrcLine[]>(parseLrc(lrc));
-
-  useEffect(() => {
-    setLrcLineList(parseLrc(lrc));
-  }, [lrc]);
-
+  const lrcLineList = useMemo(() => parseLrc(lrc), [lrc]);
   return lrcLineList;
 };

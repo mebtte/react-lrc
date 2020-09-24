@@ -26,6 +26,8 @@ const App = () => {
           textAlign: 'center',
           padding: '10px 0',
           color: active ? 'green' : 'inherit',
+          transform: `scale(${active ? 1.2 : 1})`,
+          transition: 'transform 300ms',
         }}
       >
         {content}
