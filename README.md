@@ -34,6 +34,7 @@ const Lyric = ({ lrc, currentTime }) => {
         {content}
       </div>
     ),
+    [],
   );
   const onCurrentLineChange = useCallback(
     ({ lrcLine: { millisecond, content }, index }) =>
