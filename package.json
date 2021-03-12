@@ -1,5 +1,5 @@
 {
-  "name": "@mebtte/react-lrc",
+  "name": "react-lrc",
   "version": "1.0.2",
   "description": "The react component that display lyric from lrc.",
   "author": "mebtte<hi@mebtte.com>",

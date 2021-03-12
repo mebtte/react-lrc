@@ -2,7 +2,7 @@
   "name": "react-media-session-example",
   "private": true,
   "dependencies": {
-    "@mebtte/react-lrc": "file:..",
+    "react-lrc": "file:..",
     "react": "file:../node_modules/react",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",

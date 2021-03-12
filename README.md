@@ -1,6 +1,8 @@
-# react-lrc [![version](https://img.shields.io/npm/v/@mebtte/react-lrc)](https://www.npmjs.com/package/@mebtte/react-lrc) [![license](https://img.shields.io/npm/l/@mebtte/react-lrc)](https://github.com/mebtte/react-lrc/blob/master/LICENSE)
+# react-lrc [![version](https://img.shields.io/npm/v/react-lrc)](https://www.npmjs.com/package/react-lrc) [![license](https://img.shields.io/npm/l/react-lrc)](https://github.com/mebtte/react-lrc/blob/master/LICENSE)
 
 The react component that display lyric from lrc format. If using `react-natvie`, you can use [react-native-lrc](https://github.com/wubocong/react-native-lrc).
+
+## [1.x README](https://github.com/mebtte/react-lrc/tree/74df10e762b12fce1ca54bab27a6d4844be25503)
 
 ## Screenshot
 
@@ -20,12 +22,12 @@ The react component that display lyric from lrc format. If using `react-natvie`,
 ## Usage
 
 ```sh
-npm install --save @mebtte/react-lrc
+npm install --save react-lrc
 ```
 
 ```jsx
 import React, { useCallback } from 'react';
-import { Lrc } from '@mebtte/react-lrc';
+import { Lrc } from 'react-lrc';
 
 const Lyric = ({ lrc, currentTime }) => {
   const lineRenderer = useCallback(
@@ -79,7 +81,7 @@ export default Lyric;
 ### parseLrc
 
 ```jsx
-import { parseLrc } from '@mebtte/react-lrc';
+import { parseLrc } from 'react-lrc';
 
 parseLrc(lrcString); // { id: string, millesecond: number, content: string }[]
 ```
@@ -88,7 +90,7 @@ parseLrc(lrcString); // { id: string, millesecond: number, content: string }[]
 
 ```jsx
 import React from 'react';
-import { useLrc } from '@mebtte/react-lrc';
+import { useLrc } from 'react-lrc';
 
 const Component = () => {
   const lrcLineList = useLrc(lrcString); // { id: string, millesecond: number, content: string }[]
@@ -140,11 +142,11 @@ You probably do not give `height` to `Lrc`. The `height` make `Lrc` scrollable.
 
 ## Typescript
 
-`@mebtte/react-lrc` export type `LrcLine`.
+`react-lrc` export type `LrcLine`.
 
 ```tsx
 import React from 'react';
-import { LrcLine } from '@mebtte/react-lrc';
+import { LrcLine } from 'react-lrc';
 
 const Component = () => {
   const lineRenderer = React.useCallback(

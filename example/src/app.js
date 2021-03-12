@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { Lrc } from '@mebtte/react-lrc';
+import { Lrc } from 'react-lrc';
 
 import musicList from './data';
 import { StyledApp, MusicList, Action } from './style';
