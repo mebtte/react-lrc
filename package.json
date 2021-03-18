@@ -3,7 +3,10 @@
   "version": "2.0.0",
   "description": "The react component that display lrc format.",
   "main": "dist/index.js",
-  "scripts": {},
+  "scripts": {
+    "build": "tsc --declaration",
+    "prepublish": "npm run build"
+  },
   "author": {
     "name": "mebtte",
     "email": "hi@mebtte.com",
