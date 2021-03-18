@@ -8,10 +8,4 @@ module.exports = {
   bracketSpacing: true,
   jsxBracketSameLine: false,
   arrowParens: 'always',
-  // range,
-  // parser,
-  // filepath,
-  // requirePragma,
-  // insertPragma,
-  // proseWrap,
 };

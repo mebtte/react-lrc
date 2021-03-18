@@ -1,12 +1,18 @@
 {
   "name": "react-lrc",
-  "version": "1.0.2",
-  "description": "The react component that display lyric from lrc.",
-  "author": "mebtte<hi@mebtte.com>",
+  "version": "2.0.0",
+  "description": "The react component that display lrc format.",
+  "main": "dist/index.js",
+  "scripts": {},
+  "author": {
+    "name": "mebtte",
+    "email": "hi@mebtte.com",
+    "url": "https://mebtte.com"
+  },
   "license": "MIT",
   "keywords": [
     "react",
-    "component",
+    "react-component",
     "lrc",
     "lyric"
   ],
@@ -18,22 +24,10 @@
     "url": "https://github.com/mebtte/react-lrc/issues"
   },
   "homepage": "https://github.com/mebtte/react-lrc#readme",
-  "main": "dist/index.js",
-  "module": "dist/index.modern.js",
-  "source": "src/index.tsx",
-  "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs",
-    "dev": "microbundle-crl watch --no-compress --format modern,cjs",
-    "prepublish": "npm run build"
-  },
   "peerDependencies": {
     "react": "^16.8.0"
   },
-  "devDependencies": {
-    "@babel/plugin-proposal-decorators": "^7.8.3",
-    "@types/react": "^16.9.27",
-    "microbundle-crl": "^0.13.8",
-    "prettier": "^1.19.1",
-    "react": "^16.13.1"
+  "dependencies": {
+    "clrc": "^1.0.0"
   }
 }
