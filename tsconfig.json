@@ -1,1 +1,4 @@
-{}
+{
+  "compilerOptions": {},
+  "exclude": ["./dist"]
+}

@@ -2,7 +2,7 @@
 
 The react component that display lrc format. If using `react-natvie`, you can use [react-native-lrc](https://github.com/wubocong/react-native-lrc).
 
-## [1.x README](https://github.com/mebtte/react-lrc/tree/74df10e762b12fce1ca54bab27a6d4844be25503)
+## [1.x README](https://github.com/mebtte/react-lrc/blob/74df10e762b12fce1ca54bab27a6d4844be25503/README.md)
 
 ## Example
 
