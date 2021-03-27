@@ -22,7 +22,6 @@ jobs:
       - name: build playground and deploy on gh-pages
         env:
           TOKEN: ${{secrets.TOKEN}}
-          PUBLIC_URL: /react-lrc
         run: |
           cd playground
           npm install
