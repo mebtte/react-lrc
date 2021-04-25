@@ -28,7 +28,7 @@ import useAutoScrollAction from './use_auto_scroll_action';
 const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
   const {
     lrc,
-    lineRender,
+    lineRenderer,
     currentMillisecond = 0,
     autoScroll = true,
     intervalOfRecoveringAutoScrollAfterUserScroll = 5000,
@@ -77,14 +77,14 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
           key={index}
           className={`${LRC_LINE_COMPONENT_COMMON_CLASS_NAME} ${LRC_LINE_COMPONENT_CLASS_NAME_PREFIX}${idRef.current}`}
         >
-          {lineRender({
+          {lineRenderer({
             index,
             active: currentLyricIndex === index,
             line: lyric,
           })}
         </div>
       )),
-    [lineRender, lyrics, currentLyricIndex],
+    [lineRenderer, lyrics, currentLyricIndex],
   );
   return (
     <div

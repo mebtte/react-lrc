@@ -19,7 +19,7 @@ export type LrcProps = HTMLAttributes<HTMLDivElement> & {
   /** lrc string */
   lrc: string;
   /** lyric line render */
-  lineRender: (params: {
+  lineRenderer: (params: {
     index: number;
     active: boolean;
     line: LyricLine;

@@ -18,7 +18,7 @@ const Style = styled.div`
   }
 `;
 
-const lineRender = ({
+const lineRenderer = ({
   active,
   line,
 }: {
@@ -35,7 +35,7 @@ const LrcDisplay = () => {
       <Lrc
         className="lrc"
         lrc={lrc}
-        lineRender={lineRender}
+        lineRenderer={lineRenderer}
         currentMillisecond={currentMillisecond}
         topBlank
         bottomBlank
