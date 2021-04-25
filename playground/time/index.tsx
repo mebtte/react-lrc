@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button, Typography } from '@material-ui/core';
 
+import { INITIAL_TIMESTAMP } from '../data';
 import eventemitter, { EventType } from '../eventemtiter';
 import CustomInput from './custom_input';
 
@@ -25,7 +26,9 @@ const Style = styled.div`
 `;
 
 const Time = () => {
-  const [currentMillisecond, setCurrentMillisecond] = useState(0);
+  const [currentMillisecond, setCurrentMillisecond] = useState(
+    INITIAL_TIMESTAMP,
+  );
   const [paused, setPaused] = useState(true);
 
   useEffect(() => {

@@ -12,6 +12,7 @@ import {
 } from './constants';
 import useCurrentLyricIndex from './use_current_lyric_index';
 import useIdRef from './use_id_ref';
+import useAutoScroll from './use_auto_scroll';
 
 /**
  * Lrc component
@@ -22,16 +23,23 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
     lrc,
     lineRender,
     currentMillisecond = 0,
+    autoScroll = true,
+    topBlank = false,
+    bottomBlank = false,
+
     className = '',
     ...otherProps
   } = props;
   const idRef = useIdRef();
   const rootRef = useRef<HTMLDivElement>();
 
-  const { lyrics } = useMemo(() => parseLrc(lrc, { sortByStartTime: true }), [
-    lrc,
-  ]);
+  const { lyrics } = useMemo(
+    () => parseLrc(lrc, { sortByStartTime: true, trimStart: true }),
+    [lrc],
+  );
   const currentLyricIndex = useCurrentLyricIndex(lyrics, currentMillisecond);
+
+  useAutoScroll({ id: idRef.current, autoScroll, currentLyricIndex });
 
   useImperativeHandle(ref, () => ({
     dom: rootRef.current,
@@ -61,7 +69,9 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
       className={`${LRC_COMPONENT_COMMON_CLASS_NAME} ${LRC_COMPONENT_CLASS_NAME_PREFIX}${idRef.current} ${className}`}
       ref={rootRef}
     >
+      {topBlank && <div className="blank" />}
       {lyricNodeList}
+      {bottomBlank && <div className="blank" />}
     </div>
   );
 });

@@ -37,6 +37,7 @@ module.exports = {
 
     'no-void': 'off',
     'consistent-return': 'off',
+    'no-restricted-syntax': 'off',
 
     'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': 'off',

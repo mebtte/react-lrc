@@ -7,6 +7,11 @@ const style = document.createElement('style');
 style.innerHTML = `
   .${LRC_COMPONENT_COMMON_CLASS_NAME} {
     overflow: auto;
+    scroll-behavior: smooth;
+  }
+
+  .${LRC_COMPONENT_COMMON_CLASS_NAME} > .blank {
+    height: 50%;
   }
 
   .${LRC_LINE_COMPONENT_COMMON_CLASS_NAME} {

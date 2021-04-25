@@ -24,5 +24,10 @@ export type LrcProps = HTMLAttributes<HTMLDivElement> & {
     line: LyricLine;
   }) => ReactNode;
   currentMillisecond?: number;
-  autoScroll?;
+  // whether to scroll automatically
+  autoScroll?: boolean;
+  /** add blank space on top of lrc */
+  topBlank?: boolean;
+  /** add blank space on bottom of lrc */
+  bottomBlank?: boolean;
 };

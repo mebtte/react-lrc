@@ -37,6 +37,8 @@ const LrcDisplay = () => {
         lrc={lrc}
         lineRender={lineRender}
         currentMillisecond={currentMillisecond}
+        topBlank
+        bottomBlank
       />
     </Style>
   );

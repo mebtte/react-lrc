@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
-import { throttle } from 'lodash';
 
+import { INITIAL_TIMESTAMP } from '../data';
 import eventemitter, { EventType } from '../eventemtiter';
 
 export default () => {
-  const [currentMillisecond, setCurrentMillisecond] = useState(0);
+  const [currentMillisecond, setCurrentMillisecond] = useState(
+    INITIAL_TIMESTAMP,
+  );
 
   useEffect(() => {
-    const onTimeUpdate = throttle(
-      (cm: number) => setCurrentMillisecond(cm),
-      300,
-    );
+    const onTimeUpdate = (cm: number) => setCurrentMillisecond(cm);
     eventemitter.on(EventType.TIME_UPDATE, onTimeUpdate);
     return () => void eventemitter.off(EventType.TIME_UPDATE, onTimeUpdate);
   }, []);
