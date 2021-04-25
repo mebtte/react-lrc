@@ -6,6 +6,7 @@ import {
 const style = document.createElement('style');
 style.innerHTML = `
   .${LRC_COMPONENT_COMMON_CLASS_NAME} {
+    outline: none;
     overflow: auto;
     scroll-behavior: smooth;
   }

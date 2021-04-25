@@ -11,7 +11,8 @@ export const LRC_LINE_COMPONENT_CLASS_NAME_PREFIX = 'react_lrc_line_';
 export type LrcInstance = {
   dom: HTMLDivElement;
 
-  getCurrentLyric: () => LyricLine | null;
+  getCurrentLine: () => LyricLine | null;
+  scrollToCurrentLine: () => void;
 };
 
 export type LrcProps = HTMLAttributes<HTMLDivElement> & {
@@ -26,8 +27,11 @@ export type LrcProps = HTMLAttributes<HTMLDivElement> & {
   currentMillisecond?: number;
   // whether to scroll automatically
   autoScroll?: boolean;
+  intervalOfRecoveringAutoScrollAfterUserScroll?: number;
   /** add blank space on top of lrc */
   topBlank?: boolean;
   /** add blank space on bottom of lrc */
   bottomBlank?: boolean;
+  /** call when current line change */
+  onLineChange?: (line: { index: number; line: LyricLine | null }) => void;
 };

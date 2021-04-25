@@ -22,14 +22,16 @@ const debounce = <F extends (...params: any[]) => any>(
 
 export default ({
   id,
-  autoScroll,
+  localAutoScoll,
   currentLyricIndex,
 }: {
   id: string;
-  autoScroll: boolean;
+  localAutoScoll: boolean;
   currentLyricIndex: number;
 }) => {
-  const indexMapRef = useRef<Map<number | string, IndexMap>>(new Map());
+  const indexMapRef = useRef<Map<number | string, IndexMap>>(
+    new Map<number | string, IndexMap>(),
+  );
 
   useLayoutEffect(() => {
     const caculateIndexMap = () => {
@@ -60,7 +62,7 @@ export default ({
   }, []);
 
   useLayoutEffect(() => {
-    if (autoScroll) {
+    if (localAutoScoll) {
       const lrcNode = document.querySelector<HTMLDivElement>(
         `.${LRC_COMPONENT_CLASS_NAME_PREFIX}${id}`,
       );
@@ -70,5 +72,5 @@ export default ({
           indexMap.offsetTop - lrcNode.clientHeight / 2 + indexMap.height / 2;
       }
     }
-  }, [autoScroll, currentLyricIndex]);
+  }, [localAutoScoll, currentLyricIndex]);
 };

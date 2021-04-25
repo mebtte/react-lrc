@@ -35,7 +35,7 @@ npm install --save react-lrc
 
 ### Why lrc component do not auto scroll ?
 
-You probably do not give `height` to `Lrc`. The `height` make `Lrc` scrollable.
+You probably do not specify `height` to `Lrc`. The `height` make `Lrc` scrollable.
 
 ### How to prevent user scroll ?
 
@@ -54,6 +54,7 @@ You probably do not give `height` to `Lrc`. The `height` make `Lrc` scrollable.
   /* webkit */
   ::-webkit-scrollbar {
     width: 0;
+    height: 0;
   }
 
   /* firefox */
