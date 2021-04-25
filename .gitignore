@@ -12,3 +12,6 @@ yarn.lock
 # dist
 dist/
 build/
+
+# parcel
+.cache

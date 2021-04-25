@@ -4,7 +4,12 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb', 'prettier'],
+  extends: [
+    'plugin:react/recommended',
+    'airbnb',
+    'plugin:react-hooks/recommended',
+    'prettier',
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -13,6 +18,38 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.ts', '.tsx'],
+      },
+      typescript: {},
+    },
+  },
   plugins: ['react', '@typescript-eslint'],
-  rules: {},
+  rules: {
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': 'error',
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'error',
+
+    'no-void': 'off',
+    'consistent-return': 'off',
+
+    'import/prefer-default-export': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'import/extensions': [
+      'error',
+      {
+        tsx: 'never',
+      },
+    ],
+
+    'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
+    'react/jsx-props-no-spreading': 'off',
+    'react/require-default-props': 'off',
+    'react/no-unused-prop-types': 'off',
+  },
 };

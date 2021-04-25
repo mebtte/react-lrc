@@ -1,4 +1,9 @@
 {
-  "compilerOptions": {},
-  "exclude": ["./dist"]
+  "compilerOptions": {
+    "lib": ["DOM", "ES2015"],
+    "esModuleInterop": true,
+    "jsx": "react",
+    "outDir": "build"
+  },
+  "exclude": [".cache", "build", "dist", "playground"]
 }
