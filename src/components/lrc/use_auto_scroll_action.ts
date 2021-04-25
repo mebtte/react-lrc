@@ -69,7 +69,9 @@ export default ({
       const indexMap = indexMapRef.current.get(currentLyricIndex);
       if (indexMap) {
         lrcNode.scrollTop =
-          indexMap.offsetTop - lrcNode.clientHeight / 2 + indexMap.height / 2;
+          indexMap.offsetTop -
+          lrcNode.clientHeight * 0.45 +
+          indexMap.height / 2;
       }
     }
   }, [localAutoScoll, currentLyricIndex]);

@@ -53,7 +53,6 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
     intervalOfRecoveringAutoScrollAfterUserScroll,
   });
 
-  console.log(localAutoScoll);
   useAutoScrollAction({ id: idRef.current, localAutoScoll, currentLyricIndex });
 
   useEffect(() => {
