@@ -1,6 +1,6 @@
 # react-lrc [![version](https://img.shields.io/npm/v/react-lrc)](https://www.npmjs.com/package/react-lrc) [![license](https://img.shields.io/npm/l/react-lrc)](https://github.com/mebtte/react-lrc/blob/master/LICENSE)
 
-The react component that display lrc format. play it on [online playground](https://mebtte.github.io/react-lrc).
+The react component that display lrc format. Play it on [online playground](https://mebtte.github.io/react-lrc).
 
 ## [1.x README](https://github.com/mebtte/react-lrc/blob/74df10e762b12fce1ca54bab27a6d4844be25503/README.md)
 

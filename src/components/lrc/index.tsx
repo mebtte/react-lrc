@@ -20,6 +20,10 @@ import useCurrentLyricIndex from './use_current_lyric_index';
 import useIdRef from './use_id_ref';
 import useLocalAutoScroll from './use_local_auto_scroll';
 import useAutoScrollAction from './use_auto_scroll_action';
+import eventemitter, { EventType } from './eventemitter';
+
+const recoverAutoScroll = () =>
+  eventemitter.emit(EventType.RECOVER_AUTO_SCROLL);
 
 /**
  * Lrc component
@@ -53,7 +57,12 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
     intervalOfRecoveringAutoScrollAfterUserScroll,
   });
 
-  useAutoScrollAction({ id: idRef.current, localAutoScoll, currentLyricIndex });
+  useAutoScrollAction({
+    id: idRef.current,
+    localAutoScoll,
+    lyrics,
+    currentLyricIndex,
+  });
 
   useEffect(() => {
     if (onLineChange) {
@@ -69,7 +78,7 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
       index: currentLyricIndex,
       line: lyrics[currentLyricIndex] || null,
     }),
-    scrollToCurrentLine: () => {},
+    scrollToCurrentLine: recoverAutoScroll,
   }));
 
   const lyricNodeList = useMemo(

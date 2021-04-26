@@ -1,6 +1,7 @@
-import { useState, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect, useEffect } from 'react';
 
 import { LRC_COMPONENT_CLASS_NAME_PREFIX } from './constants';
+import eventemitter, { EventType } from './eventemitter';
 
 const SCROLLABLE_KEYS = [' ', 'ArrowUp', 'ArrowDown'];
 const throttle = <F extends (...params: any[]) => any>(
@@ -99,6 +100,18 @@ export default ({
       };
     }
   }, [autoScroll, intervalOfRecoveringAutoScrollAfterUserScroll]);
+
+  useEffect(() => {
+    if (autoScroll) {
+      const onRecoverAutoScroll = () => setLocalAutoScoll(true);
+      eventemitter.on(EventType.RECOVER_AUTO_SCROLL, onRecoverAutoScroll);
+      return () =>
+        void eventemitter.off(
+          EventType.RECOVER_AUTO_SCROLL,
+          onRecoverAutoScroll,
+        );
+    }
+  }, [autoScroll]);
 
   return localAutoScroll;
 };

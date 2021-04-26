@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Time from './time';
+import CustomLrc from './custom_lrc';
 import LrcDisplay from './lrc_display';
 
 const Scollbar = styled.div`
@@ -21,20 +22,21 @@ const Style = styled.div`
   > .operation {
     flex: 1;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
   }
 `;
 
-const App = () => {
-  return (
-    <Scollbar>
-      <Style>
-        <div className="operation">
-          <Time />
-        </div>
-        <LrcDisplay />
-      </Style>
-    </Scollbar>
-  );
-};
+const App = () => (
+  <Scollbar>
+    <Style>
+      <div className="operation">
+        <Time />
+        <CustomLrc />
+      </div>
+      <LrcDisplay />
+    </Style>
+  </Scollbar>
+);
 
 export default App;

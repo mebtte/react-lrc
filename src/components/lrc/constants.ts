@@ -32,6 +32,6 @@ export type LrcProps = HTMLAttributes<HTMLDivElement> & {
   topBlank?: boolean;
   /** add blank space on bottom of lrc */
   bottomBlank?: boolean;
-  /** call when current line change */
+  /** call when current line changed */
   onLineChange?: (line: { index: number; line: LyricLine | null }) => void;
 };

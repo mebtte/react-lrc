@@ -1,4 +1,4 @@
-export const INITIAL_TIMESTAMP = 1000 * 70;
+export const INITIAL_TIMESTAMP = 1000 * 81;
 
 export const LRC = `[00:01.49]缺氧到似有幻象
 [00:04.44]乏力地躺于地上

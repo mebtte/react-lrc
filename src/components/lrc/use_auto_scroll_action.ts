@@ -14,18 +14,26 @@ type IndexMap = {
 export default ({
   id,
   localAutoScoll,
+  lyrics,
   currentLyricIndex,
 }: {
   id: string;
   localAutoScoll: boolean;
+  lyrics;
   currentLyricIndex: number;
 }) => {
   const indexMapRef = useRef<Map<number | string, IndexMap>>(
     new Map<number | string, IndexMap>(),
   );
+  const lrcNodeRef = useRef<HTMLDivElement>();
 
   useLayoutEffect(() => {
+    lrcNodeRef.current = document.querySelector(
+      `.${LRC_COMPONENT_CLASS_NAME_PREFIX}${id}`,
+    );
+
     const caculateIndexMap = () => {
+      console.log('caculate');
       const indexMap = new Map<number | string, IndexMap>();
 
       const lrcLineNodeList = document.querySelectorAll<HTMLDivElement>(
@@ -46,24 +54,25 @@ export default ({
     const resizeDetector = new window.ResizeObserver(
       debounce(caculateIndexMap),
     );
-    resizeDetector.observe(
-      document.querySelector(`.${LRC_COMPONENT_CLASS_NAME_PREFIX}${id}`),
-    );
-    return () => resizeDetector.disconnect();
-  }, []);
+    resizeDetector.observe(lrcNodeRef.current);
+    return () => {
+      lrcNodeRef.current = null;
+
+      resizeDetector.disconnect();
+    };
+  }, [lyrics]);
 
   useLayoutEffect(() => {
     if (localAutoScoll) {
-      const lrcNode = document.querySelector<HTMLDivElement>(
-        `.${LRC_COMPONENT_CLASS_NAME_PREFIX}${id}`,
-      );
       const indexMap = indexMapRef.current.get(currentLyricIndex);
       if (indexMap) {
-        lrcNode.scrollTop =
+        lrcNodeRef.current.scrollTop =
           indexMap.offsetTop -
-          lrcNode.clientHeight * 0.45 +
+          lrcNodeRef.current.clientHeight * 0.45 +
           indexMap.height / 2;
+      } else {
+        lrcNodeRef.current.scrollTop = 0;
       }
     }
-  }, [localAutoScoll, currentLyricIndex]);
+  }, [localAutoScoll, currentLyricIndex, lyrics]);
 };
