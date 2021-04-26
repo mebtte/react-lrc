@@ -14,14 +14,18 @@ type IndexMap = {
 
 export default ({
   id,
-  lyrics,
   localAutoScoll,
   currentLyricIndex,
+
+  lyrics,
+  topBlank,
 }: {
   id: string;
-  lyrics: LyricLine[];
   localAutoScoll: boolean;
   currentLyricIndex: number;
+
+  lyrics: LyricLine[];
+  topBlank: boolean;
 }) => {
   const indexMapRef = useRef<Map<number | string, IndexMap>>(
     new Map<number | string, IndexMap>(),
@@ -60,7 +64,7 @@ export default ({
 
       resizeDetector.disconnect();
     };
-  }, [lyrics]);
+  }, [lyrics, topBlank]);
 
   useLayoutEffect(() => {
     if (localAutoScoll) {
@@ -74,5 +78,5 @@ export default ({
         lrcNodeRef.current.scrollTop = 0;
       }
     }
-  }, [localAutoScoll, currentLyricIndex, lyrics]);
+  }, [localAutoScoll, currentLyricIndex, lyrics, topBlank]);
 };
