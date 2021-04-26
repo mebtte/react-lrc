@@ -17,7 +17,7 @@ const Style = styled.div`
   width: 100%;
   height: 100%;
   min-width: 720px;
-  min-height: 540px;
+  min-height: 720px;
   display: flex;
   > .operation {
     flex: 1;

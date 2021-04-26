@@ -7,8 +7,6 @@ import eventemitter, { EventType } from './eventemtiter';
 
 const style = {
   margin: 10,
-  flex: 1,
-  minHeight: 0,
 };
 const emitChange = debounce(
   (lrc: string) => eventemitter.emit(EventType.LRC_CHANGE, lrc),

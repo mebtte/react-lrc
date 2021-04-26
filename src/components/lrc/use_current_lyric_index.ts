@@ -5,9 +5,9 @@ function useCurrentLyricIndex(
   currentMillisecond: number,
 ): number {
   let index = 0;
-  for (const { length } = lyrics; index < length; index += 1) {
+  for (const { length } = lyrics; index <= length; index += 1) {
     const lyric = lyrics[index];
-    if (lyric.startMillisecond > currentMillisecond) {
+    if (!lyric || lyric.startMillisecond > currentMillisecond) {
       break;
     }
   }

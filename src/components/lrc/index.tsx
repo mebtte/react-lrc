@@ -59,8 +59,8 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
 
   useAutoScrollAction({
     id: idRef.current,
-    localAutoScoll,
     lyrics,
+    localAutoScoll,
     currentLyricIndex,
   });
 

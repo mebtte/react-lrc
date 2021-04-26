@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from 'react';
+import { LyricLine } from 'clrc';
 
 import {
   LRC_COMPONENT_CLASS_NAME_PREFIX,
@@ -13,13 +14,13 @@ type IndexMap = {
 
 export default ({
   id,
-  localAutoScoll,
   lyrics,
+  localAutoScoll,
   currentLyricIndex,
 }: {
   id: string;
+  lyrics: LyricLine[];
   localAutoScoll: boolean;
-  lyrics;
   currentLyricIndex: number;
 }) => {
   const indexMapRef = useRef<Map<number | string, IndexMap>>(
@@ -50,7 +51,6 @@ export default ({
     };
 
     caculateIndexMap();
-
     const resizeDetector = new window.ResizeObserver(
       debounce(caculateIndexMap),
     );
