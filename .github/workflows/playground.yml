@@ -9,28 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@main
+
       - name: use node.js@12.x
         uses: actions/setup-node@main
         with:
           node-version: 12.x
 
-      - name: build react-lrc
-        run: |
-          npm install
-          npm run build
-
       - name: build playgroundd and deploy on gh-pages
-        env:
-          TOKEN: ${{secrets.TOKEN}}
         run: |
-          cd playgroundd
           npm install
-          npm run build -- --public-url /react-lrc
-          cd build
+          npm run playground:build -- --public-url /react-lrc
+          cd dist
           git init
           git config --local user.name mebtte
           git config --local user.email hi@mebtte.com
-          git remote add origin https://$TOKEN@github.com/$GITHUB_REPOSITORY.git
+          git remote add origin https://${{secrets.TOKEN}}@github.com/$GITHUB_REPOSITORY.git
           git switch -c gh-pages
           git add -A
           git commit -m "deploy playgroundd"

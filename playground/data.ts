@@ -1,5 +1,11 @@
 export const INITIAL_TIMESTAMP = 1000 * 81;
 
+export const INITIAL_LRC_PROPS = {
+  autoScroll: true,
+  topBlank: false,
+  bottomBlank: false,
+};
+
 export const LRC = `[00:01.49]缺氧到似有幻象
 [00:04.44]乏力地躺于地上
 [00:08.15]合上双眼 用皮肤感应无常

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Time from './time';
 import CustomLrc from './custom_lrc';
 import LrcDisplay from './lrc_display';
+import LrcPropsSetting from './lrc_props_setting';
 
 const Scollbar = styled.div`
   position: absolute;
@@ -32,6 +33,7 @@ const App = () => (
     <Style>
       <div className="operation">
         <Time />
+        <LrcPropsSetting />
         <CustomLrc />
       </div>
       <LrcDisplay />
