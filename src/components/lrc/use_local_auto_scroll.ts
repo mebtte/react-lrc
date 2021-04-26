@@ -30,6 +30,8 @@ export default ({
 
   useLayoutEffect(() => {
     if (autoScroll) {
+      setLocalAutoScoll(true);
+
       const lrcNode = document.querySelector<HTMLDivElement>(
         `.${LRC_COMPONENT_CLASS_NAME_PREFIX}${id}`,
       );
@@ -83,6 +85,10 @@ export default ({
 
       lrcNode.addEventListener('wheel', onWheel);
       return () => {
+        window.clearTimeout(keyboardTimer);
+        window.clearTimeout(mouseTimer);
+        window.clearTimeout(wheelTimer);
+
         lrcNode.removeEventListener('keydown', onKeyDown);
 
         lrcNode.removeEventListener('mousedown', onMouseDown);

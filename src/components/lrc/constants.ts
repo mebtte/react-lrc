@@ -11,7 +11,7 @@ export const LRC_LINE_COMPONENT_CLASS_NAME_PREFIX = 'react_lrc_line_';
 export type LrcInstance = {
   dom: HTMLDivElement;
 
-  getCurrentLine: () => LyricLine | null;
+  getCurrentLine: () => { index: number; line: LyricLine | null };
   scrollToCurrentLine: () => void;
 };
 

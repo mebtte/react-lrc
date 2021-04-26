@@ -65,7 +65,10 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
   }, [onLineChange, currentLyricIndex, lyrics]);
   useImperativeHandle(ref, () => ({
     dom: rootRef.current,
-    getCurrentLine: () => lyrics[currentLyricIndex] || null,
+    getCurrentLine: () => ({
+      index: currentLyricIndex,
+      line: lyrics[currentLyricIndex] || null,
+    }),
     scrollToCurrentLine: () => {},
   }));
 

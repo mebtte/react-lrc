@@ -4,20 +4,11 @@ import {
   LRC_COMPONENT_CLASS_NAME_PREFIX,
   LRC_LINE_COMPONENT_CLASS_NAME_PREFIX,
 } from './constants';
+import debounce from '../../utils/debounce';
 
 type IndexMap = {
   height: number;
   offsetTop: number;
-};
-const debounce = <F extends (...params: any[]) => any>(
-  f: F,
-  { wait = 300 }: { wait?: number } = {},
-) => {
-  let timer: ReturnType<typeof window.setTimeout>;
-  return (...params: Parameters<F>) => {
-    window.clearTimeout(timer);
-    timer = window.setTimeout(() => f(params), wait);
-  };
 };
 
 export default ({
