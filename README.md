@@ -13,6 +13,12 @@ The react component that display lrc format. Play it on [online playground](http
 - Custom style
 - Typescript support
 
+## Examples
+
+- [Playground](https://mebtte.github.io/react-lrc)
+- [Static lyric viewer](https://codesandbox.io/s/staticlyricviewer-6g6zq)
+- [Load lrc from remote with transition](https://codesandbox.io/s/loadlrcfromremotewithtransition-1qoze)
+
 ## Requirement
 
 - `react >= 16.8` with `hook`.
