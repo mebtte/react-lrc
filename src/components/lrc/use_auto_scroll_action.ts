@@ -38,7 +38,6 @@ export default ({
     );
 
     const caculateIndexMap = () => {
-      console.log('caculate');
       const indexMap = new Map<number | string, IndexMap>();
 
       const lrcLineNodeList = document.querySelectorAll<HTMLDivElement>(

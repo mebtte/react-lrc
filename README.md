@@ -64,6 +64,27 @@ Call this when current line changed. `index` maybe `-1` and `line` maybe `null`.
 
 #### Instance methods
 
+`react-lrc` export type `LrcInstance` to determine type `useRef` like:
+
+```tsx
+import React, { useRef } from 'react';
+import { Lrc, LrcInstance } from 'react-lrc';
+
+const Demo = () => {
+  const lrcRef = useRef<LrcInstance>();
+  /**
+   * use methods like:
+   * lrcRef.current.getCurrentLine()
+   */
+  return (
+    <Lrc
+      ref={lrcRef}
+      // other props
+    />
+  );
+};
+```
+
 ##### getCurrentLine: () => { index: number, line: LyricLine | null }
 
 `getCurrentLine` return current index and current lyric line. Current index maybe `-1` and current lyric maybe `null`. `LyricLine` is exported from [clrc](https://github.com/mebtte/clrc).
@@ -120,6 +141,14 @@ You probably do not specify `height` to `Lrc`. The `height` make `Lrc` scrollabl
 
 ```jsx
 <Lrc className="lrc" {...otherProps} />
+```
+
+### How to get `Lrc` dom ?
+
+```jsx
+const lrcRef = useRef();
+// lrc dom is lrcRef.current.dom
+<Lrc ref={lrcRef} />;
 ```
 
 ## License

@@ -1,6 +1,6 @@
 import React from 'react';
-import { TextField } from '@material-ui/core';
-import { debounce } from 'lodash';
+import TextField from '@material-ui/core/TextField';
+import debounce from 'lodash/debounce';
 
 import { LRC } from './data';
 import eventemitter, { EventType } from './eventemtiter';

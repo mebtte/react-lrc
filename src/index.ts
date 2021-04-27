@@ -1,5 +1,5 @@
-import Lrc from './components/lrc';
+import Lrc, { LrcInstance } from './components/lrc';
 
-export { Lrc };
+export { Lrc, LrcInstance };
 
 export * from 'clrc';

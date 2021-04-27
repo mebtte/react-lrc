@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FormGroup, FormControlLabel, Checkbox } from '@material-ui/core';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Paper from '@material-ui/core/Paper';
 
-import eventemitter, { EventType } from '../eventemtiter';
-import { INITIAL_LRC_PROPS } from '../data';
+import eventemitter, { EventType } from './eventemtiter';
+import { INITIAL_LRC_PROPS } from './data';
 
-const Style = styled.div`
+const Style = styled(Paper)`
   flex: 1;
   min-height: 0;
+  margin: 10px;
   padding: 0 20px;
   display: flex;
   flex-direction: column;
@@ -31,7 +35,7 @@ const LrcPropsSetting = () => {
       value: checked,
     });
   return (
-    <Style>
+    <Style elevation={3}>
       <FormGroup row={false}>
         <FormControlLabel
           control={
