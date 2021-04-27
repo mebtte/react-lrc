@@ -1,6 +1,26 @@
-example/
-screenshot/
-.gitignore
+# parcel
+.cache/
+dist/
+
+# github
+.github/
+
+# husky
+.husky/
+
+# playground
+playground/
+
+# eslint
+.eslintignore
+.eslintrc.js
+
+# lint-staged
+.lintstagedrc
+
+# pretter
 .prettierignore
-prettier.config.js
+.prettierrc
+
+# typescript
 tsconfig.json

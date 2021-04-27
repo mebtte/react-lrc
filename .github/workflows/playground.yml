@@ -1,0 +1,30 @@
+name: build and deploy playground on gh-pages
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build_and_deploy:
+    name: build and deploy playground on gh-pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+
+      - name: use node.js@12.x
+        uses: actions/setup-node@main
+        with:
+          node-version: 12.x
+
+      - name: build playgroundd and deploy on gh-pages
+        run: |
+          npm install
+          npm run playground:build -- --public-url /react-lrc
+          cd dist
+          git init
+          git config --local user.name mebtte
+          git config --local user.email hi@mebtte.com
+          git remote add origin https://${{secrets.TOKEN}}@github.com/$GITHUB_REPOSITORY.git
+          git switch -c gh-pages
+          git add -A
+          git commit -m "deploy playgroundd"
+          git push origin gh-pages -f

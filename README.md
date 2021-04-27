@@ -1,118 +1,139 @@
-# react-lrc [![version](https://img.shields.io/npm/v/@mebtte/react-lrc)](https://www.npmjs.com/package/@mebtte/react-lrc) [![license](https://img.shields.io/npm/l/@mebtte/react-lrc)](https://github.com/mebtte/react-lrc/blob/master/LICENSE)
+# react-lrc [![version](https://img.shields.io/npm/v/react-lrc)](https://www.npmjs.com/package/react-lrc) [![license](https://img.shields.io/npm/l/react-lrc)](https://github.com/mebtte/react-lrc/blob/master/LICENSE)
 
-The react component that display lyric from lrc format. If using `react-natvie`, you can use [react-native-lrc](https://github.com/wubocong/react-native-lrc).
+The react component that display lrc format. Play it on [online playground](https://mebtte.github.io/react-lrc).
 
-## Screenshot
+![](./docs/demo.gif)
 
-![](./screenshot/cicada.gif)
+## [1.x README](https://github.com/mebtte/react-lrc/blob/74df10e762b12fce1ca54bab27a6d4844be25503/README.md)
 
 ## Feature
 
 - Auto scroll smoothly
 - User srcollable
 - Custom style
+- Typescript support
 
 ## Requirement
 
-- `react >= 16.8` with `hook`
-- [ResizeObserver](https://caniuse.com/?search=ResizeObserver)
+- `react >= 16.8` with `hook`.
+- [ResizeObserver](https://caniuse.com/?search=ResizeObserver), you should add [polyfill](https://github.com/que-etc/resize-observer-polyfill) probably.
 
 ## Usage
 
 ```sh
-npm install --save @mebtte/react-lrc
+npm install --save react-lrc
 ```
 
+### Lrc Component
+
 ```jsx
-import React, { useCallback } from 'react';
-import { Lrc } from '@mebtte/react-lrc';
+import { Lrc } from 'react-lrc';
 
-const Lyric = ({ lrc, currentTime }) => {
-  const lineRenderer = useCallback(
-    ({ lrcLine: { millisecond, content }, index, active }) => (
-      <div style={{ textAlign: 'center', color: active ? 'green' : 'inherit' }}>
-        {content}
-      </div>
-    ),
-    [],
-  );
-  const onCurrentLineChange = useCallback(
-    ({ lrcLine: { millisecond, content }, index }) =>
-      console.log(index, millisecond, content),
-    [],
-  );
-
+const Demo = () => {
+  // ...
   return (
     <Lrc
       lrc={lrc}
-      currentTime={currentTime}
       lineRenderer={lineRenderer}
-      onCurrentLineChange={onCurrentLineChange}
+      currentMillisecond={currentMillisecond}
     />
   );
 };
-
-export default Lyric;
 ```
 
-### `Lrc` Props
+#### Props
 
-| prop                      | description                                          | type                                                                                                             | default  |
-| ------------------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------- |
-| lrc                       | lrc string                                           | string                                                                                                           | required |
-| lineRenderer              | lrc line render method                               | ({ lrcLine: { id: string, millisecond: number, content: string }, index: number, active: boolean }) => ReactNode | required |
-| currentTime               | current time                                         | number, **millisecond**                                                                                          | 0        |
-| autoScroll                | whether auto scroll                                  | boolean                                                                                                          | true     |
-| autoScrollAfterUserScroll | auto scroll after user scroll                        | number, **millisecond**                                                                                          | 6000     |
-| spaceTop                  | space on lrc component top, percent of lrc component | number, 0~1                                                                                                      | 0.4      |
-| onCurrentLineChange       | when current line change                             | ({ index: number, lrcLine: { id: string, millisecond: number, content: string } \| null }) => void               | null     |
+##### lrc: string
 
-### `Lrc` Methods
+The lrc string.
 
-| method              | description                                | type                                                                                           |
-| ------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| scrollToCurrentLine | scroll to current line and set auto scroll | () => void                                                                                     |
-| getCurrentLine      | get the current lrc line                   | () => { lrcLine: { id: string, millisecond: number, content: string } \| null, index: number } |
+##### lineRenderer: ({ index: number, active: boolean, line: LyricLine }) => React.ReactNode
 
-## Other API
+Lyric line's renderer. When `active` is `true` means it is current line. `LyricLine` is exported from [clrc](https://github.com/mebtte/clrc).
 
-### parseLrc
+##### currentMillisecond?: number
 
-```jsx
-import { parseLrc } from '@mebtte/react-lrc';
+Current time of lrc string. default `0`.
 
-parseLrc(lrcString); // { id: string, millesecond: number, content: string }[]
-```
+##### autoScroll?: boolean
 
-### useLrc
+Whether to scroll when `currentMillisecond` changed. default `true`;
 
-```jsx
-import React from 'react';
-import { useLrc } from '@mebtte/react-lrc';
+##### intervalOfRecoveringAutoScrollAfterUserScroll?: number
 
-const Component = () => {
-  const lrcLineList = useLrc(lrcString); // { id: string, millesecond: number, content: string }[]
-  // ...
+The interval of recovering auto scroll after user scroll, it is `millisecond`. default `5000`.
+
+##### topBlank?: boolean
+
+If `true` will insert blank space to top of `Lrc`. default `false`.
+
+![](./docs/top_blank.png)
+
+##### bottomBlank?: boolean
+
+If `true` will insert blank space to bottom of `Lrc`. default `false`.
+
+![](./docs/bottom_blank.png)
+
+##### onLineChange?: ({ index: number; line: LyricLine | null }) => void
+
+Call this when current line changed. `index` maybe `-1` and `line` maybe `null`. default `null`. `LyricLine` is exported from [clrc](https://github.com/mebtte/clrc).
+
+#### Instance methods
+
+`react-lrc` export type `LrcInstance` to determine type `useRef` like:
+
+```tsx
+import React, { useRef } from 'react';
+import { Lrc, LrcInstance } from 'react-lrc';
+
+const Demo = () => {
+  const lrcRef = useRef<LrcInstance>();
+  /**
+   * use methods like:
+   * lrcRef.current.getCurrentLine()
+   */
+  return (
+    <Lrc
+      ref={lrcRef}
+      // other props
+    />
+  );
 };
 ```
 
-## Example
+##### getCurrentLine: () => { index: number, line: LyricLine | null }
 
-- [Dynamic lyric](https://mebtte.github.io/react-lrc)
-- [Static lyric](https://codesandbox.io/s/static-lyric-u32p1)
+`getCurrentLine` return current index and current lyric line. Current index maybe `-1` and current lyric maybe `null`. `LyricLine` is exported from [clrc](https://github.com/mebtte/clrc).
+
+##### scrollToCurrentLine: () => void
+
+Make `Lrc` component scroll to current line. Call this after user scroll within `intervalOfRecoveringAutoScrollAfterUserScroll` generally.
+
+### Other APIs
+
+#### [clrc](https://github.com/mebtte/clrc)
+
+`react-lrc` is powered by [clrc](https://github.com/mebtte/clrc), you can import everything that export from [clrc](https://github.com/mebtte/clrc) like:
+
+```
+import { parse } from 'react-lrc';
+
+// do with parse
+```
 
 ## Question
 
-### Why lrc component do not auto scroll ?
+### Why `Lrc` component do not auto scroll ?
 
-You probably do not give `height` to `Lrc`. The `height` make `Lrc` scrollable.
+You probably do not specify `height` to `Lrc`. The `height` make `Lrc` scrollable.
 
 ### How to prevent user scroll ?
 
 ```jsx
 <Lrc
   style={{ overflow: 'hidden !important' }}
-  autoScrollAfterUserScroll={0}
+  intervalOfRecoveringAutoScrollAfterUserScroll={0}
   {...otherProps}
 />
 ```
@@ -122,8 +143,9 @@ You probably do not give `height` to `Lrc`. The `height` make `Lrc` scrollable.
 ```scss
 .lrc {
   /* webkit */
-  ::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     width: 0;
+    height: 0;
   }
 
   /* firefox */
@@ -138,26 +160,14 @@ You probably do not give `height` to `Lrc`. The `height` make `Lrc` scrollable.
 <Lrc className="lrc" {...otherProps} />
 ```
 
-## Typescript
+### How to get `Lrc` dom ?
 
-`@mebtte/react-lrc` export type `LrcLine`.
-
-```tsx
-import React from 'react';
-import { LrcLine } from '@mebtte/react-lrc';
-
-const Component = () => {
-  const lineRenderer = React.useCallback(
-    ({ lrcLine }: { lrcLine: LrcLine }) => {
-      // ...
-    },
-    [],
-  );
-  // ...
-  return <Lrc lineRenderer={lineRenderer} {...otherProps} />;
-};
+```jsx
+const lrcRef = useRef();
+// lrc dom is lrcRef.current.dom
+<Lrc ref={lrcRef} />;
 ```
 
 ## License
 
-MIT
+[MIT](./LICENSE)
