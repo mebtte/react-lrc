@@ -2,6 +2,8 @@
 
 The react component that display lrc format. Play it on [online playground](https://mebtte.github.io/react-lrc).
 
+![](./docs/demo.gif)
+
 ## [1.x README](https://github.com/mebtte/react-lrc/blob/74df10e762b12fce1ca54bab27a6d4844be25503/README.md)
 
 ## Feature
@@ -23,6 +25,21 @@ npm install --save react-lrc
 ```
 
 ### Lrc Component
+
+```jsx
+import { Lrc } from 'react-lrc';
+
+const Demo = () => {
+  // ...
+  return (
+    <Lrc
+      lrc={lrc}
+      lineRenderer={lineRenderer}
+      currentMillisecond={currentMillisecond}
+    />
+  );
+};
+```
 
 #### Props
 
