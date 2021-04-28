@@ -2,7 +2,7 @@ import { useState, ComponentProps, useEffect } from 'react';
 import { Lrc } from '../../src';
 
 import { INITIAL_LRC_PROPS } from '../data';
-import eventemitter, { EventType } from '../eventemtiter';
+import eventemitter, { EventType } from '../eventemitter';
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
@@ -24,9 +24,9 @@ export default () => {
         ...lp,
         [key]: value,
       }));
-    eventemitter.on(EventType.LRC_PROPS_CHANGED, onPropsChanged);
+    eventemitter.listen(EventType.LRC_PROPS_CHANGED, onPropsChanged);
     return () =>
-      void eventemitter.off(EventType.LRC_PROPS_CHANGED, onPropsChanged);
+      eventemitter.unlisten(EventType.LRC_PROPS_CHANGED, onPropsChanged);
   }, []);
 
   return lrcProps;

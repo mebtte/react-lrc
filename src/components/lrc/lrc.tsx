@@ -23,7 +23,7 @@ import useAutoScrollAction from './use_auto_scroll_action';
 import eventemitter, { EventType } from './eventemitter';
 
 const recoverAutoScroll = () =>
-  eventemitter.emit(EventType.RECOVER_AUTO_SCROLL);
+  eventemitter.trigger(EventType.RECOVER_AUTO_SCROLL);
 
 /**
  * Lrc component

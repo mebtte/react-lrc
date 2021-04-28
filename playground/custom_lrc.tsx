@@ -3,13 +3,13 @@ import TextField from '@material-ui/core/TextField';
 import debounce from 'lodash/debounce';
 
 import { LRC } from './data';
-import eventemitter, { EventType } from './eventemtiter';
+import eventemitter, { EventType } from './eventemitter';
 
 const style = {
   margin: 10,
 };
 const emitChange = debounce(
-  (lrc: string) => eventemitter.emit(EventType.LRC_CHANGE, lrc),
+  (lrc: string) => eventemitter.trigger(EventType.LRC_CHANGE, lrc),
   500,
 );
 const onChange = (event: React.ChangeEvent<HTMLInputElement>) =>

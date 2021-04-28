@@ -5,7 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Paper from '@material-ui/core/Paper';
 
-import eventemitter, { EventType } from './eventemtiter';
+import eventemitter, { EventType } from './eventemitter';
 import { INITIAL_LRC_PROPS } from './data';
 
 const Style = styled(Paper)`
@@ -20,17 +20,17 @@ const Style = styled(Paper)`
 
 const LrcPropsSetting = () => {
   const onAutoScrollChange = (_, checked: boolean) =>
-    eventemitter.emit(EventType.LRC_PROPS_CHANGED, {
+    eventemitter.trigger(EventType.LRC_PROPS_CHANGED, {
       key: 'autoScroll',
       value: checked,
     });
   const onTopBlankChange = (_, checked: boolean) =>
-    eventemitter.emit(EventType.LRC_PROPS_CHANGED, {
+    eventemitter.trigger(EventType.LRC_PROPS_CHANGED, {
       key: 'topBlank',
       value: checked,
     });
   const onBottomBlankChange = (_, checked: boolean) =>
-    eventemitter.emit(EventType.LRC_PROPS_CHANGED, {
+    eventemitter.trigger(EventType.LRC_PROPS_CHANGED, {
       key: 'bottomBlank',
       value: checked,
     });

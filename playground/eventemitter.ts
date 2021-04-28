@@ -1,4 +1,4 @@
-import Eventemitter from 'eventemitter3';
+import Eventemitter from '../src/utils/eventemitter';
 
 export enum EventType {
   LRC_CHANGE = 'lrc_change',

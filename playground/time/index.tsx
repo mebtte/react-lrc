@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 import { INITIAL_TIMESTAMP } from '../data';
-import eventemitter, { EventType } from '../eventemtiter';
+import eventemitter, { EventType } from '../eventemitter';
 import CustomInput from './custom_input';
 
 const Style = styled.div`
@@ -45,7 +45,7 @@ const Time = () => {
   }, [paused]);
 
   useEffect(() => {
-    eventemitter.emit(EventType.TIME_UPDATE, currentMillisecond);
+    eventemitter.trigger(EventType.TIME_UPDATE, currentMillisecond);
   }, [currentMillisecond]);
 
   return (

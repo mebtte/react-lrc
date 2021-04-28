@@ -1,4 +1,4 @@
-import Eventemitter from 'eventemitter3';
+import Eventemitter from '../../utils/eventemitter';
 
 export enum EventType {
   RECOVER_AUTO_SCROLL = 'recover_auto_scroll',

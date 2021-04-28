@@ -2,21 +2,9 @@ import { useState, useLayoutEffect, useEffect } from 'react';
 
 import { LRC_COMPONENT_CLASS_NAME_PREFIX } from './constants';
 import eventemitter, { EventType } from './eventemitter';
+import throttle from '../../utils/throttle';
 
 const SCROLLABLE_KEYS = [' ', 'ArrowUp', 'ArrowDown'];
-const throttle = <F extends (...params: any[]) => any>(
-  f: F,
-  { wait = 100 }: { wait?: number } = {},
-) => {
-  let lastEmitTimestamp = 0;
-  return (...params: Parameters<F>): ReturnType<F> | undefined => {
-    const now = Date.now();
-    if (now - lastEmitTimestamp > wait) {
-      lastEmitTimestamp = now;
-      return f(...params);
-    }
-  };
-};
 
 export default ({
   id,
@@ -104,9 +92,9 @@ export default ({
   useEffect(() => {
     if (autoScroll) {
       const onRecoverAutoScroll = () => setLocalAutoScoll(true);
-      eventemitter.on(EventType.RECOVER_AUTO_SCROLL, onRecoverAutoScroll);
+      eventemitter.listen(EventType.RECOVER_AUTO_SCROLL, onRecoverAutoScroll);
       return () =>
-        void eventemitter.off(
+        void eventemitter.unlisten(
           EventType.RECOVER_AUTO_SCROLL,
           onRecoverAutoScroll,
         );
