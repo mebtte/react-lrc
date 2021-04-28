@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useCallback, useLayoutEffect, useRef } from 'react';
 import { LyricLine } from 'clrc';
 
 import {
@@ -6,6 +6,7 @@ import {
   LRC_LINE_COMPONENT_CLASS_NAME_PREFIX,
 } from './constants';
 import debounce from '../../utils/debounce';
+import eventemitter, { EventType } from './eventemitter';
 
 type IndexMap = {
   height: number;
@@ -31,6 +32,17 @@ export default ({
     new Map<number | string, IndexMap>(),
   );
   const lrcNodeRef = useRef<HTMLDivElement>();
+  const scrollToCurrentLine = useCallback(() => {
+    const indexMap = indexMapRef.current.get(currentLyricIndex);
+    if (indexMap) {
+      lrcNodeRef.current.scrollTop =
+        indexMap.offsetTop -
+        lrcNodeRef.current.clientHeight * 0.45 +
+        indexMap.height / 2;
+    } else {
+      lrcNodeRef.current.scrollTop = 0;
+    }
+  }, [currentLyricIndex]);
 
   useLayoutEffect(() => {
     lrcNodeRef.current = document.querySelector(
@@ -67,15 +79,20 @@ export default ({
 
   useLayoutEffect(() => {
     if (localAutoScoll) {
-      const indexMap = indexMapRef.current.get(currentLyricIndex);
-      if (indexMap) {
-        lrcNodeRef.current.scrollTop =
-          indexMap.offsetTop -
-          lrcNodeRef.current.clientHeight * 0.45 +
-          indexMap.height / 2;
-      } else {
-        lrcNodeRef.current.scrollTop = 0;
-      }
+      scrollToCurrentLine();
     }
-  }, [localAutoScoll, currentLyricIndex, lyrics, topBlank]);
+  }, [localAutoScoll, scrollToCurrentLine, lyrics, topBlank]);
+
+  useLayoutEffect(() => {
+    const onScrollToCurrentLine = () => scrollToCurrentLine();
+    eventemitter.listen(
+      EventType.SCROLL_TO_CURRENT_LINE,
+      onScrollToCurrentLine,
+    );
+    return () =>
+      eventemitter.unlisten(
+        EventType.SCROLL_TO_CURRENT_LINE,
+        onScrollToCurrentLine,
+      );
+  }, [scrollToCurrentLine]);
 };

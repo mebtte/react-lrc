@@ -22,8 +22,8 @@ import useLocalAutoScroll from './use_local_auto_scroll';
 import useAutoScrollAction from './use_auto_scroll_action';
 import eventemitter, { EventType } from './eventemitter';
 
-const recoverAutoScroll = () =>
-  eventemitter.trigger(EventType.RECOVER_AUTO_SCROLL);
+const scrollToCurrentLine = () =>
+  eventemitter.trigger(EventType.SCROLL_TO_CURRENT_LINE);
 
 /**
  * Lrc component
@@ -80,7 +80,7 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
       index: currentLyricIndex,
       line: lyrics[currentLyricIndex] || null,
     }),
-    scrollToCurrentLine: recoverAutoScroll,
+    scrollToCurrentLine,
   }));
 
   const lyricNodeList = useMemo(

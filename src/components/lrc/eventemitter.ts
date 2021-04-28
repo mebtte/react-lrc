@@ -1,7 +1,7 @@
 import Eventemitter from '../../utils/eventemitter';
 
 export enum EventType {
-  RECOVER_AUTO_SCROLL = 'recover_auto_scroll',
+  SCROLL_TO_CURRENT_LINE = 'scroll_to_current_line',
 }
 
 export default new Eventemitter<EventType>();

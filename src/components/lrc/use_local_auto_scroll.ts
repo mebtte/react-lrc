@@ -92,13 +92,18 @@ export default ({
   useEffect(() => {
     if (autoScroll) {
       const onRecoverAutoScroll = () => setLocalAutoScoll(true);
-      eventemitter.listen(EventType.RECOVER_AUTO_SCROLL, onRecoverAutoScroll);
+      eventemitter.listen(
+        EventType.SCROLL_TO_CURRENT_LINE,
+        onRecoverAutoScroll,
+      );
       return () =>
         void eventemitter.unlisten(
-          EventType.RECOVER_AUTO_SCROLL,
+          EventType.SCROLL_TO_CURRENT_LINE,
           onRecoverAutoScroll,
         );
     }
+
+    setLocalAutoScoll(false);
   }, [autoScroll]);
 
   return localAutoScroll;
