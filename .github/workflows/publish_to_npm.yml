@@ -1,0 +1,16 @@
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy_playground_to_pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - uses: actions/setup-node@main
+        with:
+          node-version: lts/*
+
+      - uses: JS-DevTools/npm-publish@master
+        with:
+          token: ${{secrets.NPM_ACCESS_TOKEN}}
