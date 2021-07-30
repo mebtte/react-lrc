@@ -1,16 +1,16 @@
 {
   "name": "react-lrc",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "The react component that display lrc format.",
   "main": "build/index.js",
   "scripts": {
+    "prepare": "husky install",
     "dev": "tsc --declaration --watch",
     "build": "rimraf build && tsc --declaration",
     "prepublish": "npm run build",
     "playground:dev": "parcel playground/index.html",
     "playground:build": "parcel build playground/index.html",
-    "lint-staged": "lint-staged",
-    "prepare": "husky install"
+    "lint-staged": "lint-staged"
   },
   "author": {
     "name": "mebtte",

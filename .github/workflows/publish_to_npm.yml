@@ -11,6 +11,8 @@ jobs:
         with:
           node-version: lts/*
 
+      - run: npm install
+
       - uses: JS-DevTools/npm-publish@master
         with:
           token: ${{secrets.NPM_ACCESS_TOKEN}}
