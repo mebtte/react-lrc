@@ -1,6 +1,6 @@
 {
   "name": "react-lrc",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "The react component that display lrc format.",
   "main": "build/index.js",
   "scripts": {
@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/mebtte/react-lrc#readme",
   "peerDependencies": {
-    "react": "^16.8.0"
+    "react": ">=16.8.0"
   },
   "dependencies": {
     "clrc": "^2.1.3"
