@@ -1,10 +1,8 @@
 # react-lrc [![version](https://img.shields.io/npm/v/react-lrc)](https://www.npmjs.com/package/react-lrc) [![license](https://img.shields.io/npm/l/react-lrc)](https://github.com/mebtte/react-lrc/blob/master/LICENSE) [![](https://img.shields.io/bundlephobia/minzip/react-lrc)](https://bundlephobia.com/result?p=react-lrc)
 
-The react component that display lrc format. Play it on [online playground](https://mebtte.github.io/react-lrc).
+The react component that display lrc format. See [example](https://mebtte.github.io/react-lrc) and play it.
 
-![](./docs/demo.gif)
-
-## [1.x README](https://github.com/mebtte/react-lrc/blob/74df10e762b12fce1ca54bab27a6d4844be25503/README.md)
+## [2.x README](https://github.com/mebtte/react-lrc/blob/d714e64e5bb70a551b498559436fdd9f1d71f8ce/README.md)
 
 ## Feature
 
@@ -13,21 +11,15 @@ The react component that display lrc format. Play it on [online playground](http
 - Custom style
 - Typescript support
 
-## Examples
-
-- [Playground](https://mebtte.github.io/react-lrc)
-- [Static lyric viewer](https://codesandbox.io/s/staticlyricviewer-6g6zq)
-- [Load lrc from remote with transition](https://codesandbox.io/s/loadlrcfromremotewithtransition-1qoze)
-
 ## Requirement
 
 - `react >= 16.8` with `hook`.
 - [ResizeObserver](https://caniuse.com/?search=ResizeObserver), you should add [polyfill](https://github.com/que-etc/resize-observer-polyfill) probably.
 
-## Usage
+## Install & Usage
 
 ```sh
-npm install --save react-lrc
+npm install react-lrc
 ```
 
 ### Lrc Component
@@ -164,14 +156,6 @@ You probably do not specify `height` to `Lrc`. The `height` make `Lrc` scrollabl
 
 ```jsx
 <Lrc className="lrc" {...otherProps} />
-```
-
-### How to get `Lrc` dom ?
-
-```jsx
-const lrcRef = useRef();
-// lrc dom is lrcRef.current.dom
-<Lrc ref={lrcRef} />;
 ```
 
 ## License

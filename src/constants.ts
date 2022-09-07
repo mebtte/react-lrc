@@ -1,1 +1,1 @@
-export const LRC_COMPONENTA_CLASSNAME_TEMPLATE = 'react-lrc-{{suffix}}';
+export const CONTAINER_CLASS_NAME = 'react-lrc-container';

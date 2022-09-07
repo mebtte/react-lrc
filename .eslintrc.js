@@ -48,7 +48,7 @@ module.exports = {
       },
     ],
 
-    'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
+    'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.mdx'] }],
     'react/jsx-props-no-spreading': 'off',
     'react/require-default-props': 'off',
     'react/no-unused-prop-types': 'off',

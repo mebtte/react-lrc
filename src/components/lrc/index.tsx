@@ -1,9 +1,12 @@
+import './style';
+
 import React, {
   useRef,
   useMemo,
-  useImperativeHandle,
   forwardRef,
   useEffect,
+  memo,
+  useImperativeHandle,
 } from 'react';
 import { LineType, LyricLine, parse as parseLrc } from 'clrc';
 import {
@@ -11,38 +14,34 @@ import {
   LRC_COMPONENT_CLASS_NAME_PREFIX,
   LRC_LINE_COMPONENT_COMMON_CLASS_NAME,
   LRC_LINE_COMPONENT_CLASS_NAME_PREFIX,
-  LrcInstance,
   LrcProps,
 } from './constants';
 import useCurrentLyricIndex from './use_current_lyric_index';
-import useId from '../../utils/use_id';
+import useImmutableId from '../../utils/use_immutable_id';
 import useLocalAutoScroll from './use_local_auto_scroll';
 import useAutoScrollAction from './use_auto_scroll_action';
-import eventemitter, { EventType } from './eventemitter';
-
-const scrollToCurrentLine = () =>
-  eventemitter.emit(EventType.SCROLL_TO_CURRENT_LINE, null);
 
 /**
  * Lrc component
  * @author mebtte<hi@mebtte.com>
  */
-const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
+const Lrc = forwardRef<HTMLDivElement, LrcProps>((props: LrcProps, ref) => {
   const {
     lrc,
     lineRenderer,
     currentMillisecond = 0,
     autoScroll = true,
-    intervalOfRecoveringAutoScrollAfterUserScroll = 5000,
+    recoverAutoScrollInterval = 5000,
     topBlank = false,
     bottomBlank = false,
-    onLineChange,
+    onLineUpdate,
+    scrollToCurrentSignal = false,
 
     className = '',
     ...otherProps
   } = props;
-  const id = useId();
-  const rootRef = useRef<HTMLDivElement>();
+  const id = useImmutableId();
+  const innerRef = useRef<HTMLDivElement>();
 
   const lyrics = useMemo<LyricLine[]>(
     () =>
@@ -57,7 +56,8 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
   const localAutoScoll = useLocalAutoScroll({
     id,
     autoScroll,
-    intervalOfRecoveringAutoScrollAfterUserScroll,
+    recoverAutoScrollInterval,
+    scrollToCurrentSignal,
   });
 
   useAutoScrollAction({
@@ -70,17 +70,13 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
   });
 
   useEffect(() => {
-    if (onLineChange) {
-      onLineChange({
+    if (onLineUpdate) {
+      onLineUpdate({
         index: currentLyricIndex,
         line: lyrics[currentLyricIndex] || null,
       });
     }
-  }, [onLineChange, currentLyricIndex, lyrics]);
-  useImperativeHandle(ref, () => ({
-    dom: rootRef.current,
-    scrollToCurrentLine,
-  }));
+  }, [onLineUpdate, currentLyricIndex, lyrics]);
 
   const lyricNodeList = useMemo(
     () =>
@@ -100,13 +96,15 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
     [lyrics, id, lineRenderer, currentLyricIndex],
   );
 
+  useImperativeHandle(ref, () => innerRef.current);
+
   return (
     <div
       /** tabIndex make focusable and enable to add keyboard listener */
       tabIndex={-1}
       {...otherProps}
       className={`${LRC_COMPONENT_COMMON_CLASS_NAME} ${LRC_COMPONENT_CLASS_NAME_PREFIX}${id} ${className}`}
-      ref={rootRef}
+      ref={innerRef}
     >
       {topBlank && <div className="blank" />}
       {lyricNodeList}
@@ -115,4 +113,4 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
   );
 });
 
-export default Lrc;
+export default memo(Lrc);

@@ -1,7 +1,5 @@
 import { useState, useLayoutEffect, useEffect } from 'react';
-
 import { LRC_COMPONENT_CLASS_NAME_PREFIX } from './constants';
-import eventemitter, { EventType } from './eventemitter';
 import throttle from '../../utils/throttle';
 
 const SCROLLABLE_KEYS = [' ', 'ArrowUp', 'ArrowDown'];
@@ -9,11 +7,13 @@ const SCROLLABLE_KEYS = [' ', 'ArrowUp', 'ArrowDown'];
 export default ({
   id,
   autoScroll,
-  intervalOfRecoveringAutoScrollAfterUserScroll,
+  recoverAutoScrollInterval,
+  scrollToCurrentSignal,
 }: {
   id: string;
   autoScroll: boolean;
-  intervalOfRecoveringAutoScrollAfterUserScroll: number;
+  recoverAutoScrollInterval: number;
+  scrollToCurrentSignal: boolean;
 }) => {
   const [localAutoScroll, setLocalAutoScoll] = useState(autoScroll);
 
@@ -35,7 +35,7 @@ export default ({
         window.clearTimeout(wheelTimer);
         return window.setTimeout(
           () => setLocalAutoScoll(true),
-          intervalOfRecoveringAutoScrollAfterUserScroll,
+          recoverAutoScrollInterval,
         );
       };
 
@@ -87,19 +87,15 @@ export default ({
         lrcNode.removeEventListener('wheel', onWheel);
       };
     }
-  }, [autoScroll, id, intervalOfRecoveringAutoScrollAfterUserScroll]);
+  }, [autoScroll, id, recoverAutoScrollInterval]);
 
   useEffect(() => {
-    if (autoScroll) {
-      const unlistenScrollToCurrentLine = eventemitter.listen(
-        EventType.SCROLL_TO_CURRENT_LINE,
-        () => setLocalAutoScoll(true),
-      );
-      return unlistenScrollToCurrentLine;
-    }
-
-    setLocalAutoScoll(false);
+    setLocalAutoScoll(autoScroll);
   }, [autoScroll]);
+
+  useEffect(() => {
+    setLocalAutoScoll(true);
+  }, [scrollToCurrentSignal]);
 
   return localAutoScroll;
 };

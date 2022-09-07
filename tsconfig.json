@@ -2,8 +2,8 @@
   "compilerOptions": {
     "lib": ["DOM", "ES2015"],
     "esModuleInterop": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "outDir": "build"
   },
-  "exclude": [".cache", "build", "dist", "playground"]
+  "exclude": [".cache", "build", "src/demos"]
 }

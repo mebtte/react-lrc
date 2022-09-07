@@ -1,12 +1,10 @@
 import { useCallback, useLayoutEffect, useRef } from 'react';
 import { LyricLine } from 'clrc';
-
 import {
   LRC_COMPONENT_CLASS_NAME_PREFIX,
   LRC_LINE_COMPONENT_CLASS_NAME_PREFIX,
 } from './constants';
 import debounce from '../../utils/debounce';
-import eventemitter, { EventType } from './eventemitter';
 
 type IndexMap = {
   height: number;
@@ -82,12 +80,4 @@ export default ({
       scrollToCurrentLine();
     }
   }, [localAutoScoll, scrollToCurrentLine, lyrics, topBlank]);
-
-  useLayoutEffect(() => {
-    const unlistenScrollToCurrentLine = eventemitter.listen(
-      EventType.SCROLL_TO_CURRENT_LINE,
-      () => scrollToCurrentLine(),
-    );
-    return unlistenScrollToCurrentLine;
-  }, [scrollToCurrentLine]);
 };
