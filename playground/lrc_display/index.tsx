@@ -6,7 +6,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import CenterFocusStrong from '@material-ui/icons/CenterFocusStrong';
 import Visibility from '@material-ui/icons/Visibility';
-
 import { Lrc, LrcInstance, LyricLine as LyricLineType } from '../../src';
 import useLrc from './use_lrc';
 import useCurrentMillisecond from './use_current_millisecond';
@@ -64,9 +63,8 @@ const LrcDisplay = () => {
   const lrcProps = useLrcProps();
   const lrcRef = useRef<LrcInstance>();
 
-  const [toCurrentLineButtonVisible, setToCurrentLineButtonVisible] = useState(
-    false,
-  );
+  const [toCurrentLineButtonVisible, setToCurrentLineButtonVisible] =
+    useState(false);
   const wheelTimer = useRef<ReturnType<typeof window.setTimeout>>();
   const onWheel = throttle(() => {
     setToCurrentLineButtonVisible(true);

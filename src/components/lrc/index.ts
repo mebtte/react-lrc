@@ -1,3 +1,4 @@
+import './style';
 import Lrc from './lrc';
 import { LrcInstance } from './constants';
 

@@ -3,7 +3,7 @@ on:
     branches:
       - master
 jobs:
-  deploy_playground_to_pages:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@main
@@ -11,15 +11,23 @@ jobs:
         with:
           node-version: lts/*
 
-      - run: |
-          npm install
-          npm run playground:build -- --public-url /react-lrc
-          cd dist
+      - name: build react-lrc
+        run: |
+          npm install --force
+          npm run build
+
+      - name: build playground and deploy
+        run: |
+          cd playground
+          npm install --force
+          npm run build
+
+          cd build
           git init
           git config --local user.name mebtte
           git config --local user.email hi@mebtte.com
-          git remote add origin https://${{secrets.ACCESS_TOKEN}}@github.com/$GITHUB_REPOSITORY.git
+          git remote add origin https://${{secrets.ACCESS_TOKEN}}@github.com/mebtte/react-lrc.git
           git switch -c gh-pages
           git add -A
           git commit -m "auto deploy"
-          git push origin gh-pages -f
+          git push -f origin gh-pages

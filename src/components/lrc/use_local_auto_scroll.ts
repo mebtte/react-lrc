@@ -25,9 +25,9 @@ export default ({
         `.${LRC_COMPONENT_CLASS_NAME_PREFIX}${id}`,
       );
 
-      let keyboardTimer: ReturnType<typeof window.setTimeout>;
-      let mouseTimer: ReturnType<typeof window.setTimeout>;
-      let wheelTimer: ReturnType<typeof window.setTimeout>;
+      let keyboardTimer: number;
+      let mouseTimer: number;
+      let wheelTimer: number;
       const shieldLocalAutoScroll = () => {
         setLocalAutoScoll(false);
         window.clearTimeout(keyboardTimer);
@@ -87,20 +87,15 @@ export default ({
         lrcNode.removeEventListener('wheel', onWheel);
       };
     }
-  }, [autoScroll, intervalOfRecoveringAutoScrollAfterUserScroll]);
+  }, [autoScroll, id, intervalOfRecoveringAutoScrollAfterUserScroll]);
 
   useEffect(() => {
     if (autoScroll) {
-      const onRecoverAutoScroll = () => setLocalAutoScoll(true);
-      eventemitter.listen(
+      const unlistenScrollToCurrentLine = eventemitter.listen(
         EventType.SCROLL_TO_CURRENT_LINE,
-        onRecoverAutoScroll,
+        () => setLocalAutoScoll(true),
       );
-      return () =>
-        void eventemitter.unlisten(
-          EventType.SCROLL_TO_CURRENT_LINE,
-          onRecoverAutoScroll,
-        );
+      return unlistenScrollToCurrentLine;
     }
 
     setLocalAutoScoll(false);

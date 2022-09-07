@@ -1,6 +1,6 @@
 {
   "name": "react-lrc",
-  "version": "2.1.5",
+  "version": "3.0.0",
   "description": "The react component that display lrc format.",
   "main": "build/index.js",
   "scripts": {
@@ -8,8 +8,6 @@
     "dev": "tsc --declaration --watch",
     "build": "rimraf build && tsc --declaration",
     "prepublish": "npm run build",
-    "playground:dev": "parcel playground/index.html",
-    "playground:build": "parcel build playground/index.html",
     "lint-staged": "lint-staged"
   },
   "author": {
@@ -33,36 +31,31 @@
   },
   "homepage": "https://github.com/mebtte/react-lrc#readme",
   "peerDependencies": {
-    "react": ">=16.8.0"
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "dependencies": {
-    "clrc": "^2.1.3"
+    "clrc": "^3.0.0",
+    "eventin": "^1.0.1"
   },
   "devDependencies": {
-    "@material-ui/core": "^4.11.3",
-    "@material-ui/icons": "^4.11.2",
-    "@types/lodash": "^4.14.168",
-    "@types/react": "^16.14.5",
-    "@types/react-dom": "^16.9.12",
-    "@types/styled-components": "^5.1.9",
-    "@typescript-eslint/eslint-plugin": "^4.18.0",
-    "@typescript-eslint/parser": "^4.18.0",
-    "eslint": "^7.22.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.22.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^6.0.0",
-    "lint-staged": "^10.5.4",
-    "lodash": "^4.17.21",
-    "parcel-bundler": "^1.12.5",
-    "prettier": "^2.2.1",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
+    "@types/react": "^18.0.18",
+    "@types/react-dom": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
+    "eslint": "^8.23.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-react": "^7.31.7",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "rimraf": "^3.0.2",
-    "styled-components": "^5.2.3",
-    "typescript": "^4.2.4"
+    "typescript": "^4.8.2"
   }
 }

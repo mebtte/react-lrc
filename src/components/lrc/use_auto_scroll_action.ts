@@ -75,7 +75,7 @@ export default ({
 
       resizeDetector.disconnect();
     };
-  }, [lyrics, topBlank]);
+  }, [id, lyrics, topBlank]);
 
   useLayoutEffect(() => {
     if (localAutoScoll) {
@@ -84,15 +84,10 @@ export default ({
   }, [localAutoScoll, scrollToCurrentLine, lyrics, topBlank]);
 
   useLayoutEffect(() => {
-    const onScrollToCurrentLine = () => scrollToCurrentLine();
-    eventemitter.listen(
+    const unlistenScrollToCurrentLine = eventemitter.listen(
       EventType.SCROLL_TO_CURRENT_LINE,
-      onScrollToCurrentLine,
+      () => scrollToCurrentLine(),
     );
-    return () =>
-      eventemitter.unlisten(
-        EventType.SCROLL_TO_CURRENT_LINE,
-        onScrollToCurrentLine,
-      );
+    return unlistenScrollToCurrentLine;
   }, [scrollToCurrentLine]);
 };

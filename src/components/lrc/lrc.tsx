@@ -5,9 +5,7 @@ import React, {
   forwardRef,
   useEffect,
 } from 'react';
-import { parse as parseLrc } from 'clrc';
-
-import './style';
+import { LineType, LyricLine, parse as parseLrc } from 'clrc';
 import {
   LRC_COMPONENT_COMMON_CLASS_NAME,
   LRC_COMPONENT_CLASS_NAME_PREFIX,
@@ -17,13 +15,13 @@ import {
   LrcProps,
 } from './constants';
 import useCurrentLyricIndex from './use_current_lyric_index';
-import useIdRef from './use_id_ref';
+import useId from '../../utils/use_id';
 import useLocalAutoScroll from './use_local_auto_scroll';
 import useAutoScrollAction from './use_auto_scroll_action';
 import eventemitter, { EventType } from './eventemitter';
 
 const scrollToCurrentLine = () =>
-  eventemitter.trigger(EventType.SCROLL_TO_CURRENT_LINE);
+  eventemitter.emit(EventType.SCROLL_TO_CURRENT_LINE, null);
 
 /**
  * Lrc component
@@ -43,22 +41,27 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
     className = '',
     ...otherProps
   } = props;
-  const idRef = useIdRef();
+  const id = useId();
   const rootRef = useRef<HTMLDivElement>();
 
-  const { lyrics } = useMemo(
-    () => parseLrc(lrc, { sortByStartTime: true, trimStart: true }),
+  const lyrics = useMemo<LyricLine[]>(
+    () =>
+      (
+        parseLrc(lrc).filter(
+          (line) => line.type === LineType.LYRIC,
+        ) as LyricLine[]
+      ).sort((a, b) => a.startMillisecond - b.startMillisecond),
     [lrc],
   );
   const currentLyricIndex = useCurrentLyricIndex(lyrics, currentMillisecond);
   const localAutoScoll = useLocalAutoScroll({
-    id: idRef.current,
+    id,
     autoScroll,
     intervalOfRecoveringAutoScrollAfterUserScroll,
   });
 
   useAutoScrollAction({
-    id: idRef.current,
+    id,
     localAutoScoll,
     currentLyricIndex,
 
@@ -76,10 +79,6 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
   }, [onLineChange, currentLyricIndex, lyrics]);
   useImperativeHandle(ref, () => ({
     dom: rootRef.current,
-    getCurrentLine: () => ({
-      index: currentLyricIndex,
-      line: lyrics[currentLyricIndex] || null,
-    }),
     scrollToCurrentLine,
   }));
 
@@ -89,7 +88,7 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
         <div
           // eslint-disable-next-line react/no-array-index-key
           key={index}
-          className={`${LRC_LINE_COMPONENT_COMMON_CLASS_NAME} ${LRC_LINE_COMPONENT_CLASS_NAME_PREFIX}${idRef.current}`}
+          className={`${LRC_LINE_COMPONENT_COMMON_CLASS_NAME} ${LRC_LINE_COMPONENT_CLASS_NAME_PREFIX}${id}`}
         >
           {lineRenderer({
             index,
@@ -98,14 +97,15 @@ const Lrc = forwardRef<LrcInstance, LrcProps>((props: LrcProps, ref) => {
           })}
         </div>
       )),
-    [lineRenderer, lyrics, currentLyricIndex],
+    [lyrics, id, lineRenderer, currentLyricIndex],
   );
+
   return (
     <div
       /** tabIndex make focusable and enable to add keyboard listener */
       tabIndex={-1}
       {...otherProps}
-      className={`${LRC_COMPONENT_COMMON_CLASS_NAME} ${LRC_COMPONENT_CLASS_NAME_PREFIX}${idRef.current} ${className}`}
+      className={`${LRC_COMPONENT_COMMON_CLASS_NAME} ${LRC_COMPONENT_CLASS_NAME_PREFIX}${id} ${className}`}
       ref={rootRef}
     >
       {topBlank && <div className="blank" />}
