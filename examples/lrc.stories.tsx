@@ -3,7 +3,7 @@ import React from 'react';
 import { ComponentStory } from '@storybook/react';
 import LrcStatic from './lrc.static';
 import LrcAutoScroll from './lrc.auto_scroll';
-import { lrcPiaoYi } from './data';
+import { lrc } from './data';
 
 export default {
   title: 'Lrc',
@@ -14,7 +14,7 @@ const StaticTemplate: ComponentStory<typeof LrcStatic> = (args) => (
 );
 export const StaticDisplay = StaticTemplate.bind({});
 StaticDisplay.args = {
-  lrc: lrcPiaoYi,
+  lrc,
 };
 
 const AutoScrollTemplate: ComponentStory<typeof LrcAutoScroll> = (args) => (
@@ -22,7 +22,7 @@ const AutoScrollTemplate: ComponentStory<typeof LrcAutoScroll> = (args) => (
 );
 export const AutoScroll = AutoScrollTemplate.bind({});
 AutoScroll.args = {
-  lrc: lrcPiaoYi,
+  lrc,
   topBlank: true,
   bottomBlank: true,
 };

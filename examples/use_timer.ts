@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useEvent from '../src/utils/use_event';
 
 function useTimer() {
-  const [paused, setPaused] = useState(true);
+  const [paused, setPaused] = useState(false);
   const play = useEvent(() => setPaused(false));
   const pause = useEvent(() => setPaused(true));
 

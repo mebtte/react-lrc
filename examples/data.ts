@@ -1,46 +1,58 @@
-export const lrcPiaoYi = `[00:02.11]哈哈哈哈 哈哈哈哈
-[00:07.71]这台车帅吧 这边这台车
-[00:10.60]超屌 旁边那台什麽车阿
-[00:15.62]藤原豆腐 这车擦这麽亮干麻
-[00:18.54]我来问他一下好了
-[00:21.67]小夥子你那什麽车阿
-[00:23.43]AE86阿 怎样?
-[00:25.11]AE86? 挑一下阿
-[00:28.67]随便阿
-[00:52.87]找支笔 写下日记 记录勇气
-[00:55.79]我可以 对着墙壁 让拳头叛逆
-[00:58.53]呼吸 天窗玻璃 打开我的身体
-[01:01.21]这里 引擎声就像是一种乐器
-[01:03.83]所以 风呼啸而过刺激
-[01:06.70]所以 我在转弯飘移
-[01:09.03]加足了马力 飙到底 看仔细
-[01:11.58]零到一百公里 谁敢与我为敌
-[01:14.30]我用第一人称 在飘移青春
-[01:19.33]输跟赢的分寸 计算的很精准
-[01:24.45]我踏上风火轮 在飘移青春
-[01:29.63]故事中的我们 在演自己的人生
-[01:45.14]胜败的对比 是残酷的可以
-[01:47.76]运气 从来就不在我这里
-[01:50.34]实力没办法模拟 飘移
-[01:52.22]人车一体 飘移
-[01:53.54]笑看后视镜的自己 啊
-[01:55.55]点火 继续 事关 荣誉
-[01:58.01]我除了 第一 其它没有 兴趣
-[02:00.58]得飘 得飘 得咿的飘
-[02:03.14]我安静的喝饮料 轻松的笑
-[02:05.73]我用第一人称 在飘移青春
-[02:10.90]输跟赢的分寸 计算的很精准
-[02:16.07]我踏上风火轮 在飘移青春
-[02:21.22]故事中的我们 在演自己的人生
-[02:26.47]得飘 得飘 得咿的飘
-[02:29.00]得飘 得飘 得咿的飘
-[02:31.54]我绕过山腰 雨声敲敲
-[02:34.15]我绕过山腰 雨声敲敲
-[02:36.67]得飘 得飘 得咿的飘
-[02:39.30]得飘 得飘 得咿的飘
-[02:41.80]再开进隧道 风声潇潇
-[02:44.45]再开进隧道 风声潇潇
-[02:47.10]我用第一人称 在飘移青春
-[02:52.15]输跟赢的分寸 计算的很精准
-[02:57.34]我踏上风火轮 在飘移青春
-[03:02.51]故事中的我们 在演自己的人生`;
+export const lrc = `[00:06.13]Janice:
+[00:07.04]曾经在灯下谈情
+[00:10.50]留不住欢乐忘形
+[00:13.72]这一秒 天黑了
+[00:20.98]如果用哀悼神情
+[00:24.54]唯一换到是同情
+[00:27.74]可跟你 一起笑
+[00:33.61]
+[00:36.07]可惜未就绪
+[00:40.43]
+[00:42.62]得你安慰好过一个消费闷的酒
+[00:46.10]回想变心那天你都有苦笑着开口
+[00:49.62]如今你跟哪位庆祝我愕然地接受
+[00:53.10]Well I'm happy, I'm happy, I'm happy for you
+[00:56.86]几次竟见到你一蹶不振闹分手
+[01:00.17]方想到给我打听不过知道没以后
+[01:03.56]多得你慷慨使我不折不扣念了旧
+[01:07.20]Well I'm happy, I'm happy, I'm happy for you
+[01:16.67]Happy for you
+[01:22.50]Just wanna be happy too
+[01:24.47]
+[01:24.63]Lukas:
+[01:24.76]Love you, hate you, all the same
+[01:28.08]Either way it takes up space
+[01:31.21]I had you, I had you
+[01:38.75]Haunted by the ghost of us
+[01:42.26]Sorry now I've said too much
+[01:45.41]I had to, I had you
+[01:50.65]
+[01:53.62]Can't help but wonder
+[02:00.26]
+[02:00.26]Are you ready are you ready are you ready now?
+[02:03.71]Do you forgive me am I something you can talk about?
+[02:07.18]I heard you're moving on and now you've got it figured out
+[02:10.76]Well I'm happy I'm happy I'm happy for you
+[02:14.49]Are you really gonna tell me that you're better now
+[02:17.75]Hey ain't it funny how we swore we couldn't live without
+[02:21.34]Each other now you got another got it figured out
+[02:24.87]Well I'm happy I'm happy I'm happy for you
+[02:34.34]Happy for you
+[02:40.18]Just wanna be happy too
+[02:42.51]
+[02:42.84]Janice:
+[02:42.85]我义无反顾 你孤苦 我当一个后援
+[02:50.14]往日回不去 现在乐趣交换
+[02:56.41]
+[02:56.41]J + L:
+[02:56.48]Are you ready are you ready are you ready now?
+[03:00.19]Do you forgive me am I something you can talk about?
+[03:03.70]I heard you're moving on and now you've got it figured out
+[03:07.41]Well I'm happy I'm happy I'm happy for you
+[03:11.03]Are you ready gonna tell me that you're better now
+[03:14.22]Hey ain't it funny how we swore we couldn't live without
+[03:17.79]Each other now you got another got it figured out
+[03:21.32]Well I'm happy I'm happy I'm happy for you
+[03:25.01]Are you ready are you ready are you ready now?
+[03:30.82]Happy for you
+[03:37.00]Just wanna be happy too`;

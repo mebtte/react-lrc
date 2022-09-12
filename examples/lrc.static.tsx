@@ -6,6 +6,7 @@ import Lrc from '../src/components/lrc';
 const Line = styled.div`
   > .time {
     color: orange;
+    font-family: monospace;
   }
 `;
 
@@ -26,7 +27,8 @@ function StaticLrc({ lrc }: { lrc: string }) {
         <Line>
           <span className="time">
             {formatMillisecond(line.startMillisecond)}
-          </span>{' '}
+          </span>
+          &nbsp;
           {line.content}
         </Line>
       )}
