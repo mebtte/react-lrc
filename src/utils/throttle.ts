@@ -1,6 +1,6 @@
 function throttle<F extends (...params: unknown[]) => unknown>(
   f: F,
-  { wait = 100 }: { wait?: number } = {},
+  wait = 100,
 ) {
   let lastEmitTimestamp = 0;
   return (...params: Parameters<F>): ReturnType<F> | void => {

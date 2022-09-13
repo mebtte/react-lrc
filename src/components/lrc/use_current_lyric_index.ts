@@ -1,4 +1,4 @@
-import { LyricLine } from 'clrc';
+import { LyricLine } from './constants';
 
 function useCurrentLyricIndex(
   lyrics: LyricLine[],

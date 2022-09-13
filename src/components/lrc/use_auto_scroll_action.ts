@@ -1,10 +1,7 @@
+/* eslint-disable no-param-reassign */
 import { useCallback, useLayoutEffect, useRef } from 'react';
-import { LyricLine } from 'clrc';
-import {
-  LRC_COMPONENT_CLASS_NAME_PREFIX,
-  LRC_LINE_COMPONENT_CLASS_NAME_PREFIX,
-} from './constants';
 import debounce from '../../utils/debounce';
+import { LINE_CLASSNAME } from '../../constants';
 
 type IndexMap = {
   height: number;
@@ -12,72 +9,69 @@ type IndexMap = {
 };
 
 export default ({
-  id,
-  localAutoScoll,
+  root,
+  localAutoScroll,
   currentLyricIndex,
 
-  lyrics,
+  lrc,
   topBlank,
 }: {
-  id: string;
-  localAutoScoll: boolean;
+  root: HTMLDivElement | null;
+  localAutoScroll: boolean;
   currentLyricIndex: number;
 
-  lyrics: LyricLine[];
+  lrc: string;
   topBlank: boolean;
 }) => {
   const indexMapRef = useRef<Map<number | string, IndexMap>>(
     new Map<number | string, IndexMap>(),
   );
-  const lrcNodeRef = useRef<HTMLDivElement>();
   const scrollToCurrentLine = useCallback(() => {
+    if (!root) {
+      return;
+    }
+
     const indexMap = indexMapRef.current.get(currentLyricIndex);
     if (indexMap) {
-      lrcNodeRef.current.scrollTop =
-        indexMap.offsetTop -
-        lrcNodeRef.current.clientHeight * 0.45 +
-        indexMap.height / 2;
+      root.scrollTop =
+        indexMap.offsetTop - root.clientHeight * 0.5 + indexMap.height;
     } else {
-      lrcNodeRef.current.scrollTop = 0;
+      root.scrollTop = 0;
     }
-  }, [currentLyricIndex]);
+  }, [currentLyricIndex, root]);
 
   useLayoutEffect(() => {
-    lrcNodeRef.current = document.querySelector(
-      `.${LRC_COMPONENT_CLASS_NAME_PREFIX}${id}`,
-    );
+    if (root) {
+      const caculateIndexMap = () => {
+        const indexMap = new Map<number | string, IndexMap>();
 
-    const caculateIndexMap = () => {
-      const indexMap = new Map<number | string, IndexMap>();
+        const lrcLineNodeList = root.querySelectorAll<HTMLDivElement>(
+          `.${LINE_CLASSNAME}`,
+        );
+        for (let i = 0, { length } = lrcLineNodeList; i < length; i += 1) {
+          const lrcLineNode = lrcLineNodeList[i];
+          indexMap.set(i, {
+            height: lrcLineNode.clientHeight,
+            offsetTop: lrcLineNode.offsetTop,
+          });
+        }
+        indexMapRef.current = indexMap;
+      };
 
-      const lrcLineNodeList = document.querySelectorAll<HTMLDivElement>(
-        `.${LRC_LINE_COMPONENT_CLASS_NAME_PREFIX}${id}`,
+      caculateIndexMap();
+      const resizeDetector = new window.ResizeObserver(
+        debounce(caculateIndexMap),
       );
-      for (let i = 0, { length } = lrcLineNodeList; i < length; i += 1) {
-        const lrcLineNode = lrcLineNodeList[i];
-        indexMap.set(i, {
-          height: lrcLineNode.clientHeight,
-          offsetTop: lrcLineNode.offsetTop,
-        });
-      }
-      indexMapRef.current = indexMap;
-    };
-
-    caculateIndexMap();
-    const resizeDetector = new window.ResizeObserver(
-      debounce(caculateIndexMap),
-    );
-    resizeDetector.observe(lrcNodeRef.current);
-    return () => {
-      lrcNodeRef.current = null;
-
-      resizeDetector.disconnect();
-    };
-  }, [id, lyrics, topBlank]);
+      resizeDetector.observe(root);
+      return () => {
+        resizeDetector.disconnect();
+      };
+    }
+  }, [root, lrc, topBlank]);
 
   useLayoutEffect(() => {
-    if (localAutoScoll) {
+    if (localAutoScroll) {
       scrollToCurrentLine();
     }
-  }, [localAutoScoll, scrollToCurrentLine, lyrics, topBlank]);
+  }, [localAutoScroll, scrollToCurrentLine, lrc, topBlank]);
 };

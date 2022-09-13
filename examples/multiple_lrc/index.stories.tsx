@@ -1,8 +1,8 @@
 /* eslint-disable react/function-component-definition */
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import MultipleLrc from '../src/components/multiple_lrc';
-import MultipleLrcNormal from './multiple_lrc.normal';
+import MultipleLrc from '../../src/components/multiple_lrc';
+import MultipleLrcNormal from './static';
 
 export default {
   title: 'MultipleLrc',

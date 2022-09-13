@@ -1,12 +1,6 @@
 import { HTMLAttributes, ReactNode } from 'react';
-import getRandomString from '../../utils/get_random_string';
 
-export const LRC_COMPONENT_COMMON_CLASS_NAME = `react_lrc_${getRandomString()}`;
-export const LRC_COMPONENT_CLASS_NAME_PREFIX = 'react_lrc_';
-export const LRC_LINE_COMPONENT_COMMON_CLASS_NAME = `react_lrc_line_${getRandomString()}`;
-export const LRC_LINE_COMPONENT_CLASS_NAME_PREFIX = 'react_lrc_line_';
-
-export interface LrcLine {
+export interface LyricLine {
   lineNumber: number;
   raw: string;
   startMillisecond: number;
@@ -20,7 +14,7 @@ export type LrcProps = HTMLAttributes<HTMLDivElement> & {
   lineRenderer: (params: {
     index: number;
     active: boolean;
-    line: LrcLine;
+    line: LyricLine;
   }) => ReactNode;
   currentMillisecond?: number;
   // whether to scroll automatically
@@ -32,5 +26,5 @@ export type LrcProps = HTMLAttributes<HTMLDivElement> & {
   /** add blank space on bottom of lrc */
   bottomBlank?: boolean;
   /** call when current line changed */
-  onLineUpdate?: (line: { index: number; line: LrcLine | null }) => void;
+  onLineUpdate?: (line: { index: number; line: LyricLine | null }) => void;
 };

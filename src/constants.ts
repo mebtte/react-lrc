@@ -1,1 +1,1 @@
-export const CONTAINER_CLASS_NAME = 'react-lrc-container';
+export const LINE_CLASSNAME = 'react-lrc-line';

@@ -1,116 +1,145 @@
-import './style';
-
 import React, {
   useRef,
   useMemo,
   forwardRef,
   useEffect,
-  memo,
   useImperativeHandle,
+  WheelEvent,
+  KeyboardEvent,
+  MouseEvent,
 } from 'react';
-import { LineType, LyricLine, parse as parseLrc } from 'clrc';
-import {
-  LRC_COMPONENT_COMMON_CLASS_NAME,
-  LRC_COMPONENT_CLASS_NAME_PREFIX,
-  LRC_LINE_COMPONENT_COMMON_CLASS_NAME,
-  LRC_LINE_COMPONENT_CLASS_NAME_PREFIX,
-  LrcProps,
-} from './constants';
+import { LrcProps } from './constants';
 import useCurrentLyricIndex from './use_current_lyric_index';
-import useImmutableId from '../../utils/use_immutable_id';
 import useLocalAutoScroll from './use_local_auto_scroll';
 import useAutoScrollAction from './use_auto_scroll_action';
+import useEvent from '../../utils/use_event';
+import Blank from '../blank';
+import Root from '../root';
+import { LINE_CLASSNAME } from '../../constants';
+import useLrc from './use_lrc';
 
 /**
  * Lrc component
  * @author mebtte<hi@mebtte.com>
  */
-const Lrc = forwardRef<HTMLDivElement, LrcProps>((props: LrcProps, ref) => {
-  const {
-    lrc,
-    lineRenderer,
-    currentMillisecond = 0,
-    autoScroll = true,
-    recoverAutoScrollInterval = 5000,
-    topBlank = false,
-    bottomBlank = false,
-    onLineUpdate,
-    scrollToCurrentSignal = false,
+const Lrc = forwardRef<HTMLDivElement, LrcProps>(
+  (
+    {
+      lrc,
+      lineRenderer,
+      currentMillisecond = 0,
+      autoScroll = true,
+      recoverAutoScrollInterval = 5000,
+      topBlank = false,
+      bottomBlank = false,
+      onLineUpdate,
+      scrollToCurrentSignal = false,
 
-    className = '',
-    ...otherProps
-  } = props;
-  const id = useImmutableId();
-  const innerRef = useRef<HTMLDivElement>();
+      onWheel,
+      onKeyDown,
+      onMouseDown,
+      onMouseUp,
+      onMouseMove,
+      ...otherProps
+    }: LrcProps,
+    ref,
+  ) => {
+    const rootRef = useRef<HTMLDivElement | null>(null);
 
-  const lyrics = useMemo<LyricLine[]>(
-    () =>
-      (
-        parseLrc(lrc).filter(
-          (line) => line.type === LineType.LYRIC,
-        ) as LyricLine[]
-      ).sort((a, b) => a.startMillisecond - b.startMillisecond),
-    [lrc],
-  );
-  const currentLyricIndex = useCurrentLyricIndex(lyrics, currentMillisecond);
-  const localAutoScoll = useLocalAutoScroll({
-    id,
-    autoScroll,
-    recoverAutoScrollInterval,
-    scrollToCurrentSignal,
-  });
+    const lyrics = useLrc(lrc);
+    const currentLyricIndex = useCurrentLyricIndex(lyrics, currentMillisecond);
+    const {
+      localAutoScroll,
+      onWheel: onLocalAutoScrollWheel,
+      onKeyDown: onLocalAutoScrollKeyDown,
+      onMouseDown: onLocalAutoScrollMouseDown,
+      onMouseUp: onLocalAutoScrollMouseUp,
+      onMouseMove: onLocalAutoScrollMove,
+    } = useLocalAutoScroll({
+      autoScroll,
+      recoverAutoScrollInterval,
+      scrollToCurrentSignal,
+    });
 
-  useAutoScrollAction({
-    id,
-    localAutoScoll,
-    currentLyricIndex,
+    useAutoScrollAction({
+      root: rootRef.current,
+      localAutoScroll,
+      currentLyricIndex,
 
-    lyrics,
-    topBlank,
-  });
+      lrc,
+      topBlank,
+    });
 
-  useEffect(() => {
-    if (onLineUpdate) {
-      onLineUpdate({
-        index: currentLyricIndex,
-        line: lyrics[currentLyricIndex] || null,
-      });
-    }
-  }, [onLineUpdate, currentLyricIndex, lyrics]);
+    useEffect(() => {
+      if (onLineUpdate) {
+        onLineUpdate({
+          index: currentLyricIndex,
+          line: lyrics[currentLyricIndex] || null,
+        });
+      }
+    }, [onLineUpdate, currentLyricIndex, lyrics]);
 
-  const lyricNodeList = useMemo(
-    () =>
-      lyrics.map((lyric, index) => (
-        <div
-          // eslint-disable-next-line react/no-array-index-key
-          key={index}
-          className={`${LRC_LINE_COMPONENT_COMMON_CLASS_NAME} ${LRC_LINE_COMPONENT_CLASS_NAME_PREFIX}${id}`}
-        >
-          {lineRenderer({
-            index,
-            active: currentLyricIndex === index,
-            line: lyric,
-          })}
-        </div>
-      )),
-    [lyrics, id, lineRenderer, currentLyricIndex],
-  );
+    const lyricNodeList = useMemo(
+      () =>
+        lyrics.map((lyric, index) => (
+          <div
+            // eslint-disable-next-line react/no-array-index-key
+            key={index}
+            className={LINE_CLASSNAME}
+          >
+            {lineRenderer({
+              index,
+              active: currentLyricIndex === index,
+              line: lyric,
+            })}
+          </div>
+        )),
+      [lyrics, lineRenderer, currentLyricIndex],
+    );
 
-  useImperativeHandle(ref, () => innerRef.current);
+    useImperativeHandle(ref, () => rootRef.current!);
 
-  return (
-    <div
-      /** tabIndex make focusable and enable to add keyboard listener */
-      tabIndex={-1}
-      {...otherProps}
-      className={`${LRC_COMPONENT_COMMON_CLASS_NAME} ${LRC_COMPONENT_CLASS_NAME_PREFIX}${id} ${className}`}
-      ref={innerRef}
-    >
-      {topBlank && <div className="blank" />}
-      {lyricNodeList}
-      {bottomBlank && <div className="blank" />}
-    </div>
-  );
-});
+    const onWheelWrapper = useEvent((event: WheelEvent<HTMLDivElement>) => {
+      onLocalAutoScrollWheel();
+      return onWheel && onWheel(event);
+    });
+    const onKeyDownWrapper = useEvent(
+      (event: KeyboardEvent<HTMLDivElement>) => {
+        onLocalAutoScrollKeyDown(event);
+        return onKeyDown && onKeyDown(event);
+      },
+    );
+    const onMouseDownWrapper = useEvent((event: MouseEvent<HTMLDivElement>) => {
+      onLocalAutoScrollMouseDown();
+      return onMouseDown && onMouseDown(event);
+    });
+    const onMouseUpWrapper = useEvent((event: MouseEvent<HTMLDivElement>) => {
+      onLocalAutoScrollMouseUp();
+      return onMouseUp && onMouseUp(event);
+    });
+    const onMouseMoveWrapper = useEvent((event: MouseEvent<HTMLDivElement>) => {
+      onLocalAutoScrollMove();
+      return onMouseMove && onMouseMove(event);
+    });
 
-export default memo(Lrc);
+    return (
+      <Root
+        /** tabIndex make focusable and enable to add keyboard listener */
+        tabIndex={-1}
+        {...otherProps}
+        onWheel={onWheelWrapper}
+        onKeyDown={onKeyDownWrapper}
+        onMouseDown={onMouseDownWrapper}
+        onMouseUp={onMouseUpWrapper}
+        onMouseMove={onMouseMoveWrapper}
+        ref={rootRef}
+      >
+        {topBlank && <Blank />}
+        {lyricNodeList}
+        {bottomBlank && <Blank />}
+      </Root>
+    );
+  },
+);
+
+export default Lrc;

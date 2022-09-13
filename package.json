@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "prepare": "husky install",
-    "dev": "tsc --declaration --watch",
+    "watch": "tsc --declaration --watch",
     "build": "rimraf build && tsc --declaration",
     "prepublish": "npm run build",
     "lint-staged": "lint-staged",

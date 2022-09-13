@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, { CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
-import Lrc from '../src/components/lrc';
-import useTimer from './use_timer';
+import Lrc from '../../src/components/lrc';
+import useTimer from '../use_timer';
 
 const Root = styled.div`
   position: absolute;
@@ -44,6 +44,10 @@ const lrcStyle: CSSProperties = {
   height: '100%',
 };
 const Line = styled.div<{ active }>`
+  min-height: 10px;
+  padding: 5px 20px;
+
+  font-size: 16px;
   text-align: center;
 
   ${({ active }) => css`
@@ -60,7 +64,8 @@ function LrcDemo({
   topBlank: boolean;
   bottomBlank: boolean;
 }) {
-  const { currentMillisecond, reset, play, pause } = useTimer();
+  const { currentMillisecond, setCurrentMillisecond, reset, play, pause } =
+    useTimer();
 
   return (
     <Root>
@@ -74,7 +79,13 @@ function LrcDemo({
         <button type="button" onClick={reset}>
           reset
         </button>
-        <div>{currentMillisecond}</div>
+        <input
+          type="number"
+          value={currentMillisecond}
+          onChange={(event) =>
+            setCurrentMillisecond(Number(event.target.value))
+          }
+        />
       </Panel>
       <div className="lrc-box">
         <Lrc
@@ -86,7 +97,6 @@ function LrcDemo({
           topBlank={topBlank}
           bottomBlank={bottomBlank}
           style={lrcStyle}
-          onScroll={(event) => console.log(event.isTrusted)}
         />
       </div>
     </Root>

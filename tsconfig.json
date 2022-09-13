@@ -3,7 +3,8 @@
     "lib": ["DOM", "ES2015"],
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "outDir": "build"
+    "outDir": "build",
+    "strictNullChecks": true
   },
   "exclude": [".cache", "build", "src/demos"]
 }

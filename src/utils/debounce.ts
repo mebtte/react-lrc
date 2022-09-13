@@ -1,6 +1,6 @@
 function debounce<F extends (...params: unknown[]) => unknown>(
   f: F,
-  { wait = 300 }: { wait?: number } = {},
+  wait = 300,
 ) {
   let timer: number;
   return (...params: Parameters<F>) => {

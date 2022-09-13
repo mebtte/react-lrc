@@ -21,7 +21,14 @@ function useTimer() {
     }
   }, [paused]);
 
-  return { currentMillisecond, reset, paused, play, pause };
+  return {
+    currentMillisecond,
+    setCurrentMillisecond,
+    reset,
+    paused,
+    play,
+    pause,
+  };
 }
 
 export default useTimer;
