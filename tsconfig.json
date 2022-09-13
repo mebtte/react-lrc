@@ -6,5 +6,5 @@
     "outDir": "build",
     "strictNullChecks": true
   },
-  "exclude": [".cache", "build", "src/demos"]
+  "exclude": ["build", "examples"]
 }

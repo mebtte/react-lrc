@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, { CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
-import Lrc from '../../src/components/lrc';
+import { Lrc, useRecoverAutoScrollImmediately } from '../../src';
 import useTimer from '../use_timer';
 
 const Root = styled.div`
@@ -42,6 +42,7 @@ const Panel = styled.div`
 `;
 const lrcStyle: CSSProperties = {
   height: '100%',
+  padding: '5px 0',
 };
 const Line = styled.div<{ active }>`
   min-height: 10px;
@@ -57,15 +58,19 @@ const Line = styled.div<{ active }>`
 
 function LrcDemo({
   lrc,
+  recoverAutoScrollInterval,
   topBlank,
   bottomBlank,
 }: {
   lrc: string;
+  recoverAutoScrollInterval: number;
   topBlank: boolean;
   bottomBlank: boolean;
 }) {
   const { currentMillisecond, setCurrentMillisecond, reset, play, pause } =
     useTimer();
+  const { signal, recoverAutoScrollImmediately } =
+    useRecoverAutoScrollImmediately();
 
   return (
     <Root>
@@ -86,6 +91,9 @@ function LrcDemo({
             setCurrentMillisecond(Number(event.target.value))
           }
         />
+        <button type="button" onClick={recoverAutoScrollImmediately}>
+          recover auto scroll immediately
+        </button>
       </Panel>
       <div className="lrc-box">
         <Lrc
@@ -97,6 +105,8 @@ function LrcDemo({
           topBlank={topBlank}
           bottomBlank={bottomBlank}
           style={lrcStyle}
+          recoverAutoScrollSingal={signal}
+          recoverAutoScrollInterval={recoverAutoScrollInterval}
         />
       </div>
     </Root>

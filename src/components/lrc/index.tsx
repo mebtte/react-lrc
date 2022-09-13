@@ -10,8 +10,8 @@ import React, {
 } from 'react';
 import { LrcProps } from './constants';
 import useCurrentLyricIndex from './use_current_lyric_index';
-import useLocalAutoScroll from './use_local_auto_scroll';
-import useAutoScrollAction from './use_auto_scroll_action';
+import useAutoScroll from './use_auto_scroll';
+import useScrollAction from './use_scroll_action';
 import useEvent from '../../utils/use_event';
 import Blank from '../blank';
 import Root from '../root';
@@ -28,12 +28,11 @@ const Lrc = forwardRef<HTMLDivElement, LrcProps>(
       lrc,
       lineRenderer,
       currentMillisecond = 0,
-      autoScroll = true,
       recoverAutoScrollInterval = 5000,
       topBlank = false,
       bottomBlank = false,
       onLineUpdate,
-      scrollToCurrentSignal = false,
+      recoverAutoScrollSingal = false,
 
       onWheel,
       onKeyDown,
@@ -49,21 +48,20 @@ const Lrc = forwardRef<HTMLDivElement, LrcProps>(
     const lyrics = useLrc(lrc);
     const currentLyricIndex = useCurrentLyricIndex(lyrics, currentMillisecond);
     const {
-      localAutoScroll,
+      autoScroll,
       onWheel: onLocalAutoScrollWheel,
       onKeyDown: onLocalAutoScrollKeyDown,
       onMouseDown: onLocalAutoScrollMouseDown,
       onMouseUp: onLocalAutoScrollMouseUp,
       onMouseMove: onLocalAutoScrollMove,
-    } = useLocalAutoScroll({
-      autoScroll,
+    } = useAutoScroll({
       recoverAutoScrollInterval,
-      scrollToCurrentSignal,
+      recoverAutoScrollSingal,
     });
 
-    useAutoScrollAction({
+    useScrollAction({
       root: rootRef.current,
-      localAutoScroll,
+      autoScroll,
       currentLyricIndex,
 
       lrc,

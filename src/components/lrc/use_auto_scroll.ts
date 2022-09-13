@@ -18,29 +18,23 @@ const SCROLLABLE_KEYS = [' ', 'ArrowUp', 'ArrowDown'];
  * @author mebtte<hi@mebtte.com>
  */
 export default ({
-  autoScroll,
   recoverAutoScrollInterval,
-  scrollToCurrentSignal,
+  recoverAutoScrollSingal,
 }: {
-  autoScroll: boolean;
   recoverAutoScrollInterval: number;
-  scrollToCurrentSignal: boolean;
+  recoverAutoScrollSingal: boolean;
 }) => {
-  const [localAutoScroll, setLocalAutoScoll] = useState(autoScroll);
+  const [autoScroll, setAutoScroll] = useState(true);
 
   const timerRef = useRef<number>();
   const handleUserScroll = useCallback(() => {
-    if (!autoScroll) {
-      return;
-    }
-
     window.clearTimeout(timerRef.current);
-    setLocalAutoScoll(false);
+    setAutoScroll(false);
     timerRef.current = window.setTimeout(
-      () => setLocalAutoScoll(true),
+      () => setAutoScroll(true),
       recoverAutoScrollInterval,
     );
-  }, [autoScroll, recoverAutoScrollInterval]);
+  }, [recoverAutoScrollInterval]);
 
   const mouseDownRef = useRef(false);
   const onMouseDown = useCallback(() => {
@@ -71,13 +65,8 @@ export default ({
   const onWheel = useMemo(() => throttle(handleUserScroll), [handleUserScroll]);
 
   useEffect(() => {
-    window.clearTimeout(timerRef.current);
-    setLocalAutoScoll(autoScroll);
-  }, [autoScroll]);
-
-  useEffect(() => {
-    setLocalAutoScoll(true);
-  }, [scrollToCurrentSignal]);
+    setAutoScroll(true);
+  }, [recoverAutoScrollSingal]);
 
   /**
    * clear timer after unmount
@@ -86,7 +75,7 @@ export default ({
   useEffect(() => () => window.clearTimeout(timerRef.current), []);
 
   return {
-    localAutoScroll,
+    autoScroll,
     onWheel,
     onKeyDown,
     onMouseDown,

@@ -10,14 +10,14 @@ type IndexMap = {
 
 export default ({
   root,
-  localAutoScroll,
+  autoScroll,
   currentLyricIndex,
 
   lrc,
   topBlank,
 }: {
   root: HTMLDivElement | null;
-  localAutoScroll: boolean;
+  autoScroll: boolean;
   currentLyricIndex: number;
 
   lrc: string;
@@ -70,8 +70,8 @@ export default ({
   }, [root, lrc, topBlank]);
 
   useLayoutEffect(() => {
-    if (localAutoScroll) {
+    if (autoScroll) {
       scrollToCurrentLine();
     }
-  }, [localAutoScroll, scrollToCurrentLine, lrc, topBlank]);
+  }, [autoScroll, scrollToCurrentLine, lrc, topBlank]);
 };
