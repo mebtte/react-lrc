@@ -37,7 +37,8 @@
     "react-dom": ">=16.8.0"
   },
   "dependencies": {
-    "clrc": "^3.0.0"
+    "clrc": "^3.0.0",
+    "resize-observer-polyfill": "^1.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.19.0",

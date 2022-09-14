@@ -1,28 +1,22 @@
 # react-lrc [![version](https://img.shields.io/npm/v/react-lrc)](https://www.npmjs.com/package/react-lrc) [![license](https://img.shields.io/npm/l/react-lrc)](https://github.com/mebtte/react-lrc/blob/master/LICENSE) [![](https://img.shields.io/bundlephobia/minzip/react-lrc)](https://bundlephobia.com/result?p=react-lrc)
 
-The react component that display lrc format. See [example](https://mebtte.github.io/react-lrc) and play it.
+The react component that display lrc format. See [example](https://mebtte.github.io/react-lrc) and play it powered by [storybook](https://storybook.js.org).
 
 ## [2.x README](https://github.com/mebtte/react-lrc/blob/d714e64e5bb70a551b498559436fdd9f1d71f8ce/README.md)
 
 ## Feature
 
 - Auto scroll smoothly
+- Support multiple lrcs
 - User srcollable
 - Custom style
 - Typescript support
-
-## Requirement
-
-- `react >= 16.8` with `hook`.
-- [ResizeObserver](https://caniuse.com/?search=ResizeObserver), you should add [polyfill](https://github.com/que-etc/resize-observer-polyfill) probably.
 
 ## Install & Usage
 
 ```sh
 npm install react-lrc
 ```
-
-### Lrc Component
 
 ```jsx
 import { Lrc } from 'react-lrc';
@@ -39,11 +33,11 @@ const Demo = () => {
 };
 ```
 
+## Reference
+
+### Common Component Props
+
 #### Props
-
-##### lrc: string
-
-The lrc string.
 
 ##### lineRenderer: ({ index: number, active: boolean, line: LyricLine }) => React.ReactNode
 
@@ -77,63 +71,20 @@ If `true` will insert blank space to bottom of `Lrc`. default `false`.
 
 Call this when current line changed. `index` maybe `-1` and `line` maybe `null`. default `null`. `LyricLine` is exported from [clrc](https://github.com/mebtte/clrc).
 
-#### Instance methods
+### Component `Lrc`
 
-`react-lrc` export type `LrcInstance` to determine type `useRef` like:
+##### lrc: string
 
-```tsx
-import React, { useRef } from 'react';
-import { Lrc, LrcInstance } from 'react-lrc';
+The lrc string.
 
-const Demo = () => {
-  const lrcRef = useRef<LrcInstance>();
-  /**
-   * use methods like:
-   * lrcRef.current.getCurrentLine()
-   */
-  return (
-    <Lrc
-      ref={lrcRef}
-      // other props
-    />
-  );
-};
-```
+### Component `MultipleLrc`
 
-##### getCurrentLine: () => { index: number, line: LyricLine | null }
-
-`getCurrentLine` return current index and current lyric line. Current index maybe `-1` and current lyric maybe `null`. `LyricLine` is exported from [clrc](https://github.com/mebtte/clrc).
-
-##### scrollToCurrentLine: () => void
-
-Make `Lrc` component scroll to current line. Call this after user scroll within `intervalOfRecoveringAutoScrollAfterUserScroll` generally.
-
-### Other APIs
-
-#### [clrc](https://github.com/mebtte/clrc)
-
-`react-lrc` is powered by [clrc](https://github.com/mebtte/clrc), you can import everything that export from [clrc](https://github.com/mebtte/clrc) like:
-
-```
-import { parse } from 'react-lrc';
-
-// do with parse
-```
-
-## Question
-
-### Why `Lrc` component do not auto scroll ?
-
-You probably do not specify `height` to `Lrc`. The `height` make `Lrc` scrollable.
+## Q & A
 
 ### How to prevent user scroll ?
 
 ```jsx
-<Lrc
-  style={{ overflow: 'hidden !important' }}
-  intervalOfRecoveringAutoScrollAfterUserScroll={0}
-  {...otherProps}
-/>
+<Lrc style={{ overflow: 'hidden !important' }} {...otherProps} />
 ```
 
 ### How to hide scrollbar ?

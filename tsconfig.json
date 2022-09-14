@@ -6,7 +6,8 @@
     "outDir": "build",
     "strictNullChecks": true,
     "target": "ES2015",
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "skipLibCheck": true
   },
   "exclude": ["build", "examples"]
 }

@@ -3,6 +3,7 @@ import React, { CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
 import { MultipleLrc, useRecoverAutoScrollImmediately } from '../../src';
 import useTimer from '../use_timer';
+import Control from '../control';
 
 const Root = styled.div`
   position: absolute;
@@ -32,13 +33,6 @@ const Root = styled.div`
       background: rgb(255 0 0 / 0.15);
     }
   }
-`;
-const Panel = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
-  background: rgb(222 222 222);
 `;
 const lrcStyle: CSSProperties = {
   height: '100%',
@@ -74,27 +68,14 @@ function LrcDemo({
 
   return (
     <Root>
-      <Panel>
-        <button type="button" onClick={play}>
-          play
-        </button>
-        <button type="button" onClick={pause}>
-          pause
-        </button>
-        <button type="button" onClick={reset}>
-          reset
-        </button>
-        <input
-          type="number"
-          value={currentMillisecond}
-          onChange={(event) =>
-            setCurrentMillisecond(Number(event.target.value))
-          }
-        />
-        <button type="button" onClick={recoverAutoScrollImmediately}>
-          recover auto scroll immediately
-        </button>
-      </Panel>
+      <Control
+        onPlay={play}
+        onPause={pause}
+        onReset={reset}
+        current={currentMillisecond}
+        setCurrent={setCurrentMillisecond}
+        recoverAutoScrollImmediately={recoverAutoScrollImmediately}
+      />
       <div className="lrc-box">
         <MultipleLrc
           lrcs={lrcs}

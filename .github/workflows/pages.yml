@@ -11,18 +11,12 @@ jobs:
         with:
           node-version: lts/*
 
-      - name: build react-lrc
+      - name: build storybook and deploy
         run: |
-          npm install --force
-          npm run build
+          npm install --legacy-peer-deps
+          npm run build-storybook
 
-      - name: build playground and deploy
-        run: |
-          cd playground
-          npm install --force
-          npm run build
-
-          cd build
+          cd storybook-static
           git init
           git config --local user.name mebtte
           git config --local user.email hi@mebtte.com
