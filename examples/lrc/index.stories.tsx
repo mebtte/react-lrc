@@ -9,14 +9,6 @@ export default {
   title: 'Lrc',
 };
 
-const StaticTemplate: ComponentStory<typeof StaticComponent> = (args) => (
-  <StaticComponent {...args} />
-);
-export const Static = StaticTemplate.bind({});
-Static.args = {
-  lrc,
-};
-
 const AutoScrollTemplate: ComponentStory<typeof AutoScrollComponent> = (
   args,
 ) => <AutoScrollComponent {...args} />;
@@ -26,4 +18,12 @@ AutoScroll.args = {
   recoverAutoScrollInterval: 5000,
   topBlank: true,
   bottomBlank: true,
+};
+
+const StaticTemplate: ComponentStory<typeof StaticComponent> = (args) => (
+  <StaticComponent {...args} />
+);
+export const Static = StaticTemplate.bind({});
+Static.args = {
+  lrc,
 };

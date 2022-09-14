@@ -11,6 +11,7 @@ function useLrc(lrc: string) {
         ) as ClrcLyricLine[]
       )
         .map((l) => ({
+          id: Math.random().toString(),
           lineNumber: l.lineNumber,
           raw: l.raw,
           startMillisecond: l.startMillisecond,
@@ -20,7 +21,7 @@ function useLrc(lrc: string) {
     [lrc],
   );
 
-  return lyrics;
+  return { lyrics };
 }
 
 export default useLrc;

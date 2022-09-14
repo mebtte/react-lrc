@@ -27,7 +27,7 @@ const Lrc = forwardRef<HTMLDivElement, LrcProps>(
     {
       lrc,
       lineRenderer,
-      currentMillisecond = 0,
+      currentMillisecond = -1,
       recoverAutoScrollInterval = 5000,
       topBlank = false,
       bottomBlank = false,
@@ -40,12 +40,12 @@ const Lrc = forwardRef<HTMLDivElement, LrcProps>(
       onMouseUp,
       onMouseMove,
       ...otherProps
-    }: LrcProps,
+    },
     ref,
   ) => {
     const rootRef = useRef<HTMLDivElement | null>(null);
 
-    const lyrics = useLrc(lrc);
+    const { lyrics } = useLrc(lrc);
     const currentLyricIndex = useCurrentLyricIndex(lyrics, currentMillisecond);
     const {
       autoScroll,
@@ -80,11 +80,7 @@ const Lrc = forwardRef<HTMLDivElement, LrcProps>(
     const lyricNodeList = useMemo(
       () =>
         lyrics.map((lyric, index) => (
-          <div
-            // eslint-disable-next-line react/no-array-index-key
-            key={index}
-            className={LINE_CLASSNAME}
-          >
+          <div key={lyric.id} className={LINE_CLASSNAME}>
             {lineRenderer({
               index,
               active: currentLyricIndex === index,

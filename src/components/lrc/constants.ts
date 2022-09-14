@@ -1,6 +1,7 @@
 import { HTMLAttributes, ReactNode } from 'react';
 
 export interface LyricLine {
+  id: string;
   lineNumber: number;
   raw: string;
   startMillisecond: number;
