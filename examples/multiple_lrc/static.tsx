@@ -1,9 +1,41 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
+import styled from 'styled-components';
 import MultipleLrc from '../../src/components/multiple_lrc';
-import useTimer from '../use_timer';
+import { formatMillisecond } from '../utils';
 
-function LrcDemo() {
-  return <div>456</div>;
+const Line = styled.div<{ active: boolean }>`
+  padding: 5px 0;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  > .time {
+    color: orange;
+    font-family: monospace;
+  }
+`;
+
+function Static({ lrcs }: { lrcs: string[] }) {
+  return (
+    <MultipleLrc
+      lrcs={lrcs}
+      lineRenderer={({ active, line }) => (
+        <Line active={active}>
+          <div className="time">{formatMillisecond(line.startMillisecond)}</div>
+          <div className="list">
+            {line.children.map((child, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <div className="item" key={index}>
+                {child.content}
+              </div>
+            ))}
+          </div>
+        </Line>
+      )}
+    />
+  );
 }
 
-export default LrcDemo;
+export default Static;

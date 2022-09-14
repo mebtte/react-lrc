@@ -4,7 +4,9 @@
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "outDir": "build",
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "target": "ES2015",
+    "moduleResolution": "Node"
   },
   "exclude": ["build", "examples"]
 }

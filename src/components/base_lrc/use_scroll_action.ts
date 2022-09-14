@@ -1,7 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { useCallback, useLayoutEffect, useRef } from 'react';
 import debounce from '../../utils/debounce';
-import { LINE_CLASSNAME } from '../../constants';
+import { BaseLine } from '../../constants';
+import { LINE_CLASSNAME } from './constants';
 
 type IndexMap = {
   height: number;
@@ -11,16 +12,16 @@ type IndexMap = {
 export default ({
   root,
   autoScroll,
-  currentLyricIndex,
+  lineIndex,
 
-  lrc,
+  lines,
   topBlank,
 }: {
   root: HTMLDivElement | null;
   autoScroll: boolean;
-  currentLyricIndex: number;
+  lineIndex: number;
 
-  lrc: string;
+  lines: BaseLine[];
   topBlank: boolean;
 }) => {
   const indexMapRef = useRef<Map<number | string, IndexMap>>(
@@ -31,14 +32,14 @@ export default ({
       return;
     }
 
-    const indexMap = indexMapRef.current.get(currentLyricIndex);
+    const indexMap = indexMapRef.current.get(lineIndex);
     if (indexMap) {
       root.scrollTop =
-        indexMap.offsetTop - root.clientHeight * 0.5 + indexMap.height;
+        indexMap.offsetTop - root.clientHeight * 0.5 + indexMap.height / 2;
     } else {
       root.scrollTop = 0;
     }
-  }, [currentLyricIndex, root]);
+  }, [lineIndex, root]);
 
   useLayoutEffect(() => {
     if (root) {
@@ -67,11 +68,11 @@ export default ({
         resizeDetector.disconnect();
       };
     }
-  }, [root, lrc, topBlank]);
+  }, [root, lines, topBlank]);
 
   useLayoutEffect(() => {
     if (autoScroll) {
       scrollToCurrentLine();
     }
-  }, [autoScroll, scrollToCurrentLine, lrc, topBlank]);
+  }, [autoScroll, scrollToCurrentLine, lines, topBlank]);
 };

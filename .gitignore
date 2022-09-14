@@ -21,3 +21,6 @@ _/
 
 # vscode
 .vscode
+
+# storybook
+storybook-static/

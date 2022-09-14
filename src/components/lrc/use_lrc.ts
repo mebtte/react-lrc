@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { parse, LineType, LyricLine as ClrcLyricLine } from 'clrc';
-import { LyricLine } from './constants';
+import { Line } from './constants';
 
 function useLrc(lrc: string) {
-  const lyrics = useMemo<LyricLine[]>(
+  const lines = useMemo<Line[]>(
     () =>
       (
         parse(lrc).filter(
@@ -21,7 +21,7 @@ function useLrc(lrc: string) {
     [lrc],
   );
 
-  return { lyrics };
+  return lines;
 }
 
 export default useLrc;

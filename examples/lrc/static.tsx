@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Lrc from '../../src/components/lrc';
+import { formatMillisecond } from '../utils';
 
 const Line = styled.div`
   > .time {
@@ -9,15 +10,6 @@ const Line = styled.div`
     font-family: monospace;
   }
 `;
-
-function formatMillisecond(ms: number) {
-  const minute = Math.floor(ms / 1000 / 60);
-  const second = Math.floor(ms / 1000) % 60;
-  const millisecond = ms % 1000;
-  return `${minute}:${second.toString().padStart(2, '0')}.${millisecond
-    .toString()
-    .padStart(3, '0')}`;
-}
 
 function StaticLrc({ lrc }: { lrc: string }) {
   return (

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import useEvent from '../src/utils/use_event';
 
-function useTimer() {
+function useTimer(speed = 1) {
   const [paused, setPaused] = useState(false);
   const play = useEvent(() => setPaused(false));
   const pause = useEvent(() => setPaused(true));
@@ -14,12 +14,12 @@ function useTimer() {
       let last = Date.now();
       const timer = window.setInterval(() => {
         const now = Date.now();
-        setCurrentMillisecond((cm) => cm + (now - last));
+        setCurrentMillisecond((cm) => cm + (now - last) * speed);
         last = now;
       }, 97);
       return () => window.clearInterval(timer);
     }
-  }, [paused]);
+  }, [paused, speed]);
 
   return {
     currentMillisecond,
