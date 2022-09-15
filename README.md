@@ -49,13 +49,13 @@ Current time of lrc, default `-1`.
 
 Make active line always vertical-middle even start or end of line list, default `false`.
 
-with verticalSpace:
-
-![](./docs/with_vertical_space.png)
-
 without verticalSpace:
 
 ![](./docs/without_vertical_space.png)
+
+with verticalSpace:
+
+![](./docs/with_vertical_space.png)
 
 #### `onLineUpdate`?: ({ index: number, line: Line | null }) => void
 
@@ -63,13 +63,13 @@ Call this when current line changed. `Line` is `LrcLine` when using `Lrc` compon
 
 #### `recoverAutoScrollInterval`
 
-The interval of recovering auto scroll after user scroll. it is `millisecond`, default `5000`.
+The interval of recovering auto scroll after user scroll. It is `millisecond`, default `5000`.
 
 ### Component `Lrc`
 
 #### `lrc`: string
 
-The lrc string.
+The lrc.
 
 ### Component `MultipleLrc`
 
@@ -79,7 +79,7 @@ The lrc array.
 
 ### Hook `useRecoverAutoScrollImmediately`
 
-After user scroll, `react-lrc` will stop auto scroll during `recoverAutoScrollInterval`. `useRecoverAutoScrollImmediately` helps recover auto scroll immediately.
+When user scroll, `react-lrc` will stop auto scroll during `recoverAutoScrollInterval`. `useRecoverAutoScrollImmediately` helps recover auto scroll immediately.
 
 ```tsx
 import { Lrc, useRecoverAutoScrollImmediately } from 'react-lrc';

@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 import styled from 'styled-components';
-import MultipleLrc from '../../src/components/multiple_lrc';
+import { MultipleLrc } from '../..';
 import { formatMillisecond } from '../utils';
 
 const Line = styled.div<{ active: boolean }>`

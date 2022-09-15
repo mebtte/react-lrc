@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, { CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
-import { MultipleLrc, useRecoverAutoScrollImmediately } from '../../src';
+import { MultipleLrc, useRecoverAutoScrollImmediately } from '../..';
 import useTimer from '../use_timer';
 import Control from '../control';
 
@@ -38,7 +38,7 @@ const lrcStyle: CSSProperties = {
   height: '100%',
   padding: '5px 0',
 };
-const Line = styled.div<{ active }>`
+const Line = styled.div<{ active: boolean }>`
   min-height: 10px;
   padding: 5px 20px;
 

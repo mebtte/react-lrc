@@ -11,9 +11,14 @@ jobs:
         with:
           node-version: lts/*
 
+      - name: install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: build react-lrc
+        run: npm run build
+
       - name: build storybook and deploy
         run: |
-          npm install --legacy-peer-deps
           npm run build-storybook
 
           cd storybook-static

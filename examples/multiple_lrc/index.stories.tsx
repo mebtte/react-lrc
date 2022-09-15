@@ -1,15 +1,13 @@
 /* eslint-disable react/function-component-definition */
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { MultipleLrc } from '../../src';
+import { ComponentStory } from '@storybook/react';
 import StaticComponent from './static';
 import { originalLrc, translatedLrc } from '../data';
 import AutoScrollComponent from './auto_scroll';
 
 export default {
   title: 'MultipleLrc',
-  component: MultipleLrc,
-} as ComponentMeta<typeof MultipleLrc>;
+};
 
 const AutoScrollTemplate: ComponentStory<typeof AutoScrollComponent> = (
   args,

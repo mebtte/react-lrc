@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react';
-import useEvent from '../src/utils/use_event';
+import { useEffect, useState, useCallback } from 'react';
 
 function useTimer(speed = 1) {
   const [paused, setPaused] = useState(false);
-  const play = useEvent(() => setPaused(false));
-  const pause = useEvent(() => setPaused(true));
+  const play = useCallback(() => setPaused(false), []);
+  const pause = useCallback(() => setPaused(true), []);
 
   const [currentMillisecond, setCurrentMillisecond] = useState(0);
-  const reset = useEvent(() => setCurrentMillisecond(0));
+  const reset = useCallback(() => setCurrentMillisecond(0), []);
 
   useEffect(() => {
     if (!paused) {
