@@ -53,13 +53,11 @@ const Line = styled.div<{ active }>`
 function LrcDemo({
   lrcs,
   recoverAutoScrollInterval,
-  topBlank,
-  bottomBlank,
+  verticalSpace,
 }: {
   lrcs: string[];
   recoverAutoScrollInterval: number;
-  topBlank: boolean;
-  bottomBlank: boolean;
+  verticalSpace: boolean;
 }) {
   const { currentMillisecond, setCurrentMillisecond, reset, play, pause } =
     useTimer(4);
@@ -87,8 +85,7 @@ function LrcDemo({
             </Line>
           )}
           currentMillisecond={currentMillisecond}
-          topBlank={topBlank}
-          bottomBlank={bottomBlank}
+          verticalSpace={verticalSpace}
           style={lrcStyle}
           recoverAutoScrollSingal={signal}
           recoverAutoScrollInterval={recoverAutoScrollInterval}

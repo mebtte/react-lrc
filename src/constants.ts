@@ -16,8 +16,7 @@ export interface BaseProps<Line extends BaseLine> {
     line: Line;
   }) => ReactNode;
   currentMillisecond?: number;
-  topBlank?: boolean;
-  bottomBlank?: boolean;
+  verticalSpace?: boolean;
   onLineUpdate?: (line: { index: number; line: Line | null }) => void;
   recoverAutoScrollInterval?: number;
   recoverAutoScrollSingal?: boolean;
@@ -25,8 +24,7 @@ export interface BaseProps<Line extends BaseLine> {
 
 export const DEFAULT_PROPS = {
   currentMillisecond: -1,
-  topBlank: false,
-  bottomBlank: false,
+  verticalSpace: false,
   recoverAutoScrollInterval: 5000,
   recoverAutoScrollSingal: false,
 } as const;

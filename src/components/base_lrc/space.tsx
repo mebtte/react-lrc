@@ -4,8 +4,8 @@ const style: CSSProperties = {
   height: '50%',
 };
 
-function Blank() {
+function Space() {
   return <div style={style} />;
 }
 
-export default memo(Blank);
+export default memo(Space);

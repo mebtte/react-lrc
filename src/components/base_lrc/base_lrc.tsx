@@ -12,22 +12,21 @@ import React, {
 } from 'react';
 import { LINE_CLASSNAME, Props } from './constants';
 import Root from './root';
-import Blank from './blank';
+import Space from './space';
 import useLineIndex from './use_line_index';
 import { BaseLine, DEFAULT_PROPS } from '../../constants';
 import useAutoScroll from './use_auto_scroll';
 import useEvent from '../../utils/use_event';
 import useScrollAction from './use_scroll_action';
 
-const blank = <Blank />;
+const space = <Space />;
 
 function BaseLrc<Line extends BaseLine>(
   {
     lines,
     lineRenderer,
     currentMillisecond = DEFAULT_PROPS.currentMillisecond,
-    topBlank = DEFAULT_PROPS.topBlank,
-    bottomBlank = DEFAULT_PROPS.bottomBlank,
+    verticalSpace = DEFAULT_PROPS.verticalSpace,
     recoverAutoScrollInterval = DEFAULT_PROPS.recoverAutoScrollInterval,
     recoverAutoScrollSingal = DEFAULT_PROPS.recoverAutoScrollSingal,
     onLineUpdate,
@@ -61,7 +60,7 @@ function BaseLrc<Line extends BaseLine>(
     autoScroll,
     lineIndex,
     lines,
-    topBlank,
+    verticalSpace,
   });
 
   useEffect(() => {
@@ -117,9 +116,9 @@ function BaseLrc<Line extends BaseLine>(
       onMouseMove={onMouseMoveWrapper}
       ref={rootRef}
     >
-      {topBlank ? blank : null}
+      {verticalSpace ? space : null}
       {lineNodes}
-      {bottomBlank ? blank : null}
+      {verticalSpace ? space : null}
     </Root>
   );
 }

@@ -16,14 +16,14 @@ export default ({
   lineIndex,
 
   lines,
-  topBlank,
+  verticalSpace,
 }: {
   root: HTMLDivElement | null;
   autoScroll: boolean;
   lineIndex: number;
 
   lines: BaseLine[];
-  topBlank: boolean;
+  verticalSpace: boolean;
 }) => {
   const indexMapRef = useRef<Map<number | string, IndexMap>>(
     new Map<number | string, IndexMap>(),
@@ -65,11 +65,11 @@ export default ({
       resizeDetector.observe(root);
       return () => resizeDetector.disconnect();
     }
-  }, [root, lines, topBlank]);
+  }, [root, lines, verticalSpace]);
 
   useLayoutEffect(() => {
     if (autoScroll) {
       scrollToCurrentLine();
     }
-  }, [autoScroll, scrollToCurrentLine, lines, topBlank]);
+  }, [autoScroll, scrollToCurrentLine, lines, verticalSpace]);
 };

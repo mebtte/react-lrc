@@ -16,8 +16,7 @@ export const AutoScroll = AutoScrollTemplate.bind({});
 AutoScroll.args = {
   lrc,
   recoverAutoScrollInterval: 5000,
-  topBlank: true,
-  bottomBlank: true,
+  verticalSpace: true,
 };
 
 const StaticTemplate: ComponentStory<typeof StaticComponent> = (args) => (
