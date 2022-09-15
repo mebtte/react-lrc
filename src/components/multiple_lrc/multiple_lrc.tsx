@@ -1,14 +1,14 @@
 import React, { ForwardedRef, forwardRef, HtmlHTMLAttributes } from 'react';
 import BaseLrc from '../base_lrc';
 import { Props, Line } from './constants';
-import useLrc from './use_lrc';
+import useLrcs from './use_lrcs';
 
 const Lrc = forwardRef(
   (
-    { lrc, ...props }: Props & HtmlHTMLAttributes<HTMLDivElement>,
+    { lrcs, ...props }: Props & HtmlHTMLAttributes<HTMLDivElement>,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
-    const lines = useLrc(lrc);
+    const lines = useLrcs(lrcs);
     return <BaseLrc<Line> {...props} lines={lines} ref={ref} />;
   },
 );

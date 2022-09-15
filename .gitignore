@@ -18,3 +18,9 @@ build/
 
 # husky
 _/
+
+# vscode
+.vscode
+
+# storybook
+storybook-static/

@@ -1,13 +1,13 @@
-function throttle<F extends (...params: any[]) => any>(
+function throttle<F extends (...params: unknown[]) => unknown>(
   f: F,
-  { wait = 100 }: { wait?: number } = {},
+  wait = 100,
 ) {
   let lastEmitTimestamp = 0;
-  return (...params: Parameters<F>): ReturnType<F> | undefined => {
+  return (...params: Parameters<F>): ReturnType<F> | void => {
     const now = Date.now();
-    if (now - lastEmitTimestamp > wait) {
+    if (now - lastEmitTimestamp >= wait) {
       lastEmitTimestamp = now;
-      return f(...params);
+      return f(...params) as ReturnType<F>;
     }
   };
 }

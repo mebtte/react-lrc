@@ -1,0 +1,18 @@
+on:
+  push:
+    branches:
+      - master
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - uses: actions/setup-node@main
+        with:
+          node-version: lts/*
+
+      - run: npm install
+
+      - uses: JS-DevTools/npm-publish@master
+        with:
+          token: ${{secrets.NPM_ACCESS_TOKEN}}

@@ -1,36 +1,22 @@
 # react-lrc [![version](https://img.shields.io/npm/v/react-lrc)](https://www.npmjs.com/package/react-lrc) [![license](https://img.shields.io/npm/l/react-lrc)](https://github.com/mebtte/react-lrc/blob/master/LICENSE) [![](https://img.shields.io/bundlephobia/minzip/react-lrc)](https://bundlephobia.com/result?p=react-lrc)
 
-The react component that display lrc format. Play it on [online playground](https://mebtte.github.io/react-lrc).
+The react component that display lrc format. See [example](https://mebtte.github.io/react_lrc) or play on [CodeSandbox](https://codesandbox.io/s/3-playground-ku96gv).
 
-![](./docs/demo.gif)
-
-## [1.x README](https://github.com/mebtte/react-lrc/blob/74df10e762b12fce1ca54bab27a6d4844be25503/README.md)
+## [2.x README](https://github.com/mebtte/react-lrc/blob/d714e64e5bb70a551b498559436fdd9f1d71f8ce/README.md)
 
 ## Feature
 
 - Auto scroll smoothly
+- Support multiple lrcs
 - User srcollable
 - Custom style
 - Typescript support
 
-## Examples
-
-- [Playground](https://mebtte.github.io/react-lrc)
-- [Static lyric viewer](https://codesandbox.io/s/staticlyricviewer-6g6zq)
-- [Load lrc from remote with transition](https://codesandbox.io/s/loadlrcfromremotewithtransition-1qoze)
-
-## Requirement
-
-- `react >= 16.8` with `hook`.
-- [ResizeObserver](https://caniuse.com/?search=ResizeObserver), you should add [polyfill](https://github.com/que-etc/resize-observer-polyfill) probably.
-
-## Usage
+## Install & Usage
 
 ```sh
-npm install --save react-lrc
+npm install react-lrc
 ```
-
-### Lrc Component
 
 ```jsx
 import { Lrc } from 'react-lrc';
@@ -47,99 +33,80 @@ const Demo = () => {
 };
 ```
 
-#### Props
+## Reference
 
-##### lrc: string
+### Common Component Props
 
-The lrc string.
+#### `lineRenderer`: ({ index: number, active: boolean, line: Line }) => React.ReactNode
 
-##### lineRenderer: ({ index: number, active: boolean, line: LyricLine }) => React.ReactNode
+The method to render every valid line of parsed lrc. `active` means whether it is current line. `Line` is `LrcLine` when using `Lrc` component or is `MultipleLrcLine` when `MultipleLrc`.
 
-Lyric line's renderer. When `active` is `true` means it is current line. `LyricLine` is exported from [clrc](https://github.com/mebtte/clrc).
+#### `currentMillisecond`?: number
 
-##### currentMillisecond?: number
+Current time of lrc, default `-1`.
 
-Current time of lrc string. default `0`.
+#### `verticalSpace`?: boolean
 
-##### autoScroll?: boolean
+Make active line always vertical-middle even start or end of line list, default `false`.
 
-Whether to scroll when `currentMillisecond` changed. default `true`;
+without verticalSpace:
 
-##### intervalOfRecoveringAutoScrollAfterUserScroll?: number
+![](./docs/without_vertical_space.png)
 
-The interval of recovering auto scroll after user scroll, it is `millisecond`. default `5000`.
+with verticalSpace:
 
-##### topBlank?: boolean
+![](./docs/with_vertical_space.png)
 
-If `true` will insert blank space to top of `Lrc`. default `false`.
+#### `onLineUpdate`?: ({ index: number, line: Line | null }) => void
 
-![](./docs/top_blank.png)
+Call this when current line changed. `Line` is `LrcLine` when using `Lrc` component or is `MultipleLrcLine` when `MultipleLrc`.
 
-##### bottomBlank?: boolean
+#### `recoverAutoScrollInterval`
 
-If `true` will insert blank space to bottom of `Lrc`. default `false`.
+The interval of recovering auto scroll after user scroll. It is `millisecond`, default `5000`.
 
-![](./docs/bottom_blank.png)
+### Component `Lrc`
 
-##### onLineChange?: ({ index: number; line: LyricLine | null }) => void
+#### `lrc`: string
 
-Call this when current line changed. `index` maybe `-1` and `line` maybe `null`. default `null`. `LyricLine` is exported from [clrc](https://github.com/mebtte/clrc).
+The lrc.
 
-#### Instance methods
+### Component `MultipleLrc`
 
-`react-lrc` export type `LrcInstance` to determine type `useRef` like:
+#### `lrcs`: string[]
+
+The lrc array.
+
+### Hook `useRecoverAutoScrollImmediately`
+
+When user scroll, `react-lrc` will stop auto scroll during `recoverAutoScrollInterval`. `useRecoverAutoScrollImmediately` helps recover auto scroll immediately.
 
 ```tsx
-import React, { useRef } from 'react';
-import { Lrc, LrcInstance } from 'react-lrc';
+import { Lrc, useRecoverAutoScrollImmediately } from 'react-lrc';
 
 const Demo = () => {
-  const lrcRef = useRef<LrcInstance>();
-  /**
-   * use methods like:
-   * lrcRef.current.getCurrentLine()
-   */
+  const { signal, recoverAutoScrollImmediately } =
+    useRecoverAutoScrollImmediately();
+
   return (
-    <Lrc
-      ref={lrcRef}
-      // other props
-    />
+    <>
+      <button type="button" onClick={recoverAutoScrollImmediately}>
+        recover auto scroll immediately
+      </button>
+      <Lrc {...otherProps} recoverAutoScrollSingal={signal} />
+    </>
   );
 };
 ```
 
-##### getCurrentLine: () => { index: number, line: LyricLine | null }
-
-`getCurrentLine` return current index and current lyric line. Current index maybe `-1` and current lyric maybe `null`. `LyricLine` is exported from [clrc](https://github.com/mebtte/clrc).
-
-##### scrollToCurrentLine: () => void
-
-Make `Lrc` component scroll to current line. Call this after user scroll within `intervalOfRecoveringAutoScrollAfterUserScroll` generally.
-
-### Other APIs
-
-#### [clrc](https://github.com/mebtte/clrc)
-
-`react-lrc` is powered by [clrc](https://github.com/mebtte/clrc), you can import everything that export from [clrc](https://github.com/mebtte/clrc) like:
-
-```
-import { parse } from 'react-lrc';
-
-// do with parse
-```
-
-## Question
-
-### Why `Lrc` component do not auto scroll ?
-
-You probably do not specify `height` to `Lrc`. The `height` make `Lrc` scrollable.
+## Q & A
 
 ### How to prevent user scroll ?
 
 ```jsx
 <Lrc
   style={{ overflow: 'hidden !important' }}
-  intervalOfRecoveringAutoScrollAfterUserScroll={0}
+  recoverAutoScrollInterval={0}
   {...otherProps}
 />
 ```
@@ -164,14 +131,6 @@ You probably do not specify `height` to `Lrc`. The `height` make `Lrc` scrollabl
 
 ```jsx
 <Lrc className="lrc" {...otherProps} />
-```
-
-### How to get `Lrc` dom ?
-
-```jsx
-const lrcRef = useRef();
-// lrc dom is lrcRef.current.dom
-<Lrc ref={lrcRef} />;
 ```
 
 ## License

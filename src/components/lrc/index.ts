@@ -1,6 +1,5 @@
 import Lrc from './lrc';
-import { LrcInstance } from './constants';
+import { Line, Props } from './constants';
 
-export { LrcInstance };
-
+export { Line, Props };
 export default Lrc;
