@@ -25,8 +25,8 @@ export interface BaseProps<Line extends BaseLine> {
 
 export const DEFAULT_PROPS = {
   currentMillisecond: -1,
-  topBlank: true,
-  bottomBlank: true,
+  topBlank: false,
+  bottomBlank: false,
   recoverAutoScrollInterval: 5000,
   recoverAutoScrollSingal: false,
 } as const;
