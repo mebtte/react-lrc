@@ -25,7 +25,9 @@ export default (lrcs: string[]) => {
       }
     }
 
-    return [...map.values()];
+    return [...map.values()].sort(
+      (a, b) => a.startMillisecond - b.startMillisecond,
+    );
   }, [lrcs.length, ...lrcs]);
 
   return lines;
