@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { parse, LineType, LyricLine as ClrcLyricLine } from 'clrc';
 import { Line } from './constants';
+import getRandomString from '../../utils/get_random_string';
 
 function useLrc(lrc: string) {
   const lines = useMemo<Line[]>(
@@ -11,7 +12,7 @@ function useLrc(lrc: string) {
         ) as ClrcLyricLine[]
       )
         .map((l) => ({
-          id: Math.random().toString(),
+          id: getRandomString(),
           lineNumber: l.lineNumber,
           raw: l.raw,
           startMillisecond: l.startMillisecond,

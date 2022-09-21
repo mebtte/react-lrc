@@ -25,9 +25,8 @@ function Static({ lrcs }: { lrcs: string[] }) {
         <Line active={active}>
           <div className="time">{formatMillisecond(line.startMillisecond)}</div>
           <div className="list">
-            {line.children.map((child, index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <div className="item" key={index}>
+            {line.children.map((child) => (
+              <div className="item" key={child.id}>
                 {child.content}
               </div>
             ))}

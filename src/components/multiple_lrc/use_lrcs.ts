@@ -1,5 +1,6 @@
 import { LineType, LyricLine, parse } from 'clrc';
 import { useMemo } from 'react';
+import getRandomString from '../../utils/get_random_string';
 import { Line } from './constants';
 
 export default (lrcs: string[]) => {
@@ -12,11 +13,12 @@ export default (lrcs: string[]) => {
       ) as LyricLine[];
       for (const item of list) {
         const current = map.get(item.startMillisecond) || {
-          id: Math.random().toString(),
+          id: getRandomString(),
           startMillisecond: item.startMillisecond,
           children: [],
         };
         current.children.push({
+          id: getRandomString(),
           lineNumber: item.lineNumber,
           raw: item.raw,
           content: item.content,
