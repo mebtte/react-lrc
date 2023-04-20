@@ -1,5 +1,3 @@
-const remarkGfm = require('remark-gfm');
-
 module.exports = {
   stories: ['../examples/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
@@ -7,22 +5,19 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
-    {
-      name: '@storybook/addon-docs',
-      options: {
-        mdxPluginOptions: {
-          mdxCompileOptions: {
-            remarkPlugins: [remarkGfm],
-          },
-        },
-      },
-    },
   ],
+  typescript: {
+    check: false,
+    checkOptions: {},
+    reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      shouldExtractLiteralValuesFromEnum: true,
+      propFilter: (prop) =>
+        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
+    },
+  },
   framework: {
     name: '@storybook/react-webpack5',
     options: {},
-  },
-  docs: {
-    autodocs: 'tag',
   },
 };

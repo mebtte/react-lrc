@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@storybook/preset-create-react-app": "^7.0.6",
+    "@storybook/react-webpack5": "^7.0.6",
     "@types/ws": "^8.5.4",
     "clrc": "github:Nafeij/clrc",
     "react-scripts": "5.0.0",
@@ -49,14 +50,14 @@
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.21.4",
     "@storybook/addon-actions": "^7.0.6",
+    "@storybook/addon-docs": "^7.0.6",
     "@storybook/addon-essentials": "^7.0.6",
     "@storybook/addon-interactions": "^7.0.6",
     "@storybook/addon-links": "^7.0.6",
     "@storybook/addon-mdx-gfm": "^7.0.6",
-    "@storybook/builder-webpack5": "^7.0.6",
     "@storybook/react": "^7.0.6",
-    "@storybook/react-webpack5": "^7.0.6",
     "@storybook/testing-library": "^0.0.14-next.2",
+    "@types/node": "^18.15.12",
     "@types/react": "^16.14.31",
     "@types/react-dom": "^16.9.16",
     "@types/styled-components": "^5.1.26",
@@ -80,6 +81,7 @@
     "rimraf": "^3.0.2",
     "storybook": "^7.0.6",
     "styled-components": "^5.3.5",
-    "typescript": "^4.8.2"
+    "typescript": "^4.8.2",
+    "webpack": "^5.80.0"
   }
 }
