@@ -9,6 +9,11 @@ export function formatMillisecond(ms: number) {
     .padStart(2, '0')}.${millisecond.toString().padStart(3, '0')}`;
 }
 
+export function formatOffset(ms: number, offset: number) {
+  const msOffset = ms - offset;
+  return msOffset ? msOffset.toPrecision(2).slice(0, 3) : '';
+}
+
 export function Renderer<ArgType>({
   compArgs,
   component,

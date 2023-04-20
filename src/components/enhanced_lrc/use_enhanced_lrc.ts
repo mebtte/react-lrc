@@ -21,7 +21,15 @@ function useEnhLrc(lrc: string) {
           raw: l.raw,
           startMillisecond: l.startMillisecond,
           content: l.content,
-          syllables: l.syllables.sort(byTime),
+          syllables: l.syllables
+            .map((s) => ({
+              id: getRandomString(),
+              sylNumber: s.sylNumber,
+              raw: s.raw,
+              startMillisecond: s.startMillisecond,
+              content: s.content,
+            }))
+            .sort(byTime),
         }))
         .sort(byTime),
     [lrc],

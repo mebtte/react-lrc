@@ -1,5 +1,5 @@
 import Lrc from './enhanced_lrc';
-import { Line, Props } from './constants';
+import { Line, Syllable, Props } from './constants';
 
-export { Line, Props };
+export { Line, Syllable, Props };
 export default Lrc;

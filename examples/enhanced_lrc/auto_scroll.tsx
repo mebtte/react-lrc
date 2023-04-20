@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, { CSSProperties } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { EnhancedLrc, useRecoverAutoScrollImmediately } from '../..';
 import Control from '../control';
 import useTimer from '../use_timer';
@@ -38,16 +38,13 @@ const lrcStyle: CSSProperties = {
   height: '100%',
   padding: '5px 0',
 };
-const Line = styled.div<{ active: boolean }>`
+
+const Line = styled.div`
   min-height: 10px;
   padding: 5px 20px;
 
   font-size: 16px;
   text-align: center;
-
-  ${({ active }) => css`
-    color: ${active ? 'green' : 'black'};
-  `}
 `;
 
 function LrcDemo({
@@ -77,8 +74,21 @@ function LrcDemo({
       <div className="lrc-box">
         <EnhancedLrc
           lrc={lrc}
-          lineRenderer={({ active, line: { content } }) => (
-            <Line active={active}>{content}</Line>
+          lineRenderer={({ active, line: { syllables } }) => (
+            <Line>
+              {syllables.map((s) => (
+                <span
+                  style={{
+                    color:
+                      active && s.startMillisecond < currentMillisecond
+                        ? 'red'
+                        : 'black',
+                  }}
+                >
+                  {s.content}
+                </span>
+              ))}
+            </Line>
           )}
           currentMillisecond={currentMillisecond}
           verticalSpace={verticalSpace}

@@ -6,6 +6,7 @@ import MultipleLrc, {
 import EnhancedLrc, {
   Line as EnhancedLrcLine,
   Props as EnhancedLrcProps,
+  Syllable,
 } from './components/enhanced_lrc';
 import useRecoverAutoScrollImmediately from './utils/use_recover_auto_scroll_immediately';
 
@@ -19,5 +20,6 @@ export {
   EnhancedLrc,
   EnhancedLrcLine,
   EnhancedLrcProps,
+  Syllable,
   useRecoverAutoScrollImmediately,
 };
