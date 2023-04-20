@@ -9,6 +9,7 @@ module.exports = {
     'airbnb',
     'plugin:react-hooks/recommended',
     'prettier',
+    'plugin:storybook/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -34,11 +35,9 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 'error',
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': 'error',
-
     'no-void': 'off',
     'consistent-return': 'off',
     'no-restricted-syntax': 'off',
-
     'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/extensions': [
@@ -47,12 +46,15 @@ module.exports = {
         tsx: 'never',
       },
     ],
-
-    'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.mdx'] }],
+    'react/jsx-filename-extension': [
+      'error',
+      {
+        extensions: ['.tsx', '.mdx'],
+      },
+    ],
     'react/jsx-props-no-spreading': 'off',
     'react/require-default-props': 'off',
     'react/no-unused-prop-types': 'off',
-
     'jsx-a11y/no-static-element-interactions': 'off',
   },
 };

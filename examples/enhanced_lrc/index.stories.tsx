@@ -1,25 +1,25 @@
 /* eslint-disable react/function-component-definition */
 import { StoryObj } from '@storybook/react';
-import { originalLrc, translatedLrc } from '../data';
+import { extraLrc } from '../data';
 import AutoScrollComponent from './auto_scroll';
 import StaticComponent from './static';
 import { Renderer } from '../utils';
 
 type CompArgs = {
-  lrcs: string[];
+  lrc: string;
   recoverAutoScrollInterval?: number;
   verticalSpace?: boolean;
 };
 
 export default {
-  title: 'MultipleLrc',
+  title: 'EnhancedLrc',
   component: Renderer<CompArgs>,
 };
 
 export const AutoScroll: StoryObj<typeof Renderer<CompArgs>> = {
   args: {
     compArgs: {
-      lrcs: [originalLrc, translatedLrc],
+      lrc: extraLrc,
       recoverAutoScrollInterval: 5000,
       verticalSpace: true,
     },
@@ -30,7 +30,7 @@ export const AutoScroll: StoryObj<typeof Renderer<CompArgs>> = {
 export const Static: StoryObj<typeof Renderer<CompArgs>> = {
   args: {
     compArgs: {
-      lrcs: [originalLrc, translatedLrc],
+      lrc: extraLrc,
     },
     component: StaticComponent,
   },

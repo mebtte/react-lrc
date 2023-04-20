@@ -39,7 +39,7 @@ const Demo = () => {
 
 #### `lineRenderer`: ({ index: number, active: boolean, line: Line }) => React.ReactNode
 
-The method to render every valid line of parsed lrc. `active` means whether it is current line. `Line` is `LrcLine` when using `Lrc` component or is `MultipleLrcLine` when `MultipleLrc`.
+The method to render every valid line of parsed lrc. `active` means whether it is current line. `Line` is `LrcLine` when using `Lrc` component, is `EnhancedLrcLine` when `EnhancedLrc` or is `MultipleLrcLine` when `MultipleLrc`.
 
 #### `currentMillisecond`?: number
 
@@ -59,13 +59,19 @@ with verticalSpace:
 
 #### `onLineUpdate`?: ({ index: number, line: Line | null }) => void
 
-Call this when current line changed. `Line` is `LrcLine` when using `Lrc` component or is `MultipleLrcLine` when `MultipleLrc`.
+Call this when current line changed. `Line` is `LrcLine` when using `Lrc` component, is `EnhancedLrcLine` when `EnhancedLrc`, or is `MultipleLrcLine` when `MultipleLrc`.
 
 #### `recoverAutoScrollInterval`
 
 The interval of recovering auto scroll after user scroll. It is `millisecond`, default `5000`.
 
 ### Component `Lrc`
+
+#### `lrc`: string
+
+The lrc.
+
+### Component `EnhancedLrc`
 
 #### `lrc`: string
 
@@ -93,6 +99,50 @@ const Demo = () => {
       <button type="button" onClick={recoverAutoScrollImmediately}>
         recover auto scroll immediately
       </button>
+      <Lrc {...otherProps} recoverAutoScrollSingal={signal} />
+    </>
+  );
+};
+```
+
+## Q & A
+
+### How to prevent user scroll ?
+
+```jsx
+<Lrc
+  style={{ overflow: 'hidden !important' }}
+  recoverAutoScrollInterval={0}
+  {...otherProps}
+/>
+```
+
+### How to hide scrollbar ?
+
+```scss
+.lrc {
+  /* webkit */
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  /* firefox */
+  scrollbar-width: none;
+
+  /* ie */
+  -ms-overflow-style: none;
+}
+```
+
+```jsx
+<Lrc className="lrc" {...otherProps} />
+```
+
+## License
+
+[MIT](./LICENSE)
+
       <Lrc {...otherProps} recoverAutoScrollSingal={signal} />
     </>
   );
