@@ -12,7 +12,7 @@ jobs:
           node-version: lts/*
 
       - name: install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm ci
 
       - name: build react-lrc
         run: npm run build
