@@ -1,7 +1,5 @@
-# node & npm & yarn
+# node & npm
 node_modules/
-package-lock.json
-yarn.lock
 
 # log
 *.log
@@ -12,9 +10,6 @@ yarn.lock
 # dist
 dist/
 build/
-
-# parcel
-.cache
 
 # husky
 _/

@@ -11,7 +11,7 @@ jobs:
         with:
           node-version: lts/*
 
-      - run: npm install
+      - run: npm ci
 
       - uses: JS-DevTools/npm-publish@master
         with:

@@ -1,6 +1,6 @@
 {
   "name": "react-lrc",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "The react component that display lrc format.",
   "main": "build/index.js",
   "scripts": {
@@ -37,7 +37,7 @@
     "react-dom": ">=16.8.0"
   },
   "dependencies": {
-    "clrc": "^3.0.0",
+    "clrc": "^3.1.1",
     "resize-observer-polyfill": "^1.5.1"
   },
   "devDependencies": {
