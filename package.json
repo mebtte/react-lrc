@@ -1,7 +1,7 @@
 {
   "name": "react-lrc",
   "version": "3.0.3",
-  "description": "The react component that display lrc format.",
+  "description": "The react component to display lyric by lrc format.",
   "main": "build/index.js",
   "author": {
     "name": "mebtte",
