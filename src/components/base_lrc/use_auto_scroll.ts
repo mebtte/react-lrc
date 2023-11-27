@@ -4,7 +4,7 @@ import {
   useRef,
   useCallback,
   useMemo,
-  KeyboardEvent,
+  type KeyboardEvent,
 } from 'react';
 import throttle from '../../utils/throttle';
 
@@ -26,11 +26,11 @@ export default ({
 }) => {
   const [autoScroll, setAutoScroll] = useState(true);
 
-  const timerRef = useRef<number>();
+  const timerRef = useRef<ReturnType<typeof globalThis.setTimeout>>();
   const handleUserScroll = useCallback(() => {
-    window.clearTimeout(timerRef.current);
+    globalThis.clearTimeout(timerRef.current);
     setAutoScroll(false);
-    timerRef.current = window.setTimeout(
+    timerRef.current = globalThis.setTimeout(
       () => setAutoScroll(true),
       recoverAutoScrollInterval,
     );
@@ -72,7 +72,7 @@ export default ({
    * clear timer after unmount
    * @author mebtte<hi@mebtte.com>
    */
-  useEffect(() => () => window.clearTimeout(timerRef.current), []);
+  useEffect(() => () => globalThis.clearTimeout(timerRef.current), []);
 
   return {
     autoScroll,
