@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
-import React, { CSSProperties } from 'react';
+import { type CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
-import { MultipleLrc, useRecoverAutoScrollImmediately } from '../..';
+import { MultipleLrc, useRecoverAutoScrollImmediately } from '../../src';
 import useTimer from '../use_timer';
 import Control from '../control';
 
@@ -80,7 +80,7 @@ function LrcDemo({
           lineRenderer={({ active, line: { children } }) => (
             <Line active={active}>
               {children.map((child) => (
-                <div>{child.content}</div>
+                <div key={child.id}>{child.content}</div>
               ))}
             </Line>
           )}

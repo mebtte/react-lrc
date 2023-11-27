@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
-import React from 'react';
 import styled from 'styled-components';
-import { Lrc } from '../..';
+import { Lrc } from '../../src';
 import { formatMillisecond } from '../utils';
 
 const Line = styled.div`

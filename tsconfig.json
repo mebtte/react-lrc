@@ -1,15 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["DOM", "ES2015"],
-    "esModuleInterop": true,
-    "jsx": "react-jsx",
-    "outDir": "build",
+    "lib": ["DOM", "ESNext"],
+    "target": "ESNext",
     "strictNullChecks": true,
-    "target": "ES5",
-    "moduleResolution": "Node",
-    "skipLibCheck": true,
     "noImplicitAny": true,
-    "downlevelIteration": true
-  },
-  "exclude": ["build", "examples"]
+    "jsx": "react-jsx",
+    "moduleResolution": "Bundler"
+  }
 }

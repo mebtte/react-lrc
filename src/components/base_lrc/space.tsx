@@ -1,4 +1,4 @@
-import React, { CSSProperties, memo } from 'react';
+import { type CSSProperties, memo } from 'react';
 
 const style: CSSProperties = {
   height: '50%',

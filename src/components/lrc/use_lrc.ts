@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { parse, LineType, LyricLine as ClrcLyricLine } from 'clrc';
-import { Line } from './constants';
+import { parse, LineType, type LyricLine as ClrcLyricLine } from 'clrc';
+import { type Line } from './constants';
 import getRandomString from '../../utils/get_random_string';
 
 function useLrc(lrc: string) {

@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
-import React, { CSSProperties } from 'react';
+import { type CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
-import { Lrc, useRecoverAutoScrollImmediately } from '../..';
+import { Lrc, useRecoverAutoScrollImmediately } from '../../src';
 import useTimer from '../use_timer';
 import Control from '../control';
 

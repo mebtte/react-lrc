@@ -1,6 +1,5 @@
 /* eslint-disable react/function-component-definition */
-import React from 'react';
-import { ComponentStory } from '@storybook/react';
+import { type ComponentStory } from '@storybook/react';
 import StaticComponent from './static';
 import { originalLrc, translatedLrc } from '../data';
 import AutoScrollComponent from './auto_scroll';

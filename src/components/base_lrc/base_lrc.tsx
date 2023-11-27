@@ -1,20 +1,20 @@
-import React, {
-  ForwardedRef,
+import {
+  type ForwardedRef,
   forwardRef,
-  HtmlHTMLAttributes,
+  type HtmlHTMLAttributes,
   useImperativeHandle,
   useMemo,
   useRef,
-  MouseEvent,
-  KeyboardEvent,
-  WheelEvent,
+  type MouseEvent,
+  type KeyboardEvent,
+  type WheelEvent,
   useEffect,
 } from 'react';
-import { LINE_CLASSNAME, Props } from './constants';
+import { LINE_CLASSNAME, type Props } from './constants';
 import Root from './root';
 import Space from './space';
 import useLineIndex from './use_line_index';
-import { BaseLine, DEFAULT_PROPS } from '../../constants';
+import { type BaseLine, DEFAULT_PROPS } from '../../constants';
 import useAutoScroll from './use_auto_scroll';
 import useEvent from '../../utils/use_event';
 import useScrollAction from './use_scroll_action';
@@ -67,7 +67,7 @@ function BaseLrc<Line extends BaseLine>(
     if (onLineUpdate) {
       onLineUpdate({
         index: lineIndex,
-        line: lines[lineIndex] || null,
+        line: lines[lineIndex] ?? null,
       });
     }
   }, [onLineUpdate, lineIndex, lines]);

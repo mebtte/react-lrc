@@ -1,9 +1,10 @@
-import React, {
-  CSSProperties,
+import {
+  type CSSProperties,
   forwardRef,
-  HtmlHTMLAttributes,
+  type HtmlHTMLAttributes,
   memo,
   useMemo,
+  type ForwardedRef,
 } from 'react';
 
 const baseStyle: CSSProperties = {
@@ -13,18 +14,18 @@ const baseStyle: CSSProperties = {
   overflow: 'auto',
 };
 
-const Root = forwardRef<HTMLDivElement, HtmlHTMLAttributes<HTMLDivElement>>(
-  ({ style, ...props }, ref) => {
-    const combinedStyle = useMemo(
-      () => ({
-        ...baseStyle,
-        ...style,
-      }),
-      [style],
-    );
+function Root(
+  { style, ...props }: HtmlHTMLAttributes<HTMLDivElement>,
+  ref: ForwardedRef<HTMLDivElement>,
+) {
+  const combinedStyle = useMemo(
+    () => ({
+      ...baseStyle,
+      ...style,
+    }),
+    [style],
+  );
+  return <div {...props} style={combinedStyle} ref={ref} />;
+}
 
-    return <div {...props} style={combinedStyle} ref={ref} />;
-  },
-);
-
-export default memo(Root);
+export default memo(forwardRef(Root));
