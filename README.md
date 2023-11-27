@@ -104,11 +104,9 @@ const Demo = () => {
 ### How to prevent user scroll ?
 
 ```jsx
-<Lrc
-  style={{ overflow: 'hidden !important' }}
-  recoverAutoScrollInterval={0}
-  {...otherProps}
-/>
+const style = { overflow: 'hidden !important' };
+
+<Lrc style={style} recoverAutoScrollInterval={0} {...otherProps} />;
 ```
 
 ### How to hide scrollbar ?
@@ -123,9 +121,6 @@ const Demo = () => {
 
   /* firefox */
   scrollbar-width: none;
-
-  /* ie */
-  -ms-overflow-style: none;
 }
 ```
 
