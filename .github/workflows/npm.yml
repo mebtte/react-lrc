@@ -12,6 +12,7 @@ jobs:
           node-version: lts/*
 
       - run: npm ci
+      - run: npm run build
 
       - uses: JS-DevTools/npm-publish@main
         with:
