@@ -1,6 +1,6 @@
 # react-lrc [![version](https://img.shields.io/npm/v/react-lrc)](https://www.npmjs.com/package/react-lrc) [![license](https://img.shields.io/npm/l/react-lrc)](https://github.com/mebtte/react-lrc/blob/master/LICENSE) [![](https://img.shields.io/bundlephobia/minzip/react-lrc)](https://bundlephobia.com/result?p=react-lrc)
 
-The react component to display lyric by lrc format. See [example](https://mebtte.github.io/react-lrc) or play on [CodeSandbox](https://codesandbox.io/s/3-playground-ku96gv).
+The react component to display lyric from LRC. See [example](https://mebtte.github.io/react-lrc) or play on [CodeSandbox](https://codesandbox.io/s/3-playground-ku96gv).
 
 ## [2.x README](https://github.com/mebtte/react-lrc/blob/d714e64e5bb70a551b498559436fdd9f1d71f8ce/README.md)
 
