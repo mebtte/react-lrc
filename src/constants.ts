@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 export interface BaseLine {
   id: string;
@@ -6,20 +6,17 @@ export interface BaseLine {
 }
 
 export interface BaseProps<Line extends BaseLine> {
-  lineRenderer: ({
-    index,
-    active,
-    line,
-  }: {
+  lineRenderer: (payload: {
     index: number;
     active: boolean;
     line: Line;
   }) => ReactNode;
   currentMillisecond?: number;
   verticalSpace?: boolean;
-  onLineUpdate?: (line: { index: number; line: Line | null }) => void;
   recoverAutoScrollInterval?: number;
   recoverAutoScrollSingal?: boolean;
+  onLineUpdate?: (line: { index: number; line: Line | null }) => void;
+  onAutoScrollChange?: (payload: { autoScroll: boolean }) => void;
 }
 
 export const DEFAULT_PROPS = {

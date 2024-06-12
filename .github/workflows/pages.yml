@@ -24,7 +24,7 @@ jobs:
           cd storybook-static
           git init
           git config --local user.name mebtte
-          git config --local user.email hi@mebtte.com
+          git config --local user.email i@mebtte.com
           git remote add origin https://${{secrets.ACCESS_TOKEN}}@github.com/mebtte/react-lrc.git
           git switch -c gh-pages
           git add -A

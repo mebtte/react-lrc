@@ -49,6 +49,7 @@ const Line = styled.div<{ active: boolean }>`
     color: ${active ? 'green' : 'black'};
   `}
 `;
+const log = console.log.bind(console);
 
 function LrcDemo({
   lrc,
@@ -85,6 +86,8 @@ function LrcDemo({
           style={lrcStyle}
           recoverAutoScrollSingal={signal}
           recoverAutoScrollInterval={recoverAutoScrollInterval}
+          onLineUpdate={log}
+          onAutoScrollChange={log}
         />
       </div>
     </Root>

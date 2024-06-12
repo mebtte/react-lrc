@@ -2,7 +2,7 @@ import { useRef, useCallback } from 'react';
 
 /**
  * stable useCallback
- * @author mebtte<hi@mebtte.com>
+ * @author mebtte<i@mebtte.com>
  */
 function useEvent<Callback extends (...args: unknown[]) => unknown>(
   callback: Callback,

@@ -63,7 +63,11 @@ Call this when current line changed. `Line` is `LrcLine` when using `Lrc` compon
 
 #### `recoverAutoScrollInterval`
 
-The interval of recovering auto scroll after user scroll. It is `millisecond`, default `5000`.
+The interval of recovering auto scroll after user scrolling. It is `millisecond`, default `5000`.
+
+#### `onAutoScrollChange`?: ({ autoScroll: boolean }) => void
+
+There is a state which indicates whether or not it is auto-scroll, and which default value is `true`. When scrolling by user, it will be set to `false`. After `recoverAutoScrollInterval` milliseconds, it will be set to `true` automatically. `onAutoScrollChange` will be called when the state changed.
 
 ### Component `Lrc`
 

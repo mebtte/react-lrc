@@ -1,4 +1,4 @@
-import { BaseLine, BaseProps } from '../../constants';
+import { type BaseLine, type BaseProps } from '../../constants';
 
 export const LINE_CLASSNAME = 'react-lrc-line';
 

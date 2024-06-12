@@ -1,13 +1,13 @@
 {
   "name": "react-lrc",
-  "version": "3.1.3",
+  "version": "3.2.0",
   "description": "The react component to display lyric from LRC.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "author": {
     "name": "mebtte",
-    "email": "hi@mebtte.com",
+    "email": "i@mebtte.com",
     "url": "https://mebtte.com"
   },
   "license": "MIT",

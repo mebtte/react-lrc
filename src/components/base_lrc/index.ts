@@ -1,5 +1,5 @@
 import BaseLrc from './base_lrc';
-import { Props } from './constants';
+import { type Props } from './constants';
 
-export { Props };
+export type { Props };
 export default BaseLrc;

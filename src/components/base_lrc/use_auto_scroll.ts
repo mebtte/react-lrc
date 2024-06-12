@@ -7,6 +7,8 @@ import {
   type KeyboardEvent,
 } from 'react';
 import throttle from '../../utils/throttle';
+import { type Props } from './constants';
+import { type BaseLine } from '../../constants';
 
 const SCROLLABLE_KEYS = [' ', 'ArrowUp', 'ArrowDown'];
 
@@ -15,14 +17,16 @@ const SCROLLABLE_KEYS = [' ', 'ArrowUp', 'ArrowDown'];
  * 1. wheel
  * 2. keyboard
  * 3. drag scrollbar
- * @author mebtte<hi@mebtte.com>
+ * @author mebtte<i@mebtte.com>
  */
 export default ({
   recoverAutoScrollInterval,
   recoverAutoScrollSingal,
+  onAutoScrollChange,
 }: {
   recoverAutoScrollInterval: number;
   recoverAutoScrollSingal: boolean;
+  onAutoScrollChange: Props<BaseLine>['onAutoScrollChange'];
 }) => {
   const [autoScroll, setAutoScroll] = useState(true);
 
@@ -68,9 +72,15 @@ export default ({
     setAutoScroll(true);
   }, [recoverAutoScrollSingal]);
 
+  useEffect(() => {
+    if (onAutoScrollChange) {
+      onAutoScrollChange({ autoScroll });
+    }
+  }, [autoScroll, onAutoScrollChange]);
+
   /**
    * clear timer after unmount
-   * @author mebtte<hi@mebtte.com>
+   * @author mebtte<i@mebtte.com>
    */
   useEffect(() => () => globalThis.clearTimeout(timerRef.current), []);
 

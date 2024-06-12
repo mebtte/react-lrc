@@ -30,6 +30,7 @@ function BaseLrc<Line extends BaseLine>(
     recoverAutoScrollInterval = DEFAULT_PROPS.recoverAutoScrollInterval,
     recoverAutoScrollSingal = DEFAULT_PROPS.recoverAutoScrollSingal,
     onLineUpdate,
+    onAutoScrollChange,
 
     onWheel,
     onKeyDown,
@@ -53,6 +54,7 @@ function BaseLrc<Line extends BaseLine>(
   } = useAutoScroll({
     recoverAutoScrollInterval,
     recoverAutoScrollSingal,
+    onAutoScrollChange,
   });
 
   useScrollAction({
