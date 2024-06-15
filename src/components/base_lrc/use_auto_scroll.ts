@@ -40,17 +40,17 @@ export default ({
     );
   }, [recoverAutoScrollInterval]);
 
-  const mouseDownRef = useRef(false);
-  const onMouseDown = useCallback(() => {
-    mouseDownRef.current = true;
+  const pointerDownRef = useRef(false);
+  const onPointerDown = useCallback(() => {
+    pointerDownRef.current = true;
   }, []);
-  const onMouseUp = useCallback(() => {
-    mouseDownRef.current = false;
+  const onPointerUp = useCallback(() => {
+    pointerDownRef.current = false;
   }, []);
-  const onMouseMove = useMemo(
+  const onPointerMove = useMemo(
     () =>
       throttle(() => {
-        if (mouseDownRef.current) {
+        if (pointerDownRef.current) {
           handleUserScroll();
         }
       }),
@@ -88,8 +88,8 @@ export default ({
     autoScroll,
     onWheel,
     onKeyDown,
-    onMouseDown,
-    onMouseUp,
-    onMouseMove,
+    onPointerDown,
+    onPointerUp,
+    onPointerMove,
   };
 };

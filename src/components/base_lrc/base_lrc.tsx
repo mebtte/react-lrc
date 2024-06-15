@@ -1,14 +1,14 @@
 import {
-  type ForwardedRef,
   forwardRef,
-  type HtmlHTMLAttributes,
   useImperativeHandle,
   useMemo,
   useRef,
-  type MouseEvent,
+  useEffect,
+  type HtmlHTMLAttributes,
   type KeyboardEvent,
   type WheelEvent,
-  useEffect,
+  type PointerEvent,
+  type ForwardedRef,
 } from 'react';
 import { LINE_CLASSNAME, type Props } from './constants';
 import Root from './root';
@@ -34,9 +34,9 @@ function BaseLrc<Line extends BaseLine>(
 
     onWheel,
     onKeyDown,
-    onMouseDown,
-    onMouseUp,
-    onMouseMove,
+    onPointerDown,
+    onPointerUp,
+    onPointerMove,
 
     ...props
   }: Props<Line> & HtmlHTMLAttributes<HTMLDivElement>,
@@ -48,9 +48,9 @@ function BaseLrc<Line extends BaseLine>(
     autoScroll,
     onWheel: onLocalAutoScrollWheel,
     onKeyDown: onLocalAutoScrollKeyDown,
-    onMouseDown: onLocalAutoScrollMouseDown,
-    onMouseUp: onLocalAutoScrollMouseUp,
-    onMouseMove: onLocalAutoScrollMove,
+    onPointerDown: onLocalAutoScrollPointerDown,
+    onPointerUp: onLocalAutoScrollPointerUp,
+    onPointerMove: onLocalAutoScrollPointerMove,
   } = useAutoScroll({
     recoverAutoScrollInterval,
     recoverAutoScrollSingal,
@@ -84,18 +84,22 @@ function BaseLrc<Line extends BaseLine>(
     onLocalAutoScrollKeyDown(event);
     return onKeyDown && onKeyDown(event);
   });
-  const onMouseDownWrapper = useEvent((event: MouseEvent<HTMLDivElement>) => {
-    onLocalAutoScrollMouseDown();
-    return onMouseDown && onMouseDown(event);
+  const onPointerDownWrapper = useEvent(
+    (event: PointerEvent<HTMLDivElement>) => {
+      onLocalAutoScrollPointerDown();
+      return onPointerDown?.(event);
+    },
+  );
+  const onPointerUpWrapper = useEvent((event: PointerEvent<HTMLDivElement>) => {
+    onLocalAutoScrollPointerUp();
+    return onPointerUp?.(event);
   });
-  const onMouseUpWrapper = useEvent((event: MouseEvent<HTMLDivElement>) => {
-    onLocalAutoScrollMouseUp();
-    return onMouseUp && onMouseUp(event);
-  });
-  const onMouseMoveWrapper = useEvent((event: MouseEvent<HTMLDivElement>) => {
-    onLocalAutoScrollMove();
-    return onMouseMove && onMouseMove(event);
-  });
+  const onPointerMoveWrapper = useEvent(
+    (event: PointerEvent<HTMLDivElement>) => {
+      onLocalAutoScrollPointerMove();
+      return onPointerMove?.(event);
+    },
+  );
 
   const lineNodes = useMemo(
     () =>
@@ -113,9 +117,9 @@ function BaseLrc<Line extends BaseLine>(
       {...props}
       onWheel={onWheelWrapper}
       onKeyDown={onKeyDownWrapper}
-      onMouseDown={onMouseDownWrapper}
-      onMouseUp={onMouseUpWrapper}
-      onMouseMove={onMouseMoveWrapper}
+      onPointerDown={onPointerDownWrapper}
+      onPointerUp={onPointerUpWrapper}
+      onPointerMove={onPointerMoveWrapper}
       ref={rootRef}
     >
       {verticalSpace ? space : null}

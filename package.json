@@ -1,6 +1,6 @@
 {
   "name": "react-lrc",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "The react component to display lyric from LRC.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
