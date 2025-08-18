@@ -3,7 +3,6 @@ import {
   useImperativeHandle,
   useMemo,
   useRef,
-  useEffect,
   type HtmlHTMLAttributes,
   type KeyboardEvent,
   type WheelEvent,
@@ -29,7 +28,8 @@ function BaseLrc<Line extends BaseLine>(
     verticalSpace = DEFAULT_PROPS.verticalSpace,
     recoverAutoScrollInterval = DEFAULT_PROPS.recoverAutoScrollInterval,
     recoverAutoScrollSingal = DEFAULT_PROPS.recoverAutoScrollSingal,
-    onLineUpdate,
+    onLineClick,
+    isOnLineClickRecoverAutoScroll = DEFAULT_PROPS.isOnLineClickRecoverAutoScroll,
     onAutoScrollChange,
 
     onWheel,
@@ -65,15 +65,6 @@ function BaseLrc<Line extends BaseLine>(
     verticalSpace,
   });
 
-  useEffect(() => {
-    if (onLineUpdate) {
-      onLineUpdate({
-        index: lineIndex,
-        line: lines[lineIndex] ?? null,
-      });
-    }
-  }, [onLineUpdate, lineIndex, lines]);
-
   useImperativeHandle(ref, () => rootRef.current!);
 
   const onWheelWrapper = useEvent((event: WheelEvent<HTMLDivElement>) => {
@@ -104,11 +95,27 @@ function BaseLrc<Line extends BaseLine>(
   const lineNodes = useMemo(
     () =>
       lines.map((line, index) => (
-        <div key={line.id} className={LINE_CLASSNAME}>
+        <div
+          key={line.id}
+          className={LINE_CLASSNAME}
+          onClick={() => {
+            if (onLineClick) {
+              onLineClick({
+                line,
+              });
+            }
+          }}
+        >
           {lineRenderer({ index, active: lineIndex === index, line })}
         </div>
       )),
-    [lineIndex, lineRenderer, lines],
+    [
+      lineIndex,
+      lineRenderer,
+      lines,
+      onLineClick,
+      isOnLineClickRecoverAutoScroll,
+    ],
   );
   return (
     <Root

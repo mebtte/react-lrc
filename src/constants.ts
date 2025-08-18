@@ -15,7 +15,8 @@ export interface BaseProps<Line extends BaseLine> {
   verticalSpace?: boolean;
   recoverAutoScrollInterval?: number;
   recoverAutoScrollSingal?: boolean;
-  onLineUpdate?: (line: { index: number; line: Line | null }) => void;
+  onLineClick?: (payload: { line: Line | null }) => void;
+  isOnLineClickRecoverAutoScroll?: boolean;
   onAutoScrollChange?: (payload: { autoScroll: boolean }) => void;
 }
 
@@ -24,4 +25,5 @@ export const DEFAULT_PROPS = {
   verticalSpace: false,
   recoverAutoScrollInterval: 5000,
   recoverAutoScrollSingal: false,
+  isOnLineClickRecoverAutoScroll: true,
 } as const;

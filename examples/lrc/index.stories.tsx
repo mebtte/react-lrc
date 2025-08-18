@@ -13,8 +13,9 @@ export default meta;
 export const AutoScroll: StoryObj<typeof AutoScrollComponent> = {
   args: {
     lrc,
-    recoverAutoScrollInterval: 5000,
+    recoverAutoScrollInterval: 3000,
     verticalSpace: true,
+    isOnLineClickRecoverAutoScroll: true,
   },
 };
 
