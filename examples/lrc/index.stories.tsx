@@ -15,7 +15,6 @@ export const AutoScroll: StoryObj<typeof AutoScrollComponent> = {
     lrc,
     recoverAutoScrollInterval: 3000,
     verticalSpace: true,
-    isOnLineClickRecoverAutoScroll: true,
   },
 };
 

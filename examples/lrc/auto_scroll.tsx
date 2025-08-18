@@ -54,12 +54,12 @@ const log = console.log.bind(console);
 function LrcDemo({
   lrc,
   recoverAutoScrollInterval,
-  isOnLineClickRecoverAutoScroll,
+  isOnLineClickRecoverAutoScroll = true,
   verticalSpace,
 }: {
   lrc: string;
   recoverAutoScrollInterval: number;
-  isOnLineClickRecoverAutoScroll: boolean;
+  isOnLineClickRecoverAutoScroll?: boolean;
   verticalSpace: boolean;
 }) {
   const { currentMillisecond, setCurrentMillisecond, reset, play, pause } =
@@ -88,7 +88,6 @@ function LrcDemo({
           style={lrcStyle}
           recoverAutoScrollSingal={signal}
           recoverAutoScrollInterval={recoverAutoScrollInterval}
-          isOnLineClickRecoverAutoScroll={isOnLineClickRecoverAutoScroll}
           onLineClick={({ line }) => {
             if (line) {
               setCurrentMillisecond(line.startMillisecond);

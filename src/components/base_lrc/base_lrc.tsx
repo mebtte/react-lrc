@@ -29,7 +29,6 @@ function BaseLrc<Line extends BaseLine>(
     recoverAutoScrollInterval = DEFAULT_PROPS.recoverAutoScrollInterval,
     recoverAutoScrollSingal = DEFAULT_PROPS.recoverAutoScrollSingal,
     onLineClick,
-    isOnLineClickRecoverAutoScroll = DEFAULT_PROPS.isOnLineClickRecoverAutoScroll,
     onAutoScrollChange,
 
     onWheel,
@@ -109,13 +108,7 @@ function BaseLrc<Line extends BaseLine>(
           {lineRenderer({ index, active: lineIndex === index, line })}
         </div>
       )),
-    [
-      lineIndex,
-      lineRenderer,
-      lines,
-      onLineClick,
-      isOnLineClickRecoverAutoScroll,
-    ],
+    [lineIndex, lineRenderer, lines, onLineClick],
   );
   return (
     <Root
