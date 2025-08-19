@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   stories: ['../examples/**/*.stories.@(tsx)'],
   addons: ['@storybook/addon-links'],
   framework: {
