@@ -7,8 +7,9 @@ The react component to display lyric from LRC. See [example](https://mebtte.gith
 ## Feature
 
 - Auto scroll smoothly
-- Support multiple lrcs
-- User srcollable
+- Support multiple languages
+- User can interrupt auto scroll by scrolling
+- Click line to jump & recover auto scroll
 - Custom style
 - Typescript support
 
@@ -57,10 +58,6 @@ with verticalSpace:
 
 ![](./docs/with_vertical_space.png)
 
-#### `onLineUpdate`?: ({ index: number, line: Line | null }) => void
-
-Call this when current line changed. `Line` is `LrcLine` when using `Lrc` component or is `MultipleLrcLine` when `MultipleLrc`.
-
 #### `recoverAutoScrollInterval`
 
 The interval of recovering auto scroll after user scrolling. It is `millisecond`, default `5000`.
@@ -68,6 +65,14 @@ The interval of recovering auto scroll after user scrolling. It is `millisecond`
 #### `onAutoScrollChange`?: ({ autoScroll: boolean }) => void
 
 There is a state which indicates whether or not it is auto-scroll, and which default value is `true`. When scrolling by user, it will be set to `false`. After `recoverAutoScrollInterval` milliseconds, it will be set to `true` automatically. `onAutoScrollChange` will be called when the state changed.
+
+#### `onLineClick`?: ({ line: Line | null }) => void
+
+Called when a line is clicked. `Line` is `LrcLine` when using `Lrc` component or is `MultipleLrcLine` when `MultipleLrc`. When clicking empty space, `line` will be `null`.
+
+#### `isOnLineClickRecoverAutoScroll`?: boolean
+
+Whether clicking a line recovers auto scroll immediately. Default is `true`. When set to `true`, clicking any line will jump to that position and resume auto scrolling.
 
 ### Component `Lrc`
 
@@ -97,7 +102,19 @@ const Demo = () => {
       <button type="button" onClick={recoverAutoScrollImmediately}>
         recover auto scroll immediately
       </button>
-      <Lrc {...otherProps} recoverAutoScrollSingal={signal} />
+      <Lrc
+        {...otherProps}
+        recoverAutoScrollSingal={signal}
+        onLineClick={({ line }) => {
+          // Custom behavior: jump to line and recover scroll
+          if (line) {
+            setCurrentMillisecond(line.startMillisecond);
+          }
+          if (isOnLineClickRecoverAutoScroll) {
+            recoverAutoScrollImmediately();
+          }
+        }}
+      />
     </>
   );
 };

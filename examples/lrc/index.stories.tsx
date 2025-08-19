@@ -1,27 +1,25 @@
-/* eslint-disable react/function-component-definition */
-import { type ComponentStory } from '@storybook/react';
-import StaticComponent from './static';
+import type { StoryObj, Meta } from '@storybook/react';
+import type StaticComponent from './static';
 import AutoScrollComponent from './auto_scroll';
 import { lrc } from '../data';
 
-export default {
+const meta: Meta<typeof AutoScrollComponent> = {
   title: 'Lrc',
+  component: AutoScrollComponent,
 };
 
-const AutoScrollTemplate: ComponentStory<typeof AutoScrollComponent> = (
-  args,
-) => <AutoScrollComponent {...args} />;
-export const AutoScroll = AutoScrollTemplate.bind({});
-AutoScroll.args = {
-  lrc,
-  recoverAutoScrollInterval: 5000,
-  verticalSpace: true,
+export default meta;
+
+export const AutoScroll: StoryObj<typeof AutoScrollComponent> = {
+  args: {
+    lrc,
+    recoverAutoScrollInterval: 3000,
+    verticalSpace: true,
+  },
 };
 
-const StaticTemplate: ComponentStory<typeof StaticComponent> = (args) => (
-  <StaticComponent {...args} />
-);
-export const Static = StaticTemplate.bind({});
-Static.args = {
-  lrc,
+export const Static: StoryObj<typeof StaticComponent> = {
+  args: {
+    lrc,
+  },
 };
