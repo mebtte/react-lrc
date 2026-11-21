@@ -2,18 +2,20 @@ on:
   push:
     branches:
       - master
+permissions:
+  contents: read
+  id-token: write # Required for npm Trusted Publishing.
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
-      - uses: actions/setup-node@main
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
         with:
-          node-version: lts/*
+          node-version: '24'
 
       - run: npm ci
-      - run: npm run build
+      - run: npm run typecheck
+      - run: npm test
 
-      - uses: JS-DevTools/npm-publish@main
-        with:
-          token: ${{secrets.NPM_ACCESS_TOKEN}}
+      - uses: JS-DevTools/npm-publish@v4.1.5

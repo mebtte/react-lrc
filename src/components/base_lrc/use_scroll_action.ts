@@ -1,14 +1,13 @@
-/* eslint-disable no-param-reassign */
 import { useCallback, useLayoutEffect, useRef } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 import debounce from '../../utils/debounce';
-import { BaseLine } from '../../constants';
+import type { BaseLine } from '../../constants';
 import { LINE_CLASSNAME } from './constants';
 
-type IndexMap = {
+interface IndexMap {
   height: number;
   offsetTop: number;
-};
+}
 
 export default ({
   root,

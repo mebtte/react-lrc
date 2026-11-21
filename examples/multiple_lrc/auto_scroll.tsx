@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
 import { type CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
 import { MultipleLrc, useRecoverAutoScrollImmediately } from '../../src';

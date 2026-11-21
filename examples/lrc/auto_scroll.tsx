@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
 import { type CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
 import { Lrc, useRecoverAutoScrollImmediately } from '../../src';
@@ -49,7 +48,7 @@ const Line = styled.div<{ active: boolean }>`
     color: ${active ? 'green' : 'black'};
   `}
 `;
-const log = console.log.bind(console);
+const log = (...args: unknown[]) => console.log(...args);
 
 function LrcDemo({
   lrc,

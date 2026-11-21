@@ -30,7 +30,9 @@ export default ({
 }) => {
   const [autoScroll, setAutoScroll] = useState(true);
 
-  const timerRef = useRef<ReturnType<typeof globalThis.setTimeout>>();
+  const timerRef = useRef<ReturnType<typeof globalThis.setTimeout> | undefined>(
+    undefined,
+  );
   const handleUserScroll = useCallback(() => {
     globalThis.clearTimeout(timerRef.current);
     setAutoScroll(false);

@@ -3,7 +3,7 @@ function throttle<F extends (...params: unknown[]) => unknown>(
   wait = 100,
 ) {
   let lastEmitTimestamp = 0;
-  return (...params: Parameters<F>): ReturnType<F> | void => {
+  return (...params: Parameters<F>): ReturnType<F> | undefined => {
     const now = Date.now();
     if (now - lastEmitTimestamp >= wait) {
       lastEmitTimestamp = now;

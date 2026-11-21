@@ -1,18 +1,16 @@
-import { LineType, LyricLine, parse } from 'clrc';
+import { LineType, parse } from 'clrc';
 import { useMemo } from 'react';
 import getRandomString from '../../utils/get_random_string';
-import { Line } from './constants';
+import type { Line } from './constants';
 
 export default (lrcs: string[]) => {
   const lines = useMemo<Line[]>(() => {
     const map = new Map<number, Line>();
 
     for (const lrc of lrcs) {
-      const list = parse(lrc).filter(
-        (l) => l.type === LineType.LYRIC,
-      ) as LyricLine[];
+      const list = parse(lrc).filter((l) => l.type === LineType.LYRIC);
       for (const item of list) {
-        const current = map.get(item.startMillisecond) || {
+        const current = map.get(item.startMillisecond) ?? {
           id: getRandomString(),
           startMillisecond: item.startMillisecond,
           children: [],

@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
 import styled from 'styled-components';
 import { Lrc } from '../../src';
 import { formatMillisecond } from '../utils';

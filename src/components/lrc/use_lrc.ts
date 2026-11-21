@@ -1,16 +1,13 @@
 import { useMemo } from 'react';
-import { parse, LineType, type LyricLine as ClrcLyricLine } from 'clrc';
+import { parse, LineType } from 'clrc';
 import { type Line } from './constants';
 import getRandomString from '../../utils/get_random_string';
 
 function useLrc(lrc: string) {
   const lines = useMemo<Line[]>(
     () =>
-      (
-        parse(lrc).filter(
-          (line) => line.type === LineType.LYRIC,
-        ) as ClrcLyricLine[]
-      )
+      parse(lrc)
+        .filter((line) => line.type === LineType.LYRIC)
         .map((l) => ({
           id: getRandomString(),
           lineNumber: l.lineNumber,

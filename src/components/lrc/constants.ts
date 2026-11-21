@@ -1,4 +1,4 @@
-import { BaseLine, BaseProps } from '../../constants';
+import type { BaseLine, BaseProps } from '../../constants';
 
 export interface Line extends BaseLine {
   lineNumber: number;
