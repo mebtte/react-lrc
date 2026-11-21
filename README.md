@@ -132,6 +132,10 @@ const style = { overflow: 'hidden !important' };
 <Lrc className="lrc" {...otherProps} />
 ```
 
+## Contributors
+
+[![Contributors to react-lrc](https://contrib.rocks/image?repo=mebtte/react-lrc)](https://github.com/mebtte/react-lrc/graphs/contributors)
+
 ## License
 
 [MIT](./LICENSE)
