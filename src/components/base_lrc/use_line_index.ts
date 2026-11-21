@@ -1,4 +1,4 @@
-import { BaseLine } from '../../constants';
+import type { BaseLine } from '../../constants';
 
 function useLineIndex(lines: BaseLine[], currentMillisecond: number): number {
   let index = 0;
